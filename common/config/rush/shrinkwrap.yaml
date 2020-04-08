@@ -1,0 +1,101 @@
+dependencies:
+  '@rush-temp/md-check': 'file:projects/md-check.tgz'
+  '@rush-temp/md-check-exec-mocha': 'file:projects/md-check-exec-mocha.tgz'
+  '@rush-temp/md-check-exec-node': 'file:projects/md-check-exec-node.tgz'
+  '@rush-temp/md-check-preprocess-typescript': 'file:projects/md-check-preprocess-typescript.tgz'
+  markdown-it: 10.0.0
+  typescript: 3.8.3
+packages:
+  /argparse/1.0.10:
+    dependencies:
+      sprintf-js: 1.0.3
+    dev: false
+    resolution:
+      integrity: sha512-o5Roy6tNG4SL/FOkCAN6RzjiakZS25RLYFrcMttJqbdd8BWrnA+fGz57iN5Pb06pvBGvl5gQ0B48dJlslXvoTg==
+  /entities/2.0.0:
+    dev: false
+    resolution:
+      integrity: sha512-D9f7V0JSRwIxlRI2mjMqufDrRDnx8p+eEOz7aUM9SuvF8gsBzra0/6tbjl1m8eQHrZlYj6PxqE00hZ1SAIKPLw==
+  /linkify-it/2.2.0:
+    dependencies:
+      uc.micro: 1.0.6
+    dev: false
+    resolution:
+      integrity: sha512-GnAl/knGn+i1U/wjBz3akz2stz+HrHLsxMwHQGofCDfPvlf+gDKN58UtfmUquTY4/MXeE2x7k19KQmeoZi94Iw==
+  /markdown-it/10.0.0:
+    dependencies:
+      argparse: 1.0.10
+      entities: 2.0.0
+      linkify-it: 2.2.0
+      mdurl: 1.0.1
+      uc.micro: 1.0.6
+    dev: false
+    hasBin: true
+    resolution:
+      integrity: sha512-YWOP1j7UbDNz+TumYP1kpwnP0aEa711cJjrAQrzd0UXlbJfc5aAq0F/PZHjiioqDC1NKgvIMX+o+9Bk7yuM2dg==
+  /mdurl/1.0.1:
+    dev: false
+    resolution:
+      integrity: sha1-/oWy7HWlkDfyrf7BAP1sYBdhFS4=
+  /sprintf-js/1.0.3:
+    dev: false
+    resolution:
+      integrity: sha1-BOaSb2YolTVPPdAVIDYzuFcpfiw=
+  /typescript/3.8.3:
+    dev: false
+    engines:
+      node: '>=4.2.0'
+    hasBin: true
+    resolution:
+      integrity: sha512-MYlEfn5VrLNsgudQTVJeNaQFUAI7DkhnOjdpAp4T+ku1TfQClewlbSuTVHiA+8skNBgaf02TL/kLOvig4y3G8w==
+  /uc.micro/1.0.6:
+    dev: false
+    resolution:
+      integrity: sha512-8Y75pvTYkLJW2hWQHXxoqRgV7qb9B+9vFEtidML+7koHUFapnVJAZ6cKs+Qjz5Aw3aZWHMC6u0wJE3At+nSGwA==
+  'file:projects/md-check-exec-mocha.tgz':
+    dependencies:
+      typescript: 3.8.3
+    dev: false
+    name: '@rush-temp/md-check-exec-mocha'
+    resolution:
+      integrity: sha512-ioED31uCIAmx35BRuXTl61OsFsLu8/rooFLAbjpfWqk96rjIKOPykg9yia4mE90IFrt9yyMUhk0ZQhyP2BvnlA==
+      tarball: 'file:projects/md-check-exec-mocha.tgz'
+    version: 0.0.0
+  'file:projects/md-check-exec-node.tgz':
+    dependencies:
+      typescript: 3.8.3
+    dev: false
+    name: '@rush-temp/md-check-exec-node'
+    resolution:
+      integrity: sha512-9K+WynjkrpQo8vF5VGF5X+R0wL5ZgEwYUWEPrwTEvdiaglFXIw5TKuL9ovZ/N2aCKhKViCvi0rxBWXcCdY8W2A==
+      tarball: 'file:projects/md-check-exec-node.tgz'
+    version: 0.0.0
+  'file:projects/md-check-preprocess-typescript.tgz':
+    dependencies:
+      typescript: 3.8.3
+    dev: false
+    name: '@rush-temp/md-check-preprocess-typescript'
+    resolution:
+      integrity: sha512-m+j1LhmUHEfremLaZL3d9eEsIijAf9kHDF/BjHdyxZVeFfHgUhicHYYTZqx34vak6GEG7pu5Mzc54KhaTlXeLw==
+      tarball: 'file:projects/md-check-preprocess-typescript.tgz'
+    version: 0.0.0
+  'file:projects/md-check.tgz':
+    dependencies:
+      markdown-it: 10.0.0
+      typescript: 3.8.3
+    dev: false
+    name: '@rush-temp/md-check'
+    resolution:
+      integrity: sha512-/I4u1E5SsAmtBQD+BBFZjFnGSVKX8y5ihaIN1Nw2RT3LrqCCUIEHpiHGKyMChKMhU1SOWuU8QlrsV+gWCJas1g==
+      tarball: 'file:projects/md-check.tgz'
+    version: 0.0.0
+registry: 'https://registry.npmjs.org/'
+shrinkwrapMinorVersion: 9
+shrinkwrapVersion: 3
+specifiers:
+  '@rush-temp/md-check': 'file:./projects/md-check.tgz'
+  '@rush-temp/md-check-exec-mocha': 'file:./projects/md-check-exec-mocha.tgz'
+  '@rush-temp/md-check-exec-node': 'file:./projects/md-check-exec-node.tgz'
+  '@rush-temp/md-check-preprocess-typescript': 'file:./projects/md-check-preprocess-typescript.tgz'
+  markdown-it: ~10.0.0
+  typescript: ~3.8.3

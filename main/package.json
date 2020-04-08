@@ -1,0 +1,28 @@
+{
+  "name": "@btilford/md-check",
+  "version": "0.0.1",
+  "description": "Compile and execute markdown code fences",
+  "main": "dist/index.js",
+  "dependencies": {
+    "markdown-it": "~10.0.0",
+    "typescript": "~3.8.3"
+  },
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/btilford/md-check.git"
+  },
+  "keywords": [
+    "markdown",
+    "documentation",
+    "docs"
+  ],
+  "author": "btilford",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/btilford/md-check/issues"
+  },
+  "homepage": "https://github.com/btilford/md-check#readme"
+}
