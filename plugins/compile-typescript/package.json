@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "Compile typescript markdown fences",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/btilford/md-check.git"
@@ -21,10 +22,10 @@
   "homepage": "https://github.com/btilford/md-check#readme",
   "dependencies": {
     "typescript": "~3.8.3",
-    "@types/node": "~13.11.1",
-    "mocha": "~7.1.1"
+    "@btilford/md-check": "~0.0.1"
   },
   "devDependencies": {
+    "@types/node": "~13.11.1",
     "mocha": "~7.1.1",
     "@types/mocha": "~7.0.2",
     "chai": "~4.2.0",

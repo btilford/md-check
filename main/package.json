@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "Compile and execute markdown code fences",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "dependencies": {
     "markdown-it": "~10.0.0",
     "typescript": "~3.8.3",

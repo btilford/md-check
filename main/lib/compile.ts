@@ -1,11 +1,11 @@
-import {Configuration} from './configure';
+import {ConfigurationOptions} from './configure';
 import {FileContext} from './context';
 import {FenceContext} from './fence';
 import {writeTemp} from './files';
 import {ConfigurationSupplier} from './options';
 
 
-export type CompilerOptions = {
+export type CompilerOptions = ConfigurationOptions & {
   [name: string]: any;
 };
 
@@ -18,7 +18,7 @@ export type CompileResult = FileContext & {
 
 export abstract class Compiler {
 
-  constructor(readonly options: CompilerOptions) {
+  constructor(protected readonly options: CompilerOptions) {
   }
 
 
@@ -43,7 +43,7 @@ export class WriteSourceCompiler extends Compiler {
 
 
   static supply(matchFence: RegExp): ConfigurationSupplier<Compiler> {
-    return function makeWriteSourceCompiler(config: Configuration) {
+    return function makeWriteSourceCompiler(config: ConfigurationOptions) {
       return new WriteSourceCompiler({
         ...config,
         matchFence,

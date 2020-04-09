@@ -1,9 +1,12 @@
 {
   "extends": "../../tsconfig",
-  "include": ["lib/**/*",  "e2e/**/*"],
+  "include": ["lib/**/*", "e2e/**/*"],
   "compilerOptions": {
     "declarationDir": "./dist",
     "outDir": "./dist",
-
+    "baseUrl": "",
+    "paths": {
+      "@btilford/md-check": ["node_modules/@btilford/md-check"]
+    }
   }
 }
