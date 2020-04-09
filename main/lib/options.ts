@@ -1,11 +1,12 @@
 import globby from 'globby';
 import MarkdownIt from 'markdown-it';
 import {Compiler} from './compile';
-import {Configuration} from './configure';
+import {ConfigurationOptions} from './configure';
 import {ExecutionRenderer, Executor} from './exec';
 import {FileRenderer} from './renderer';
 
 
+export type OutputStyle = 'single-file' | 'per-file';
 export type Project = {
   readonly name: string;
   readonly version?: string;
@@ -26,7 +27,7 @@ export type MarkdownItOptions = {
 
 
 export interface ConfigurationSupplier<T> {
-  (config: Configuration): T;
+  (config: ConfigurationOptions): T;
 }
 
 
@@ -38,7 +39,7 @@ export type Options = {
   executors?: [ConfigurationSupplier<Executor>, ConfigurationSupplier<ExecutionRenderer>?][];
   defaultExecutionRenderer?: ConfigurationSupplier<ExecutionRenderer>;
   failOnerror?: boolean;
-  outputStyle?: 'single-file' | 'per-file';
+  outputStyle?: OutputStyle;
   include: {
     patterns: string | string[];
     globby?: globby.GlobbyOptions;

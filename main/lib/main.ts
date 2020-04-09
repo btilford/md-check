@@ -3,7 +3,7 @@ import Token from 'markdown-it/lib/token';
 import {Compiler, CompileResult} from './compile';
 import {Configuration} from './configure';
 import {Context, FileContext, ProjectDetails} from './context';
-import {ExecutionResult, ExecutorConfig, ForkExecutor} from './exec';
+import {ExecutionResult, ExecutorConfig} from './exec';
 import {FenceContext, FenceResult, fences, insertFences} from './fence';
 import {apppendOutput, readSource, writeOutput} from './files';
 import {Md} from './md';
@@ -39,7 +39,7 @@ async function processFence(ctx: FenceContext): Promise<FenceResult> {
 
   const compiler = compilers.find(c => c.accepts(ctx.fence.name));
   let insert: Token[] | undefined;
-  let compiled: CompileResult[] = [];
+  const compiled: CompileResult[] = [];
 
   if (compiler) {
     console.debug('Compiling %s', ctx.fence.id);
@@ -226,8 +226,8 @@ export async function main(options: Options): Promise<Results> {
   config = new Configuration(options);
   compilers = config.compilers;
   project = new ProjectDetails(config.project);
-  executors = config.executors || [new ForkExecutor({ ...config, cmd: 'node', matchFence: /node$/ })];
-  renderer = config.fileRenderer || new FileRenderer({ ...config });
+  executors = config.executors;
+  renderer = config.fileRenderer;
 
   md = config.md;
   parser = new Parser(md);

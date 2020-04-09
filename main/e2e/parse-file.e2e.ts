@@ -15,7 +15,7 @@ describe('Parse a single file E2E Test', () => {
           WriteSourceCompiler.supply(/^javascript/),
         ],
         executors: [
-          [ForkExecutor.supply(/node$/, 'node')/*, StdOutRenderer.supply()*/],
+          [ForkExecutor.supply(/node$/, 'node')],
         ],
       });
     });

@@ -1,11 +1,13 @@
 import {exec} from 'child_process';
 import Token from 'markdown-it/lib/token';
-import {Configuration} from '../configure';
+import {ConfigurationOptions} from '../configure';
 import {FenceContext} from '../fence';
 import {ConfigurationSupplier} from '../options';
 
 
-export type ExecutorOptions = Configuration & {};
+export type ExecutorOptions = ConfigurationOptions & {
+  [name: string]: any;
+};
 export type ExecutionContext = FenceContext & {};
 export type ExecutionResult = ExecutionContext & {
   readonly execution: {
@@ -15,7 +17,6 @@ export type ExecutionResult = ExecutionContext & {
     readonly tokens?: Token[];
   };
 }
-
 
 
 export abstract class Executor {
@@ -88,7 +89,7 @@ export class ForkExecutor extends Executor {
 
 
   static supply(matchFence: RegExp, cmd: string, ...args: string[]): ConfigurationSupplier<Executor> {
-    return function makeForkExecutor(config: Configuration) {
+    return function makeForkExecutor(config: ConfigurationOptions) {
       const opt: ForkOptions = {
         ...config,
         matchFence,
