@@ -1,9 +1,9 @@
 import globby from 'globby';
 import Token from 'markdown-it/lib/token';
 import {Compiler, CompileResult} from './compile';
+import {Configuration} from './configure';
 import {Context, FileContext, ProjectDetails} from './context';
-import {ExecutionRenderer} from './exec/ExecutionRenderer';
-import {ExecutionResult, Executor, ForkExecutor} from './exec/executor';
+import {ExecutionResult, ExecutorConfig, ForkExecutor} from './exec';
 import {FenceContext, FenceResult, fences, insertFences} from './fence';
 import {apppendOutput, readSource, writeOutput} from './files';
 import {Md} from './md';
@@ -28,11 +28,11 @@ export type Results = {
 
 let md: Md;
 let parser: Parser;
-let executors: [Executor, ExecutionRenderer][];
+let executors: ExecutorConfig[];
 let renderer: FileRenderer;
 let compilers: Compiler[];
 let project: ProjectDetails;
-let opt: Options;
+let config: Configuration;
 
 
 async function processFence(ctx: FenceContext): Promise<FenceResult> {
@@ -125,13 +125,13 @@ type Nav = {
 export function processNav(results: Result[]): Nav[] {
   return results.map(file => {
     const render = file.rendered;
-    const baseLink = opt.outputStyle === 'per-file' ? render?.file : '';
+    const baseLink = config.outputStyle === 'per-file' ? render?.file : '';
     const parsed = file.parsed?.parsed;
     const fences = file.fences?.sort((left, right) => left.fence.index - right.fence.index);
     return {
       file: file.file,
       link: {
-        href: opt.outputStyle === 'per-file' ? file.file : parsed?.id,
+        href: config.outputStyle === 'per-file' ? file.file : parsed?.id,
         text: parsed?.header.title || file.file,
         title: parsed?.header.description,
       },
@@ -203,7 +203,7 @@ export async function processIndex(results: Results): Promise<Results> {
     `),
   );
 
-  if (opt.outputStyle === 'single-file') {
+  if (config.outputStyle === 'single-file') {
     singleFile(index, files);
   }
 
@@ -212,16 +212,16 @@ export async function processIndex(results: Results): Promise<Results> {
 
 
 export async function main(options: Options): Promise<Results> {
-  opt = options;
-  compilers = options.compilers;
-  project = new ProjectDetails(options.project);
-  executors = options.executors || [new ForkExecutor({ ...options, cmd: 'node', matchFence: /node$/ })];
-  renderer = options.fileRenderer || new FileRenderer({ ...options });
+  config = new Configuration(options);
+  compilers = config.compilers;
+  project = new ProjectDetails(config.project);
+  executors = config.executors || [new ForkExecutor({ ...config, cmd: 'node', matchFence: /node$/ })];
+  renderer = config.fileRenderer || new FileRenderer({ ...config });
 
-  md = new Md(options);
+  md = config.md;
   parser = new Parser(md);
 
-  const files = globby.stream(options.include.patterns, options.include.globby);
+  const files = globby.stream(options.include.patterns, config.include.globby);
   const results: Results = {
     files: [],
   };
@@ -234,7 +234,7 @@ export async function main(options: Options): Promise<Results> {
       results.files.push(result);
     }
     catch (error) {
-      if (options.failOnerror) {
+      if (config.failOnerror) {
         throw error;
       }
       else {

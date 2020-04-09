@@ -1,9 +1,8 @@
-import anchor from 'markdown-it-anchor';
-import Token from 'markdown-it/lib/token';
-import {MarkdownItPlugin, Options} from './options';
-
 import hlt from 'highlight.js';
 import MarkdownIt from 'markdown-it';
+import anchor from 'markdown-it-anchor';
+import Token from 'markdown-it/lib/token';
+import {MarkdownItOptions, MarkdownItPlugin} from './options';
 
 
 const defaultMarkownItOptions: MarkdownIt.Options = {
@@ -37,13 +36,13 @@ export class Md {
   readonly mdOptions: MarkdownIt.Options;
 
 
-  constructor(readonly options?: Options) {
-    const mdOpts: MarkdownIt.Options = options?.markdownIt?.options || defaultMarkownItOptions;
+  constructor(readonly options?: MarkdownItOptions) {
+    const mdOpts: MarkdownIt.Options = options?.options || defaultMarkownItOptions;
     this.mdOptions = mdOpts;
 
     let md = new MarkdownIt(mdOpts);
-    if (options?.markdownIt?.use !== false) {
-      md = (options?.markdownIt?.use || defaultPlugins)
+    if (options?.use !== false) {
+      md = (options?.use || defaultPlugins)
         .reduce((_md, plugin) => _md.use(plugin.plugin, ...plugin.params), md);
     }
     this.md = md;

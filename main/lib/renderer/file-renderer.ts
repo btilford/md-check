@@ -1,12 +1,12 @@
+import {Configuration} from '../configure';
 import {FileContext} from '../context';
 import {writeOutput} from '../files';
 import {Md} from '../md';
-import {Options} from '../options';
 import {ParseResult} from '../parser';
 import {stripMargin} from '../text';
 
 
-export type RenderOptions = Options & {};
+export type RenderOptions = Configuration & {};
 
 export type RenderContext = ParseResult & {
   md: Md;

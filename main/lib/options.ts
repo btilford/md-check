@@ -1,9 +1,8 @@
-import {GlobbyOptions} from '../../common/temp/pnpm-store/2/registry.npmjs.org/globby/11.0.0/package/index';
-import {Compiler} from './compile';
 import MarkdownIt from 'markdown-it';
-import {ExecutionRenderer} from './exec/ExecutionRenderer';
-import {Executor} from './exec/executor';
+import {Compiler} from './compile';
+import {ExecutionRenderer, Executor} from './exec';
 import {FileRenderer} from './renderer';
+import globby from 'globby';
 
 
 export type Project = {
@@ -24,16 +23,19 @@ export type MarkdownItOptions = {
   use?: MarkdownItPlugin[] | false;
 };
 
+
 export type Options = {
-  readonly project: Project;
-  readonly markdownIt?: MarkdownItOptions;
-  readonly compilers: Compiler[];
-  readonly fileRenderer: FileRenderer;
-  readonly executors: [Executor, ExecutionRenderer][];
-  readonly failOnerror?: boolean;
-  readonly outputStyle?: 'single-file' | 'per-file';
-  readonly include: {
-    readonly patterns: string | string[];
-    readonly globby?: GlobbyOptions;
+  project?: Project;
+  markdownIt?: MarkdownItOptions;
+  compilers?: Compiler[];
+  fileRenderer?: FileRenderer;
+  executors?: [Executor, ExecutionRenderer?][];
+  defaultExecutionRenderer?: ExecutionRenderer;
+  failOnerror?: boolean;
+  outputStyle?: 'single-file' | 'per-file';
+  include: {
+    patterns: string | string[];
+    globby?: globby.GlobbyOptions;
   };
 }
+
