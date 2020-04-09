@@ -99,7 +99,7 @@
     }
   },
   "scripts": {
-    "clean": "rm -rf .md-check/*",
+    "clean": "rm -rf .md-check/* docs/*",
     "compile": "node md-check.js",
     "watch:compile": "npm-watch compile",
     "test": "echo TODO",
@@ -109,7 +109,7 @@
     "watch:lint": "npm-watch lint",
     "watch": "run-p watch:lint watch:test watch:compile",
 
-    "build": "run-s clean lint compile test"
+    "build": "run-s clean lint compile"
 
 
   }

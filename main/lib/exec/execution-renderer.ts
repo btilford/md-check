@@ -5,6 +5,8 @@ import {stripMargin} from '../text';
 import {ExecutionResult} from './executor';
 
 
+export type OutputStream = 'stderr' | 'stdout';
+
 export type ExecutionRendererOptions = Configuration & {}
 
 export type ExecutionRenderContext = ExecutionResult & {}
@@ -19,9 +21,9 @@ export abstract class ExecutionRenderer {
 }
 
 
-function renderLine(line) {
+function renderLine(line, stream: OutputStream) {
   // @formatter:off
-  return `<span class="hljs-meta">&gt;&nbsp;</span><span class="hljs-bash shell"><span class="hljs-string stderr">${escapeHTML(line)}</span></span>`;
+  return `<span class="hljs-meta">&gt;&nbsp;</span><span class="hljs-bash shell"><span class="hljs-string ${stream}">${escapeHTML(line)}</span></span>`;
   // @formatter:on
 }
 
@@ -35,9 +37,9 @@ export class StdOutRenderer extends ExecutionRenderer {
   }
 
 
-  html(out: string, type: 'stderr' | 'stdout'): string {
+  html(out: string, type: OutputStream): string {
     const lines = out.split('\n')
-                     .map(renderLine)
+                     .map(line => renderLine(line, type))
                      .join('\n');
 
     return stripMargin(`

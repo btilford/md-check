@@ -1,0 +1,6 @@
+---
+
+---
+# Usage
+
+{% include examples.html %}

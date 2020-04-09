@@ -194,10 +194,16 @@ function renderNav(nav: Nav[]): string {
 async function singleFile(index: string, results: Result[]): Promise<RenderResult[]> {
   return await Promise.all(results.filter(r => r.rendered?.file).map(async result => {
     const file = result.rendered?.file as string;
-    console.debug('Appending %s to %s', file, index);
-    const written = await apppendOutput(project, file, index);
-    console.log('Appended %s to %s', written, index);
-    return result;
+    try {
+      console.debug('Appending %s to %s', file, index);
+      const written = await apppendOutput(project, file, index);
+      console.log('Appended %s to %s', written, index);
+      return result;
+    }
+    catch (error) {
+      console.error('Error appending %s to %s!', file, index, error);
+      throw error;
+    }
   }));
 }
 

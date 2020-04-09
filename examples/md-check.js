@@ -1,14 +1,14 @@
 const { TsCompiler } = require('@btilford/md-check-compile-typescript');
-
-
+const path = require('path');
+const fs = require('fs').promises;
 const { mdCheck, ForkExecutor, WriteSourceCompiler } = require('@btilford/md-check');
 
-
+const outputDir = 'docs/';
 const run = mdCheck({
-  outputStyle: 'per-file',
+  outputStyle: 'single-file',
   failOnerror: true,
   project: {
-    outputDir: '../docs/_examples',
+    outputDir,
   },
   include: {
     patterns: [
@@ -26,8 +26,14 @@ const run = mdCheck({
   ],
 });
 
-run().then(() => {
-  console.log('Finished running');
+run().then(async results => {
+  console.log('Finished generating partials');
+
+  const basePath = path.resolve(path.join(__dirname, outputDir));
+
+  // const nav = fs.readFile(path.join(basePath, 'index.html'));
+  //
+
 }).catch(err => {
   console.error('Error running!', err);
 });

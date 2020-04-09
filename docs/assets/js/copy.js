@@ -1,6 +1,6 @@
-document.querySelectorAll('pre .usage__code-block, pre.usage__code-block').forEach(node => {
+document.querySelectorAll('pre .md-check__code-block, pre.md-check__code-block').forEach(node => {
   const parent = node.parentElement;
-  if (!parent.parentElement.classList.contains('example__output')) {
+  if (!parent.parentElement.classList.contains('execution__output')) {
     console.debug('Adding copy for %o to %o', node, parent);
     const button = document.createElement('button');
     button.textContent = 'copy';

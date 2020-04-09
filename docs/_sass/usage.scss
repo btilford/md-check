@@ -3,30 +3,30 @@
 }
 
 .highlighter-rouge,
-.usage__example {
+.file__content {
     position: relative;
 }
-.usage__example {
+.file__content {
     padding: 10px;
 }
 
-.usage__example pre,
-.highlighter-rouge .usage__code-block,
-.highlighter-rouge .usage__code-block pre,
-.highlighter-rouge .usage__code-block code,
-.usage__example .usage__code-block,
-.usage__example .usage__code-block pre,
-.usage__example .usage__code-block code,
-.example__output,
-.example__output pre,
-.example__output .language-shell,
+.file__content pre,
+.highlighter-rouge .md-check__code-block,
+.highlighter-rouge .md-check__code-block pre,
+.highlighter-rouge .md-check__code-block code,
+.file__content .md-check__code-block,
+.file__content .md-check__code-block pre,
+.file__content .md-check__code-block code,
+.execution__output,
+.execution__output pre,
+.execution__output .language-shell,
 .shell {
     background-color: #333;
     color: #ddd;
     box-shadow: none;
 }
 
-.example__output {
+.execution__output {
     display: block;
     color: #ddd;
     padding: 10px;
@@ -34,7 +34,7 @@
     margin-bottom: 20px;
 }
 
-.example__output pre {
+.execution__output pre {
     margin: 0;
     padding: 0;
 }
@@ -85,7 +85,7 @@
     right: 0;
     //bottom: -25px ;
 }
-.usage__example code,
+.file__content code,
 code.highlighter-rouge {
     background-color: #ddd;
     color: #111;

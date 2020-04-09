@@ -33,12 +33,21 @@ export async function writeOutput(project: ProjectDetails, file: string, src: st
 
 
 export async function apppendOutput(project: ProjectDetails, from: string, to: string): Promise<string> {
-  const _to = project.outputPath(to);
+  const _to = path.resolve(project.outputPath(to));
+  let _from = from;
   await fs.mkdir(_to.replace(path.basename(_to), ''), { recursive: true });
-  const src = await fs.readFile(from, { encoding: UTF8 });
-
+  let src: string;
+  try {
+    src = await fs.readFile(_from, { encoding: UTF8 });
+  }
+  catch (err) {
+    const retry = `/${_from}`;
+    console.warn('Reading from %s failed trying %s', _from, retry);
+    src = await fs.readFile(retry, { encoding: UTF8 });
+    _from = retry;
+  }
   await fs.appendFile(_to, src, { encoding: UTF8 });
-  console.debug('Appended %s to  %s', from, _to);
+  console.debug('Appended %s to  %s', _from, _to);
 
   return project.relativePath(_to);
 }

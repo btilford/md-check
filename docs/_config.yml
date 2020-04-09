@@ -19,11 +19,11 @@ include:
     - "_*_.html"
     - "_*_.*.html"
     #    - _sass
-    - ['_examples']
-
-collections:
-    examples:
-        output: true
+#
+#collections:
+#    examples:
+#        output: true
+#        permalink: /examples/:path/
 
 #sass:
 #    sass_dir: _scss
