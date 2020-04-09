@@ -10,7 +10,7 @@ import {Md} from './md';
 import {Options} from './options';
 import {Parser, ParseResult} from './parser';
 import {FileRenderer, RenderResult} from './renderer';
-import {stripMargin, UTF8} from './text';
+import {stripMargin} from './text';
 
 
 export type Result = FileContext & {
@@ -131,13 +131,15 @@ export function processNav(results: Result[]): Nav[] {
   return results.map(file => {
     const render = file.rendered;
     const parsed = file.parsed?.parsed;
+    const filePath = file.file;
 
     const href = config.outputStyle === 'per-file'
-                 ? project.outputRelativePath(render?.file || '')
+                 ? `${filePath}.html`
                  : `#${parsed?.id}`;
     const baseLink = config.outputStyle === 'per-file'
                      ? render?.file
                      : '';
+    console.debug('Generating nav for %s, href:%s', filePath, href)
 
     const fences = file.fences?.sort((left, right) => left.fence.index - right.fence.index);
 
@@ -162,9 +164,9 @@ export function processNav(results: Result[]): Nav[] {
 
 
 function renderNav(nav: Nav[]): string {
-  return nav.reduce((out, item: Nav) => {
+  return nav.map((item: Nav) => {
     let result: string;
-    if (item.children) {
+    if (item.children && item.children.length > 0) {
       result = stripMargin(`
       |<li class="nav__item"><a class="nav__link"
       |       href="${item.link.href}" 
@@ -185,7 +187,7 @@ function renderNav(nav: Nav[]): string {
     }
     return result;
 
-  }, '');
+  }).join('\n');
 }
 
 
@@ -238,16 +240,19 @@ export async function main(options: Options): Promise<Results> {
   md = config.md;
   parser = new Parser(md);
 
-  const files = globby.stream(options.include.patterns, config.include.globby);
+  const files = await globby(options.include.patterns, config.include.globby);
   const results: Results = {
     files: [],
   };
   const ctx: Context = {
     project,
   };
+  console.log('Matched %d files', files.length);
   for await (const file of files) {
+    console.debug('Matched on file %s', file);
     try {
-      const result = await processFile(typeof file === 'string' ? file : file.toString(UTF8), ctx);
+      // const result = await processFile(typeof file === 'string' ? file : file.toString(UTF8), ctx);
+      const result = await processFile(file, ctx);
       results.files.push(result);
     }
     catch (error) {

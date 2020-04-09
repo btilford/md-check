@@ -1,0 +1,95 @@
+.highlighter-rouge {
+    margin: 10px;
+}
+
+.highlighter-rouge,
+.usage__example {
+    position: relative;
+}
+.usage__example {
+    padding: 10px;
+}
+
+.usage__example pre,
+.highlighter-rouge .usage__code-block,
+.highlighter-rouge .usage__code-block pre,
+.highlighter-rouge .usage__code-block code,
+.usage__example .usage__code-block,
+.usage__example .usage__code-block pre,
+.usage__example .usage__code-block code,
+.example__output,
+.example__output pre,
+.example__output .language-shell,
+.shell {
+    background-color: #333;
+    color: #ddd;
+    box-shadow: none;
+}
+
+.example__output {
+    display: block;
+    color: #ddd;
+    padding: 10px;
+    margin-top: 2px;
+    margin-bottom: 20px;
+}
+
+.example__output pre {
+    margin: 0;
+    padding: 0;
+}
+
+.shell {
+    font-weight: bolder;
+}
+
+.stderr {
+    color: red;
+}
+
+.stdout {
+    //color: green;
+}
+
+.wrapper {
+    display: grid;
+    grid-template-areas: "nav content";
+    grid-template-columns: 200px 1fr;
+}
+
+.usage__nav {
+    grid-area: nav;
+}
+
+.usage {
+    grid-area: content;
+}
+
+
+.code-block__btn {
+    border: none;
+    background-color: #0f79d0;
+    color: #ddd;
+    font-weight: bolder;
+    padding: 5px;
+}
+
+.code-block__btn--copy {
+    position: absolute;
+    right: 10px;
+    //bottom: -15px;
+    z-index: 100;
+}
+
+.highlighter-rouge .code-block__btn {
+    right: 0;
+    //bottom: -25px ;
+}
+.usage__example code,
+code.highlighter-rouge {
+    background-color: #ddd;
+    color: #111;
+    padding: 1px;
+    margin: 0;
+    display: inline-block;
+}

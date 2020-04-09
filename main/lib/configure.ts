@@ -74,16 +74,20 @@ export class Configuration implements ConfigurationOptions {
     if (!this._executors) {
       if (this.options.executors) {
         this._executors = this.options.executors.map(config => {
-          let result: ExecutorConfig;
+          let result: ExecutorConfig | undefined;
           if (config.length === 2) {
             const [exec, rend] = config;
             result = [exec(this), rend ? rend(this) : this.defaultExecutionRenderer];
           }
           else {
-            result = [config[0](this), this.defaultExecutionRenderer];
+            const [exec] = config;
+            if (exec) {
+              result = [exec(this), this.defaultExecutionRenderer];
+            }
+
           }
           return result;
-        });
+        }).filter(executor => executor) as ExecutorConfig[];
       }
       else {
         this._executors = []

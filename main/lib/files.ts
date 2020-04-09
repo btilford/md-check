@@ -14,11 +14,10 @@ export async function readOutput(project: ProjectDetails, file: string): Promise
 }
 
 
-
 export async function writeTemp(project: ProjectDetails, file: string, src: string): Promise<string> {
   const result = project.tempPath(file);
   await fs.mkdir(result.replace(path.basename(result), ''), { recursive: true });
-  await fs.writeFile(result, src, { encoding: UTF8 });
+  await fs.writeFile(result, src, { encoding: UTF8, mode: 777 });
   console.debug('Wrote tempfile %s', result);
   return project.relativePath(result);
 }

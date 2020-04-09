@@ -33,7 +33,7 @@ export type TsCompileResult = CompileResult & {
 
 export class TypescriptError extends Error {
 
-  constructor(message: string, diagnostics: Diagnostic[]) {
+  constructor(message: string, ...diagnostics: Diagnostic[]) {
     super(message);
   }
 }
@@ -97,6 +97,7 @@ export class TsCompiler extends Compiler {
       target: ScriptTarget.ES2015,
       module: ModuleKind.CommonJS,
       moduleResolution: undefined,
+      paths: { [this.options.project.name]: [this.options.project.cwd] },
     }
   }
 
@@ -107,7 +108,7 @@ export class TsCompiler extends Compiler {
 
 
   async compile(context: CompileContext): Promise<TsCompileResult> {
-    const tmpTs = await writeTemp(this.options.project, `${context.file}.ts`, context.fence.code);
+    const tmpTs = await writeTemp(this.options.project, `${context.file}_${context.fence.index}.ts`, context.fence.code);
     const fileName = path.basename(tmpTs);
     const compileDir = tmpTs.replace(fileName, '');
 
@@ -124,14 +125,18 @@ export class TsCompiler extends Compiler {
 
     if (emit.emitSkipped) {
       // TODO errors
+      const msg = `Error compiling typescript on ${tmpTs} in file ${context.file}`;
+
       if (this.options.failOnerror) {
-        const error = new TypescriptError(
-          `Error compiling typescript on ${tmpTs} in file ${context.file}`,
-          emit.diagnostics.map((diag: Diagnostic) => {
+        throw new TypescriptError(
+          msg,
+          ...emit.diagnostics.map((diag: Diagnostic) => {
             return diag;
           }),
         );
-        throw error;
+      }
+      else {
+        emit.diagnostics.forEach(diag => errors.push(new TypescriptError(`${msg}: ${diag.messageText}`, diag)));
       }
     }
 

@@ -58,7 +58,8 @@ export class WriteSourceCompiler extends Compiler {
 
 
   async compile(context: CompileContext): Promise<CompileResult> {
-    const file = await writeTemp(context.project, context.file, context.fence.code);
+    const fileName = `${context.file.replace(/(\.\w+)$/, `_${context.fence.index}$1`)}`;
+    const file = await writeTemp(context.project, fileName, context.fence.code);
     console.debug('Code %s written to to %s', context.fence.id, file);
     return {
       ...context,

@@ -13,7 +13,6 @@ class Something {
         console.log(msg, ...args);
     }
 }
-
 const log:Something = new Something();
 log.log('typescript ok');
 

@@ -1,9 +1,8 @@
 {
-  "name": "@btilford/md-check-compile-typescript",
+  "name": "@btilford/md-check-root",
   "version": "0.0.1",
+  "private": true,
   "description": "Compile typescript markdown fences",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/btilford/md-check.git"
@@ -20,10 +19,6 @@
     "url": "https://github.com/btilford/md-check/issues"
   },
   "homepage": "https://github.com/btilford/md-check#readme",
-  "dependencies": {
-    "typescript": "~3.8.3",
-    "@btilford/md-check": "~0.0.1"
-  },
   "devDependencies": {
     "@types/node": "~13.11.1",
     "mocha": "~7.1.1",
@@ -58,45 +53,8 @@
     "typescript": "~3.8.3",
     "npm-watch": "~0.6.0"
   },
-  "watch": {
-    "test": {
-      "patterns": [
-        "src",
-        "test",
-        "node_modules/@btilford"
-      ],
-      "extensions": "ts",
-      "quiet": true,
-      "delay": 2000,
-      "clearBuffer": false
-    },
-    "lint": {
-      "patterns": [
-        "."
-      ],
-      "ignore": [
-        "reports/**/*",
-        "dist/**/*",
-        "dist/**/*",
-        ".nyc.output/**/*"
-      ],
-      "extensions": "ts,json,html,js,md",
-      "quiet": true,
-      "delay": 2000,
-      "clearBuffer": false
-    }
-  },
+
   "scripts": {
-    "compile": "tsc --project tsconfig.production.json",
-    "watch:compile": "tsc --watch",
-    "test": "nyc mocha --enable-source-maps --require ts-node/register --sort lib/**/*.spec.ts",
-    "watch:test": "npm-watch test",
-    "lint": "eslint . --ext js --ext ts --ext md",
-    "lint:fix": "eslint . --fix --ext js --ext ts --ext md",
-    "watch:lint": "npm-watch lint",
-    "watch": "run-p watch:lint watch:test watch:compile",
-
-    "build": "run-s lint compile test"
-
+    "docs:gh-pages": "bundle exec jekyll serve --source docs/ --destination ./.gh-pages"
   }
 }

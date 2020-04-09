@@ -11,6 +11,10 @@ export * from './configure';
 
 
 import {main} from './main';
+import {Options} from './options';
 
 
-export default main;
+export function mdCheck(options: Options) {
+  return () => main(options);
+}
+export default mdCheck;

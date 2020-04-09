@@ -1,0 +1,12 @@
+{
+  "extends": "../tsconfig",
+  "compilerOptions": {
+    "declarationDir": "./dist",
+    "outDir": "./dist",
+    "baseUrl": "",
+    "paths": {
+      "@btilford/md-check": ["node_modules/@btilford/md-check"],
+      "@btilford/md-check-compile-typescript": ["node_modules/@btilford/md-check-compile-typescript"]
+    }
+  }
+}

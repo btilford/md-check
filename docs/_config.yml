@@ -1,0 +1,39 @@
+theme: jekyll-theme-slate
+
+title: md-check
+description: Run code blocks from your markdown.
+
+show_downloads: true
+google_analytics: G-6L3V8LTD4K
+
+highlighter: rouge
+markdown: kramdown
+kramdown:
+    input: GFM
+    syntax_highlighter: rouge
+    syntax_highlighter_opts:
+        css_class: 'highlight md-check__code-block'
+        default_lang: typescript
+
+include:
+    - "_*_.html"
+    - "_*_.*.html"
+    #    - _sass
+    - ['_examples']
+
+collections:
+    examples:
+        output: true
+
+#sass:
+#    sass_dir: _scss
+#    style: :compressed
+repository: btilford/md-check
+
+plugins:
+    - jekyll-github-metadata
+    - jekyll-mentions
+    - jekyll-redirect-from
+    - jekyll-sitemap
+    - jemoji
+#    - jekyll-theme-slate

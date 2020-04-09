@@ -5,6 +5,7 @@ module.exports = {
     '.nyc_output',
     'coverage',
     'reports',
+    '.md-check'
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {

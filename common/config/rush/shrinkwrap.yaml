@@ -2,8 +2,10 @@ dependencies:
   '@istanbuljs/nyc-config-typescript': 1.0.1
   '@mocha/eslint-config-mocha': 0.0.0
   '@rush-temp/md-check': 'file:projects/md-check.tgz'
+  '@rush-temp/md-check-compile-typescript': 'file:projects/md-check-compile-typescript.tgz'
+  '@rush-temp/md-check-examples': 'file:projects/md-check-examples.tgz'
   '@rush-temp/md-check-exec-mocha': 'file:projects/md-check-exec-mocha.tgz'
-  '@rush-temp/md-check-preprocess-typescript': 'file:projects/md-check-preprocess-typescript.tgz'
+  '@rush-temp/md-check-root': 'file:projects/md-check-root.tgz'
   '@types/chai': 4.2.11
   '@types/escape-html': 0.0.20
   '@types/globby': 9.1.0
@@ -232,6 +234,22 @@ packages:
       ts-node: '*'
     resolution:
       integrity: sha512-/gz6LgVpky205LuoOfwEZmnUtaSmdk0QIMcNFj9OvxhiMhPpKftMgZmGN7jNj7jR+lr8IB1Yks3QSSSNSxfoaQ==
+  /@istanbuljs/nyc-config-typescript/1.0.1/9a1f7e81172c3427602a4c688e2198b2:
+    dependencies:
+      '@istanbuljs/schema': 0.1.2
+      nyc: 15.0.1
+      source-map-support: 0.5.16
+      ts-node: /ts-node/8.8.2/typescript@3.8.3
+    dev: false
+    engines:
+      node: '>=8'
+    id: registry.npmjs.org/@istanbuljs/nyc-config-typescript/1.0.1
+    peerDependencies:
+      nyc: '>=15'
+      source-map-support: '*'
+      ts-node: '*'
+    resolution:
+      integrity: sha512-/gz6LgVpky205LuoOfwEZmnUtaSmdk0QIMcNFj9OvxhiMhPpKftMgZmGN7jNj7jR+lr8IB1Yks3QSSSNSxfoaQ==
   /@istanbuljs/nyc-config-typescript/1.0.1/ts-node@8.8.2:
     dependencies:
       ts-node: 8.8.2
@@ -255,6 +273,26 @@ packages:
     dependencies:
       lodash.mergewith: 4.6.2
     dev: false
+    peerDependencies:
+      eslint: ^2.5.1
+      eslint-config-standard: ^5.1.0
+      eslint-plugin-import: ^1.3.0
+      eslint-plugin-mocha-only: 0.0.3
+      eslint-plugin-promise: ^1.1.0
+      eslint-plugin-standard: ^1.3.2
+    resolution:
+      integrity: sha1-G5h4BwWqqhlsZLgn3kAfhS7QqXc=
+  /@mocha/eslint-config-mocha/0.0.0/5937831fa3e535c31e612e6865f1f1e6:
+    dependencies:
+      eslint: 6.8.0
+      eslint-config-standard: /eslint-config-standard/14.1.1/a3042394a6e1b6256b9f786cd589bbc2
+      eslint-plugin-import: /eslint-plugin-import/2.20.2/eslint@6.8.0
+      eslint-plugin-mocha-only: /eslint-plugin-mocha-only/0.0.3/eslint@6.8.0
+      eslint-plugin-promise: 4.2.1
+      eslint-plugin-standard: /eslint-plugin-standard/4.0.1/eslint@6.8.0
+      lodash.mergewith: 4.6.2
+    dev: false
+    id: registry.npmjs.org/@mocha/eslint-config-mocha/0.0.0
     peerDependencies:
       eslint: ^2.5.1
       eslint-config-standard: ^5.1.0
@@ -400,6 +438,23 @@ packages:
       eslint: ^5.0.0 || ^6.0.0
     resolution:
       integrity: sha512-/my+vVHRN7zYgcp0n4z5A6HAK7bvKGBiswaM5zIlOQczsxj/aiD7RcgD+dvVFuwFaGh5+kM7XA6Q6PN0bvb1tw==
+  /@typescript-eslint/eslint-plugin/2.27.0/e4f96d28dab14e99675bed7d0dba806c:
+    dependencies:
+      '@typescript-eslint/experimental-utils': /@typescript-eslint/experimental-utils/2.27.0/eslint@6.8.0
+      '@typescript-eslint/parser': /@typescript-eslint/parser/2.27.0/eslint@6.8.0
+      eslint: 6.8.0
+      functional-red-black-tree: 1.0.1
+      regexpp: 3.1.0
+      tsutils: /tsutils/3.17.1/typescript@3.8.3
+    dev: false
+    engines:
+      node: ^8.10.0 || ^10.13.0 || >=11.10.1
+    id: registry.npmjs.org/@typescript-eslint/eslint-plugin/2.27.0
+    peerDependencies:
+      '@typescript-eslint/parser': ^2.0.0
+      eslint: ^5.0.0 || ^6.0.0
+    resolution:
+      integrity: sha512-/my+vVHRN7zYgcp0n4z5A6HAK7bvKGBiswaM5zIlOQczsxj/aiD7RcgD+dvVFuwFaGh5+kM7XA6Q6PN0bvb1tw==
   /@typescript-eslint/experimental-utils/2.27.0:
     dependencies:
       '@types/json-schema': 7.0.4
@@ -413,6 +468,21 @@ packages:
       eslint: '*'
     resolution:
       integrity: sha512-vOsYzjwJlY6E0NJRXPTeCGqjv5OHgRU1kzxHKWJVPjDYGbPgLudBXjIlc+OD1hDBZ4l1DLbOc5VjofKahsu9Jw==
+  /@typescript-eslint/experimental-utils/2.27.0/eslint@6.8.0:
+    dependencies:
+      '@types/json-schema': 7.0.4
+      '@typescript-eslint/typescript-estree': 2.27.0
+      eslint: 6.8.0
+      eslint-scope: 5.0.0
+      eslint-utils: 2.0.0
+    dev: false
+    engines:
+      node: ^8.10.0 || ^10.13.0 || >=11.10.1
+    id: registry.npmjs.org/@typescript-eslint/experimental-utils/2.27.0
+    peerDependencies:
+      eslint: '*'
+    resolution:
+      integrity: sha512-vOsYzjwJlY6E0NJRXPTeCGqjv5OHgRU1kzxHKWJVPjDYGbPgLudBXjIlc+OD1hDBZ4l1DLbOc5VjofKahsu9Jw==
   /@typescript-eslint/parser/2.27.0:
     dependencies:
       '@types/eslint-visitor-keys': 1.0.0
@@ -422,6 +492,21 @@ packages:
     dev: false
     engines:
       node: ^8.10.0 || ^10.13.0 || >=11.10.1
+    peerDependencies:
+      eslint: ^5.0.0 || ^6.0.0
+    resolution:
+      integrity: sha512-HFUXZY+EdwrJXZo31DW4IS1ujQW3krzlRjBrFRrJcMDh0zCu107/nRfhk/uBasO8m0NVDbBF5WZKcIUMRO7vPg==
+  /@typescript-eslint/parser/2.27.0/eslint@6.8.0:
+    dependencies:
+      '@types/eslint-visitor-keys': 1.0.0
+      '@typescript-eslint/experimental-utils': /@typescript-eslint/experimental-utils/2.27.0/eslint@6.8.0
+      '@typescript-eslint/typescript-estree': 2.27.0
+      eslint: 6.8.0
+      eslint-visitor-keys: 1.1.0
+    dev: false
+    engines:
+      node: ^8.10.0 || ^10.13.0 || >=11.10.1
+    id: registry.npmjs.org/@typescript-eslint/parser/2.27.0
     peerDependencies:
       eslint: ^5.0.0 || ^6.0.0
     resolution:
@@ -1335,6 +1420,22 @@ packages:
       eslint-plugin-standard: '>=4.0.0'
     resolution:
       integrity: sha512-Z9B+VR+JIXRxz21udPTL9HpFMyoMUEeX1G251EQ6e05WD9aPVtVBn09XUmZ259wCMlCDmYDSZG62Hhm+ZTJcUg==
+  /eslint-config-standard/14.1.1/a3042394a6e1b6256b9f786cd589bbc2:
+    dependencies:
+      eslint: 6.8.0
+      eslint-plugin-import: /eslint-plugin-import/2.20.2/eslint@6.8.0
+      eslint-plugin-promise: 4.2.1
+      eslint-plugin-standard: /eslint-plugin-standard/4.0.1/eslint@6.8.0
+    dev: false
+    id: registry.npmjs.org/eslint-config-standard/14.1.1
+    peerDependencies:
+      eslint: '>=6.2.2'
+      eslint-plugin-import: '>=2.18.0'
+      eslint-plugin-node: '>=9.1.0'
+      eslint-plugin-promise: '>=4.2.1'
+      eslint-plugin-standard: '>=4.0.0'
+    resolution:
+      integrity: sha512-Z9B+VR+JIXRxz21udPTL9HpFMyoMUEeX1G251EQ6e05WD9aPVtVBn09XUmZ259wCMlCDmYDSZG62Hhm+ZTJcUg==
   /eslint-import-resolver-node/0.3.3:
     dependencies:
       debug: 2.6.9
@@ -1379,6 +1480,29 @@ packages:
       eslint: 2.x - 6.x
     resolution:
       integrity: sha512-FObidqpXrR8OnCh4iNsxy+WACztJLXAHBO5hK79T1Hc77PgQZkyDGA5Ag9xAvRpglvLNxhH/zSmZ70/pZ31dHg==
+  /eslint-plugin-import/2.20.2/eslint@6.8.0:
+    dependencies:
+      array-includes: 3.1.1
+      array.prototype.flat: 1.2.3
+      contains-path: 0.1.0
+      debug: 2.6.9
+      doctrine: 1.5.0
+      eslint: 6.8.0
+      eslint-import-resolver-node: 0.3.3
+      eslint-module-utils: 2.6.0
+      has: 1.0.3
+      minimatch: 3.0.4
+      object.values: 1.1.1
+      read-pkg-up: 2.0.0
+      resolve: 1.15.1
+    dev: false
+    engines:
+      node: '>=4'
+    id: registry.npmjs.org/eslint-plugin-import/2.20.2
+    peerDependencies:
+      eslint: 2.x - 6.x
+    resolution:
+      integrity: sha512-FObidqpXrR8OnCh4iNsxy+WACztJLXAHBO5hK79T1Hc77PgQZkyDGA5Ag9xAvRpglvLNxhH/zSmZ70/pZ31dHg==
   /eslint-plugin-json/2.1.1:
     dependencies:
       lodash: 4.17.15
@@ -1418,6 +1542,15 @@ packages:
       eslint: '>=0.8.0'
     resolution:
       integrity: sha1-8dEoTPIrefVOwf35iAye8FE5wkA=
+  /eslint-plugin-mocha-only/0.0.3/eslint@6.8.0:
+    dependencies:
+      eslint: 6.8.0
+    dev: false
+    id: registry.npmjs.org/eslint-plugin-mocha-only/0.0.3
+    peerDependencies:
+      eslint: '>=0.8.0'
+    resolution:
+      integrity: sha1-8dEoTPIrefVOwf35iAye8FE5wkA=
   /eslint-plugin-mocha/6.3.0:
     dependencies:
       eslint-utils: 2.0.0
@@ -1429,11 +1562,36 @@ packages:
       eslint: '>= 4.0.0'
     resolution:
       integrity: sha512-Cd2roo8caAyG21oKaaNTj7cqeYRWW1I2B5SfpKRp0Ip1gkfwoR1Ow0IGlPWnNjzywdF4n+kHL8/9vM6zCJUxdg==
+  /eslint-plugin-mocha/6.3.0/eslint@6.8.0:
+    dependencies:
+      eslint: 6.8.0
+      eslint-utils: 2.0.0
+      ramda: 0.27.0
+    dev: false
+    engines:
+      node: '>=8.0.0'
+    id: registry.npmjs.org/eslint-plugin-mocha/6.3.0
+    peerDependencies:
+      eslint: '>= 4.0.0'
+    resolution:
+      integrity: sha512-Cd2roo8caAyG21oKaaNTj7cqeYRWW1I2B5SfpKRp0Ip1gkfwoR1Ow0IGlPWnNjzywdF4n+kHL8/9vM6zCJUxdg==
   /eslint-plugin-no-secrets/0.6.5:
     dev: false
     engines:
       node: '>=10.0.0'
       npm: '>=6.9.0'
+    peerDependencies:
+      eslint: '>=3.0.0'
+    resolution:
+      integrity: sha512-LbKdK2IYChsIHwEMTARPXj50IeJfmCotAXhfN+S1tF3wAqnJmPMznEXcxPbLyOssgXNFBi9HqQFB0kW0dWqLyw==
+  /eslint-plugin-no-secrets/0.6.5/eslint@6.8.0:
+    dependencies:
+      eslint: 6.8.0
+    dev: false
+    engines:
+      node: '>=10.0.0'
+      npm: '>=6.9.0'
+    id: registry.npmjs.org/eslint-plugin-no-secrets/0.6.5
     peerDependencies:
       eslint: '>=3.0.0'
     resolution:
@@ -1466,8 +1624,28 @@ packages:
       eslint: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0
     resolution:
       integrity: sha512-XW5MnzlRjhXpIdbULC/qAdJYHWw3rRLws/DyawdlPU/IdVr9AmRK1r2LaCvabwKOAW2XYYSo3kDX58E4MrB7PQ==
+  /eslint-plugin-sonarjs/0.5.0/eslint@6.8.0:
+    dependencies:
+      eslint: 6.8.0
+    dev: false
+    engines:
+      node: '>=6'
+    id: registry.npmjs.org/eslint-plugin-sonarjs/0.5.0
+    peerDependencies:
+      eslint: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0
+    resolution:
+      integrity: sha512-XW5MnzlRjhXpIdbULC/qAdJYHWw3rRLws/DyawdlPU/IdVr9AmRK1r2LaCvabwKOAW2XYYSo3kDX58E4MrB7PQ==
   /eslint-plugin-standard/4.0.1:
     dev: false
+    peerDependencies:
+      eslint: '>=5.0.0'
+    resolution:
+      integrity: sha512-v/KBnfyaOMPmZc/dmc6ozOdWqekGp7bBGq4jLAecEfPGmfKiWS4sA8sC0LqiV9w5qmXAtXVn4M3p1jSyhY85SQ==
+  /eslint-plugin-standard/4.0.1/eslint@6.8.0:
+    dependencies:
+      eslint: 6.8.0
+    dev: false
+    id: registry.npmjs.org/eslint-plugin-standard/4.0.1
     peerDependencies:
       eslint: '>=5.0.0'
     resolution:
@@ -1521,6 +1699,30 @@ packages:
     engines:
       node: '>=6'
     hasBin: true
+    peerDependencies:
+      eslint: '>=4 <7.0.0'
+    resolution:
+      integrity: sha512-tWT6gQQWzGVn4KMs6ZAdG+nkNNQHg+c6wGdw/mwhp+jWyA7OWEOLxQnRhrP34ddJjpgDafhHOHBNtpVOtXXv4g==
+  /eslint-watch/6.0.1/eslint@6.8.0:
+    dependencies:
+      chokidar: 3.3.1
+      core-js: 3.6.4
+      debug: 4.1.1
+      eslint: 6.8.0
+      execa: 2.1.0
+      keypress: 0.2.1
+      lodash.debounce: 4.0.8
+      lodash.isempty: 4.4.0
+      lodash.isequal: 4.5.0
+      lodash.kebabcase: 4.1.1
+      lodash.unionwith: 4.6.0
+      optionator: 0.8.3
+      source-map-support: 0.5.16
+    dev: false
+    engines:
+      node: '>=6'
+    hasBin: true
+    id: registry.npmjs.org/eslint-watch/6.0.1
     peerDependencies:
       eslint: '>=4 <7.0.0'
     resolution:
@@ -4976,6 +5178,23 @@ packages:
       typescript: '>=2.7'
     resolution:
       integrity: sha512-duVj6BpSpUpD/oM4MfhO98ozgkp3Gt9qIp3jGxwU2DFvl/3IRaEAvbLa8G60uS7C77457e/m5TMowjedeRxI1Q==
+  /ts-node/8.8.2/typescript@3.8.3:
+    dependencies:
+      arg: 4.1.3
+      diff: 4.0.2
+      make-error: 1.3.6
+      source-map-support: 0.5.16
+      typescript: 3.8.3
+      yn: 3.1.1
+    dev: false
+    engines:
+      node: '>=6.0.0'
+    hasBin: true
+    id: registry.npmjs.org/ts-node/8.8.2
+    peerDependencies:
+      typescript: '>=2.7'
+    resolution:
+      integrity: sha512-duVj6BpSpUpD/oM4MfhO98ozgkp3Gt9qIp3jGxwU2DFvl/3IRaEAvbLa8G60uS7C77457e/m5TMowjedeRxI1Q==
   /tsconfig-paths/3.9.0:
     dependencies:
       '@types/json5': 0.0.29
@@ -4995,6 +5214,18 @@ packages:
     dev: false
     engines:
       node: '>= 6'
+    peerDependencies:
+      typescript: '>=2.8.0 || >= 3.2.0-dev || >= 3.3.0-dev || >= 3.4.0-dev || >= 3.5.0-dev || >= 3.6.0-dev || >= 3.6.0-beta || >= 3.7.0-dev || >= 3.7.0-beta'
+    resolution:
+      integrity: sha512-kzeQ5B8H3w60nFY2g8cJIuH7JDpsALXySGtwGJ0p2LSjLgay3NdIpqq5SoOBe46bKDW2iq25irHCr8wjomUS2g==
+  /tsutils/3.17.1/typescript@3.8.3:
+    dependencies:
+      tslib: 1.11.1
+      typescript: 3.8.3
+    dev: false
+    engines:
+      node: '>= 6'
+    id: registry.npmjs.org/tsutils/3.17.1
     peerDependencies:
       typescript: '>=2.8.0 || >= 3.2.0-dev || >= 3.3.0-dev || >= 3.4.0-dev || >= 3.5.0-dev || >= 3.6.0-dev || >= 3.6.0-beta || >= 3.7.0-dev || >= 3.7.0-beta'
     resolution:
@@ -5479,6 +5710,86 @@ packages:
       node: '>=6'
     resolution:
       integrity: sha512-Ux4ygGWsu2c7isFWe8Yu1YluJmqVhxqK2cLXNQA5AcC3QfbGNpM7fu0Y8b/z16pXLnFxZYvWhd3fhBY9DLmC6Q==
+  'file:projects/md-check-compile-typescript.tgz':
+    dependencies:
+      '@istanbuljs/nyc-config-typescript': /@istanbuljs/nyc-config-typescript/1.0.1/ts-node@8.8.2
+      '@mocha/eslint-config-mocha': /@mocha/eslint-config-mocha/0.0.0/73f2aa797c2236742ba1f35bb2b39064
+      '@types/chai': 4.2.11
+      '@types/mocha': 7.0.2
+      '@types/node': 13.11.1
+      '@typescript-eslint/eslint-plugin': /@typescript-eslint/eslint-plugin/2.27.0/@typescript-eslint!parser@2.27.0
+      '@typescript-eslint/parser': 2.27.0
+      chai: 4.2.0
+      eslint: 6.8.0
+      eslint-config-standard: /eslint-config-standard/14.1.1/5d2e3482b5c108e4fbcc42e77a5ef32b
+      eslint-plugin-editorconfig: 2.1.2
+      eslint-plugin-import: 2.20.2
+      eslint-plugin-json: 2.1.1
+      eslint-plugin-markdown: 1.0.2
+      eslint-plugin-md: 1.0.15
+      eslint-plugin-mocha: 6.3.0
+      eslint-plugin-mocha-only: 0.0.3
+      eslint-plugin-no-secrets: 0.6.5
+      eslint-plugin-optimize-regex: 1.1.7
+      eslint-plugin-promise: 4.2.1
+      eslint-plugin-security: 1.4.0
+      eslint-plugin-sonarjs: 0.5.0
+      eslint-plugin-standard: 4.0.1
+      eslint-watch: 6.0.1
+      mocha: 7.1.1
+      npm-run-all: 4.1.5
+      npm-watch: 0.6.0
+      nyc: 15.0.1
+      source-map-support: 0.5.16
+      ts-node: 8.8.2
+      tsconfig-paths: 3.9.0
+      typescript: 3.8.3
+    dev: false
+    name: '@rush-temp/md-check-compile-typescript'
+    resolution:
+      integrity: sha512-3NqBTJ2CbSw/DaouH32JBo7RGnRcJxHG6qT+z7XV6Uq774oNEAE4/xnrkXBNkPMsAi8ywkJqA0qPbJtDzaCxbw==
+      tarball: 'file:projects/md-check-compile-typescript.tgz'
+    version: 0.0.0
+  'file:projects/md-check-examples.tgz':
+    dependencies:
+      '@istanbuljs/nyc-config-typescript': /@istanbuljs/nyc-config-typescript/1.0.1/ts-node@8.8.2
+      '@mocha/eslint-config-mocha': /@mocha/eslint-config-mocha/0.0.0/73f2aa797c2236742ba1f35bb2b39064
+      '@types/chai': 4.2.11
+      '@types/mocha': 7.0.2
+      '@types/node': 13.11.1
+      '@typescript-eslint/eslint-plugin': /@typescript-eslint/eslint-plugin/2.27.0/@typescript-eslint!parser@2.27.0
+      '@typescript-eslint/parser': 2.27.0
+      chai: 4.2.0
+      eslint: 6.8.0
+      eslint-config-standard: /eslint-config-standard/14.1.1/5d2e3482b5c108e4fbcc42e77a5ef32b
+      eslint-plugin-editorconfig: 2.1.2
+      eslint-plugin-import: 2.20.2
+      eslint-plugin-json: 2.1.1
+      eslint-plugin-markdown: 1.0.2
+      eslint-plugin-md: 1.0.15
+      eslint-plugin-mocha: 6.3.0
+      eslint-plugin-mocha-only: 0.0.3
+      eslint-plugin-no-secrets: 0.6.5
+      eslint-plugin-optimize-regex: 1.1.7
+      eslint-plugin-promise: 4.2.1
+      eslint-plugin-security: 1.4.0
+      eslint-plugin-sonarjs: 0.5.0
+      eslint-plugin-standard: 4.0.1
+      eslint-watch: 6.0.1
+      mocha: 7.1.1
+      npm-run-all: 4.1.5
+      npm-watch: 0.6.0
+      nyc: 15.0.1
+      source-map-support: 0.5.16
+      ts-node: 8.8.2
+      tsconfig-paths: 3.9.0
+      typescript: 3.8.3
+    dev: false
+    name: '@rush-temp/md-check-examples'
+    resolution:
+      integrity: sha512-P38SZsJgmteRA97Wq0YvzS5scy1ux8G2Lqe3UZk4wcyB37jUJvY9iBMr/AOsBsOl7JRbwno7XLkWnUAkcpsqMg==
+      tarball: 'file:projects/md-check-examples.tgz'
+    version: 0.0.0
   'file:projects/md-check-exec-mocha.tgz':
     dependencies:
       '@istanbuljs/nyc-config-typescript': /@istanbuljs/nyc-config-typescript/1.0.1/ts-node@8.8.2
@@ -5519,45 +5830,45 @@ packages:
       integrity: sha512-buD5/jICQKbzqHtzboWNO6NZ/zRkiZS1iP/VcdfmfkHyrglVJy5atHEPAs1QQTPLwwYK2KNPT9oXypvds7feTQ==
       tarball: 'file:projects/md-check-exec-mocha.tgz'
     version: 0.0.0
-  'file:projects/md-check-preprocess-typescript.tgz':
+  'file:projects/md-check-root.tgz':
     dependencies:
-      '@istanbuljs/nyc-config-typescript': /@istanbuljs/nyc-config-typescript/1.0.1/ts-node@8.8.2
-      '@mocha/eslint-config-mocha': /@mocha/eslint-config-mocha/0.0.0/73f2aa797c2236742ba1f35bb2b39064
+      '@istanbuljs/nyc-config-typescript': /@istanbuljs/nyc-config-typescript/1.0.1/9a1f7e81172c3427602a4c688e2198b2
+      '@mocha/eslint-config-mocha': /@mocha/eslint-config-mocha/0.0.0/5937831fa3e535c31e612e6865f1f1e6
       '@types/chai': 4.2.11
       '@types/mocha': 7.0.2
       '@types/node': 13.11.1
-      '@typescript-eslint/eslint-plugin': /@typescript-eslint/eslint-plugin/2.27.0/@typescript-eslint!parser@2.27.0
-      '@typescript-eslint/parser': 2.27.0
+      '@typescript-eslint/eslint-plugin': /@typescript-eslint/eslint-plugin/2.27.0/e4f96d28dab14e99675bed7d0dba806c
+      '@typescript-eslint/parser': /@typescript-eslint/parser/2.27.0/eslint@6.8.0
       chai: 4.2.0
       eslint: 6.8.0
-      eslint-config-standard: /eslint-config-standard/14.1.1/5d2e3482b5c108e4fbcc42e77a5ef32b
+      eslint-config-standard: /eslint-config-standard/14.1.1/a3042394a6e1b6256b9f786cd589bbc2
       eslint-plugin-editorconfig: 2.1.2
-      eslint-plugin-import: 2.20.2
+      eslint-plugin-import: /eslint-plugin-import/2.20.2/eslint@6.8.0
       eslint-plugin-json: 2.1.1
       eslint-plugin-markdown: 1.0.2
       eslint-plugin-md: 1.0.15
-      eslint-plugin-mocha: 6.3.0
-      eslint-plugin-mocha-only: 0.0.3
-      eslint-plugin-no-secrets: 0.6.5
+      eslint-plugin-mocha: /eslint-plugin-mocha/6.3.0/eslint@6.8.0
+      eslint-plugin-mocha-only: /eslint-plugin-mocha-only/0.0.3/eslint@6.8.0
+      eslint-plugin-no-secrets: /eslint-plugin-no-secrets/0.6.5/eslint@6.8.0
       eslint-plugin-optimize-regex: 1.1.7
       eslint-plugin-promise: 4.2.1
       eslint-plugin-security: 1.4.0
-      eslint-plugin-sonarjs: 0.5.0
-      eslint-plugin-standard: 4.0.1
-      eslint-watch: 6.0.1
+      eslint-plugin-sonarjs: /eslint-plugin-sonarjs/0.5.0/eslint@6.8.0
+      eslint-plugin-standard: /eslint-plugin-standard/4.0.1/eslint@6.8.0
+      eslint-watch: /eslint-watch/6.0.1/eslint@6.8.0
       mocha: 7.1.1
       npm-run-all: 4.1.5
       npm-watch: 0.6.0
       nyc: 15.0.1
       source-map-support: 0.5.16
-      ts-node: 8.8.2
+      ts-node: /ts-node/8.8.2/typescript@3.8.3
       tsconfig-paths: 3.9.0
       typescript: 3.8.3
     dev: false
-    name: '@rush-temp/md-check-preprocess-typescript'
+    name: '@rush-temp/md-check-root'
     resolution:
-      integrity: sha512-9l0tRFoisltvTH8SnmZTNXH3k5j+vB2QQCoMSsv1SDeOnAQajCXcvux6IEM+8lVQQsCer5ys0IIDDfoiiVdrOg==
-      tarball: 'file:projects/md-check-preprocess-typescript.tgz'
+      integrity: sha512-oUUQ+kckXU2nd/RAyhi7oQ74dSuGDKNqEjn1okTyQ0B/OZSJbgR7fqqKCyrhaiihO2681LKk7ufakQJW5itaxQ==
+      tarball: 'file:projects/md-check-root.tgz'
     version: 0.0.0
   'file:projects/md-check.tgz':
     dependencies:
@@ -5619,8 +5930,10 @@ specifiers:
   '@istanbuljs/nyc-config-typescript': ~1.0.1
   '@mocha/eslint-config-mocha': ~0.0.0
   '@rush-temp/md-check': 'file:./projects/md-check.tgz'
+  '@rush-temp/md-check-compile-typescript': 'file:./projects/md-check-compile-typescript.tgz'
+  '@rush-temp/md-check-examples': 'file:./projects/md-check-examples.tgz'
   '@rush-temp/md-check-exec-mocha': 'file:./projects/md-check-exec-mocha.tgz'
-  '@rush-temp/md-check-preprocess-typescript': 'file:./projects/md-check-preprocess-typescript.tgz'
+  '@rush-temp/md-check-root': 'file:./projects/md-check-root.tgz'
   '@types/chai': ~4.2.11
   '@types/escape-html': ~0.0.20
   '@types/globby': ~9.1.0

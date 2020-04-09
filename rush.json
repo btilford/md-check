@@ -158,7 +158,7 @@
    * and set projectFolderMaxDepth to a large number.
    */
   // "projectFolderMinDepth": 2,
-   "projectFolderMaxDepth": 3,
+  "projectFolderMaxDepth": 3,
 
   /**
    * This feature helps you to review and approve new packages before they are introduced
@@ -398,16 +398,24 @@
     // },
     //
     {
+      "packageName": "@btilford/md-check-root",
+      "projectFolder": "./",
+    },
+    {
       "packageName": "@btilford/md-check",
       "projectFolder": "main",
     },
     {
-      "packageName": "@btilford/md-check-preprocess-typescript",
+      "packageName": "@btilford/md-check-compile-typescript",
       "projectFolder": "plugins/compile-typescript",
     },
     {
       "packageName": "@btilford/md-check-exec-mocha",
       "projectFolder": "plugins/exec-mocha",
+    },
+    {
+      "packageName": "@btilford/md-check-examples",
+      "projectFolder": "examples",
     },
 
     //

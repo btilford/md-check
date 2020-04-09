@@ -52,17 +52,42 @@ export type InsertFences = ParseResult & {
 
 export function insertFences(ctx: InsertFences): Token[] {
   const copy = [...ctx.parsed.tokens];
+  const inserts = ctx.inserts.filter(item => item.insert && item.insert.length > 0);
+
   let offset = 0;
-  ctx.inserts.filter(item => item.insert).forEach(item => {
+  const insertLen = inserts.reduce(
+    (num, next) => num + (next.insert
+                          ? next.insert.length
+                          : 0),
+    0,
+  );
+  const expectNewLen = copy.length + insertLen;
+
+  inserts.forEach(item => {
     const fence = item.fence;
-    const at = (offset + 1 + fence.index);
+    const at = (offset + fence.index + 1);
     const len = item.insert?.length || 0;
+    const oldLen = copy.length;
     if (item.insert && len > 0) {
       copy.splice(at, 0, ...item.insert);
       offset = (at + len + 1);
+      console.log(
+        '%s #%d: inserting %d at %d -> new offset %d : old len=%d new len=%d',
+        item.file,
+        item.fence.index,
+        len,
+        at,
+        oldLen,
+        copy.length,
+      );
     }
 
   });
   console.debug('Inserted %d tokens for %s', copy.length - ctx.parsed.tokens.length, ctx.file);
+  console.assert(
+    expectNewLen === copy.length,
+    `Expected to have inserted ${insertLen} off by ${expectNewLen - copy.length}!`,
+  );
+
   return copy;
 }
