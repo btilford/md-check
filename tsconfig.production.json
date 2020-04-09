@@ -1,0 +1,18 @@
+{
+  "extends": "./tsconfig.json",
+  "exclude": [
+    "node_modules",
+    "**/*.spec.ts",
+    "test"
+  ],
+  "compilerOptions": {
+    "incremental": false,
+    "preserveWatchOutput": false,
+    "listFiles": false,
+    "listEmittedFiles": false,
+    "assumeChangesOnlyAffectDirectDependencies": false,
+    "extendedDiagnostics": false,
+    "diagnostics": false,
+    "pretty": true
+  }
+}

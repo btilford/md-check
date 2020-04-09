@@ -1,0 +1,62 @@
+{
+  "compilerOptions": {
+    "target": "ES2015",
+    "lib": [
+      "ES2020",
+      "ESNext"
+    ],
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "declaration": true,
+    "declarationMap": true,
+
+    "declarationDir": "./dist",
+    "outDir": "./dist",
+
+    "sourceMap": false,
+    "inlineSourceMap": true,
+    "inlineSources": true,
+    "removeComments": false,
+    "strict": true,
+    "allowJs": false,
+    "checkJs": false,
+
+
+    "diagnostics": false,
+    "extendedDiagnostics": false,
+    "listEmittedFiles": false,
+    "listFiles": false,
+    "preserveWatchOutput": true,
+    "noErrorTruncation": true,
+    "pretty": true,
+    "traceResolution": false,
+
+    "assumeChangesOnlyAffectDirectDependencies": false,
+    "incremental": true,
+
+
+
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "emitDecoratorMetadata": true,
+    "downlevelIteration": true,
+
+    "noImplicitAny": false,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "forceConsistentCasingInFileNames": true,
+    "noUnusedLocals": true,
+    "strictBindCallApply": true,
+    "strictFunctionTypes": false,
+    "strictNullChecks": true,
+    "strictPropertyInitialization": true
+
+
+  },
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
+}

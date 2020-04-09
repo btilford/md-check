@@ -403,15 +403,11 @@
     },
     {
       "packageName": "@btilford/md-check-preprocess-typescript",
-      "projectFolder": "plugins/preprocess/typescript",
-    },
-    {
-      "packageName": "@btilford/md-check-exec-node",
-      "projectFolder": "plugins/exec/node",
+      "projectFolder": "plugins/compile-typescript",
     },
     {
       "packageName": "@btilford/md-check-exec-mocha",
-      "projectFolder": "plugins/exec/mocha",
+      "projectFolder": "plugins/exec-mocha",
     },
 
     //

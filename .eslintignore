@@ -1,0 +1,14 @@
+node_modules/
+dist/
+docs/
+coverage/
+reports/
+.nyc_output/
+package.json
+package-lock.json
+typings/
+tsconfig.json
+karma.conf.js
+usage/**/*.js
+dist
+main/dist
