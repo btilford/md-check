@@ -64,3 +64,9 @@ common/temp/
 
 .idea/
 *.iml
+dist/
+node_modules
+
+.nyc_output/
+reports
+.md-check

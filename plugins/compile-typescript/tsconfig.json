@@ -1,0 +1,9 @@
+{
+  "extends": "../../tsconfig",
+  "include": ["lib/**/*",  "e2e/**/*"],
+  "compilerOptions": {
+    "declarationDir": "./dist",
+    "outDir": "./dist",
+
+  }
+}
