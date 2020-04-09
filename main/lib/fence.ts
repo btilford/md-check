@@ -1,5 +1,7 @@
 import Token from 'markdown-it/lib/token';
+import {CompileResult} from './compile';
 import {ParseContext, ParseResult} from './parser';
+import {makeId} from './text';
 
 
 export type FenceContext = ParseContext & {
@@ -27,7 +29,7 @@ export function fences(ctx: ParseResult): FenceContext[] {
           code: token.content,
           index: tdx,
           token,
-          id: encodeURIComponent(`code_${ctx.file}_${tdx}`),
+          id: makeId('code', ctx.file, tdx.toString(10)),
         },
       };
       result.push(fence);
@@ -39,6 +41,7 @@ export function fences(ctx: ParseResult): FenceContext[] {
 
 export type FenceResult = FenceContext & {
   readonly insert?: Token[];
+  readonly compiled?: CompileResult[];
 }
 export type InsertFences = ParseResult & {
   readonly inserts: FenceResult[];

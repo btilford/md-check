@@ -2,7 +2,7 @@ import frontmatter from 'frontmatter';
 import Token from 'markdown-it/lib/token';
 import {FileContext} from './context';
 import {Md} from './md';
-import {stripMarkdownHeader} from './text';
+import {makeId, stripMarkdownHeader} from './text';
 
 
 export type ParseContext = FileContext & {
@@ -40,7 +40,7 @@ export class Parser {
         fence,
         tokens,
         header: header?.data || {},
-        id: encodeURIComponent(`file_${ctx.file}`),
+        id: makeId('file', ctx.file),
       },
     }
   }

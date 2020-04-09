@@ -2,6 +2,7 @@ import {Configuration} from '../configure';
 import {FileContext} from '../context';
 import {writeOutput} from '../files';
 import {Md} from '../md';
+import {ConfigurationSupplier} from '../options';
 import {ParseResult} from '../parser';
 import {stripMargin} from '../text';
 
@@ -19,6 +20,13 @@ export type RenderResult = FileContext & {
 export class FileRenderer {
 
   constructor(readonly options: RenderOptions) {
+  }
+
+
+  static supply(): ConfigurationSupplier<FileRenderer> {
+    return function makeFileRenderer(config: Configuration) {
+      return new FileRenderer(config);
+    }
   }
 
 
@@ -49,7 +57,7 @@ export class FileRenderer {
       |</section>
     `);
 
-    const file = await writeOutput(ctx.project, ctx.file, html);
+    const file = await writeOutput(ctx.project, `${ctx.file}.html`, html);
     return {
       ...ctx,
       file,

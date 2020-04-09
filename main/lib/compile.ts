@@ -1,6 +1,8 @@
+import {Configuration} from './configure';
 import {FileContext} from './context';
 import {FenceContext} from './fence';
 import {writeTemp} from './files';
+import {ConfigurationSupplier} from './options';
 
 
 export type CompilerOptions = {
@@ -40,6 +42,16 @@ export class WriteSourceCompiler extends Compiler {
   }
 
 
+  static supply(matchFence: RegExp): ConfigurationSupplier<Compiler> {
+    return function makeWriteSourceCompiler(config: Configuration) {
+      return new WriteSourceCompiler({
+        ...config,
+        matchFence,
+      });
+    }
+  }
+
+
   accepts(fence?: string): boolean {
     return fence ? this.options.matchFence.test(fence) : false;
   }
@@ -47,7 +59,7 @@ export class WriteSourceCompiler extends Compiler {
 
   async compile(context: CompileContext): Promise<CompileResult> {
     const file = await writeTemp(context.project, context.file, context.fence.code);
-
+    console.debug('Wrote %s to %s', context.fence.id, file);
     return {
       ...context,
       file,

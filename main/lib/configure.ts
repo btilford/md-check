@@ -24,7 +24,7 @@ function projectAtCwd(): Project {
 }
 
 
-export class Configuration implements Options {
+export class Configuration {
 
 
   constructor(options: Options) {
@@ -35,24 +35,35 @@ export class Configuration implements Options {
 
     this.markdownIt = options.markdownIt;
     this.md = new Md(this.markdownIt);
-    this.compilers = options.compilers || [];
+    this.compilers = options.compilers ? options.compilers.map(fn => fn(this)) : [];
 
-    this.defaultExecutionRenderer = options.defaultExecutionRenderer || new StdOutRenderer({
-      ...this,
-    });
-    this.executors = (options.executors || []).map(config => {
-      return config.length === 2 ? config as ExecutorConfig : [config[0], this.defaultExecutionRenderer];
-    });
-
-    this.fileRenderer = options.fileRenderer || new FileRenderer({
-      ...this,
-    });
+    this.defaultExecutionRenderer = options.defaultExecutionRenderer
+                                    ? options.defaultExecutionRenderer(this)
+                                    : StdOutRenderer.supply()(this);
+    if (options.executors) {
+      this.executors = options.executors.map(config => {
+        let result: ExecutorConfig;
+        if (config.length === 2) {
+          const [exec, rend] = config;
+          result = [exec(this), rend ? rend(this) : this.defaultExecutionRenderer];
+        }
+        else {
+          result = [config[0](this), this.defaultExecutionRenderer];
+        }
+        return result;
+      });
+    }
+    else {
+      this.executors = []
+    }
+    this.fileRenderer = options.fileRenderer
+                        ? options.fileRenderer(this)
+                        : FileRenderer.supply()(this);
 
   }
 
 
   readonly md: Md;
-  readonly default
 
   readonly compilers: Compiler[];
   readonly executors: ExecutorConfig[];

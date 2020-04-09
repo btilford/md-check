@@ -1,10 +1,11 @@
 import escapeHTML from 'escape-html';
-import {Options} from '../options';
+import {Configuration} from '../configure';
+import {ConfigurationSupplier} from '../options';
 import {stripMargin} from '../text';
 import {ExecutionResult} from './executor';
 
 
-export type ExecutionRendererOptions = Options & {}
+export type ExecutionRendererOptions = Configuration & {}
 
 export type ExecutionRenderContext = ExecutionResult & {}
 
@@ -27,6 +28,13 @@ function renderLine(line) {
 
 export class StdOutRenderer extends ExecutionRenderer {
 
+  static supply(): ConfigurationSupplier<ExecutionRenderer> {
+    return function makeExecutionRenderer(config: Configuration) {
+      return new StdOutRenderer(config);
+    }
+  }
+
+
   html(out: string, type: 'stderr' | 'stdout'): string {
     const lines = out.split('\n')
                      .map(renderLine)
@@ -42,8 +50,8 @@ export class StdOutRenderer extends ExecutionRenderer {
   render(ctx: ExecutionRenderContext): string | undefined {
     let html: string | undefined;
     const out = [
-      (ctx.stdout ? this.html(ctx.stdout, 'stdout') : false),
-      (ctx.stderr ? this.html(ctx.stderr, 'stderr') : false),
+      (ctx.execution.stdout ? this.html(ctx.execution.stdout.trim(), 'stdout') : false),
+      (ctx.execution.stderr ? this.html(ctx.execution.stderr.trim(), 'stderr') : false),
     ].filter(it => it).join('\n');
 
 

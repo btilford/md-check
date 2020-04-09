@@ -1,8 +1,9 @@
+import globby from 'globby';
 import MarkdownIt from 'markdown-it';
 import {Compiler} from './compile';
+import {Configuration} from './configure';
 import {ExecutionRenderer, Executor} from './exec';
 import {FileRenderer} from './renderer';
-import globby from 'globby';
 
 
 export type Project = {
@@ -24,13 +25,18 @@ export type MarkdownItOptions = {
 };
 
 
+export interface ConfigurationSupplier<T> {
+  (config: Configuration): T;
+}
+
+
 export type Options = {
   project?: Project;
   markdownIt?: MarkdownItOptions;
-  compilers?: Compiler[];
-  fileRenderer?: FileRenderer;
-  executors?: [Executor, ExecutionRenderer?][];
-  defaultExecutionRenderer?: ExecutionRenderer;
+  compilers?: ConfigurationSupplier<Compiler>[];
+  fileRenderer?: ConfigurationSupplier<FileRenderer>;
+  executors?: [ConfigurationSupplier<Executor>, ConfigurationSupplier<ExecutionRenderer>?][];
+  defaultExecutionRenderer?: ConfigurationSupplier<ExecutionRenderer>;
   failOnerror?: boolean;
   outputStyle?: 'single-file' | 'per-file';
   include: {

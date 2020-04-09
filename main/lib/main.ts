@@ -39,16 +39,18 @@ async function processFence(ctx: FenceContext): Promise<FenceResult> {
 
   const compiler = compilers.find(c => c.accepts(ctx.fence.name));
   let insert: Token[] | undefined;
+  let compiled: CompileResult[] = [];
+
   if (compiler) {
-    console.debug('Compiling file %s', ctx.file);
-    const compiled = await compiler.compile({ ...ctx });
-    console.debug('Compiled %o', compiled);
+    console.debug('Compiling %s', ctx.fence.id);
+    const compiledFile = await compiler.compile({ ...ctx });
+    compiled.push(compiledFile);
 
     const exec = executors.find(([exec]) => exec.accept(ctx.fence.name));
     if (exec) {
       const [executor, renderer] = exec;
-      console.debug('Executing %s', compiled.file);
-      const execution = await executor.execute({ ...ctx, file: compiled.file });
+      console.debug('Executing %s', compiledFile.file);
+      const execution = await executor.execute({ ...ctx, file: compiledFile.file });
 
       const rendered = renderer.render({
         ...execution,
@@ -63,6 +65,7 @@ async function processFence(ctx: FenceContext): Promise<FenceResult> {
   return {
     ...ctx,
     insert,
+    compiled,
   };
 
 }
@@ -86,6 +89,7 @@ async function processFile(file: string, ctx: Context): Promise<Result> {
   result.parsed = parsed;
 
   const inserts = await Promise.all(fences(parsed).map(processFence));
+  result.compiled = inserts.map(i => i.compiled).filter(c => c) as unknown as CompileResult[];
 
   const copy = insertFences({
     ...parsed,
@@ -125,13 +129,16 @@ type Nav = {
 export function processNav(results: Result[]): Nav[] {
   return results.map(file => {
     const render = file.rendered;
-    const baseLink = config.outputStyle === 'per-file' ? render?.file : '';
     const parsed = file.parsed?.parsed;
+
+    const href = config.outputStyle === 'per-file' ? render?.file : `#${parsed?.id}`;
+    const baseLink = config.outputStyle === 'per-file' ? render?.file : '';
     const fences = file.fences?.sort((left, right) => left.fence.index - right.fence.index);
+
     return {
       file: file.file,
       link: {
-        href: config.outputStyle === 'per-file' ? file.file : parsed?.id,
+        href,
         text: parsed?.header.title || file.file,
         title: parsed?.header.description,
       },
@@ -176,24 +183,28 @@ function renderNav(nav: Nav[]): string {
 }
 
 
-async function singleFile(index: string, renders: RenderResult[]): Promise<RenderResult[]> {
-  return await Promise.all(renders.map(async render => {
-    const written = await apppendOutput(project, render.file, index);
+async function singleFile(index: string, results: Result[]): Promise<RenderResult[]> {
+  return await Promise.all(results.filter(r => r.rendered?.file).map(async result => {
+    const file = result.rendered?.file as string;
+    console.debug('Appending %s to %s', file, index);
+    const written = await apppendOutput(project, file, index);
     console.log('Appended %s to %s', written, index);
-    return render;
+    return result;
   }));
 }
 
 
 export async function processIndex(results: Results): Promise<Results> {
-  const files = results.files.filter(file => file.rendered);
-  files.sort((left, right) => left.file.localeCompare(right.file));
+  const files: Result[] = results.files.filter(file => file.rendered);
 
-  const nav = renderNav(processNav(files));
-  const index = project.outputPath('index.html');
+  files.sort((left, right) => left.file.localeCompare(right.file));
+  const navTree = processNav(files);
+  console.dir(navTree, { colors: true });
+  const nav = renderNav(navTree);
+  const index = 'index.html';
 
   console.debug('Writing index at %s', index);
-  writeOutput(
+  await writeOutput(
     project,
     index,
     stripMargin(`
@@ -204,7 +215,7 @@ export async function processIndex(results: Results): Promise<Results> {
   );
 
   if (config.outputStyle === 'single-file') {
-    singleFile(index, files);
+    await singleFile(index, files);
   }
 
   return results;
@@ -243,7 +254,6 @@ export async function main(options: Options): Promise<Results> {
     }
   }
 
-
-  return results;
+  return await processIndex(results);
 }
 
