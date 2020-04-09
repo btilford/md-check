@@ -59,7 +59,7 @@ export class WriteSourceCompiler extends Compiler {
 
   async compile(context: CompileContext): Promise<CompileResult> {
     const file = await writeTemp(context.project, context.file, context.fence.code);
-    console.debug('Wrote %s to %s', context.fence.id, file);
+    console.debug('Code %s written to to %s', context.fence.id, file);
     return {
       ...context,
       file,

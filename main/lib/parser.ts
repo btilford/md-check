@@ -27,17 +27,15 @@ export class Parser {
 
 
   async parse(ctx: ParseContext): Promise<ParseResult> {
-
+    console.debug('Parsing file %s', ctx.file);
     const header = frontmatter(ctx.markdown);
     const markdown = header ? stripMarkdownHeader(ctx.markdown) : ctx.markdown;
     const tokens = this.md.parse(markdown, {});
-    const fenceToken = tokens.find(token => token.type === 'fence' && token.tag === 'code');
-    const fence = fenceToken?.info;
 
+    console.debug('Parsed %d tokens from file %s', tokens.length, ctx.file);
     return {
       ...ctx,
       parsed: {
-        fence,
         tokens,
         header: header?.data || {},
         id: makeId('file', ctx.file),

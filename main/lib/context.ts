@@ -1,10 +1,30 @@
 import path from 'path';
 import {Project} from './options';
+import {stripLeadingAndTrailingSlashes} from './text';
 
 
 export class ProjectDetails implements Project {
 
+  readonly matchCwd: RegExp;
+  readonly matchOutputDir: RegExp;
+
+  readonly temp: string;
+  readonly output: string;
+  readonly tempDir: string;
+  readonly outputDir: string;
+  readonly cwd: string;
+
+
   constructor(private readonly project: Project) {
+    this.cwd = this.project.cwd || process.cwd();
+
+    this.output = this.project.outputDir || 'dist';
+    this.temp = this.project.tempDir || '.md-check';
+
+    this.tempDir = this.absolutePath(this.temp);
+    this.outputDir = this.absolutePath(this.output);
+    this.matchCwd = RegExp(this.cwd, 'g');
+    this.matchOutputDir = RegExp(this.output, 'g');
   }
 
 
@@ -18,23 +38,20 @@ export class ProjectDetails implements Project {
   }
 
 
-  get cwd(): string {
-    return this.project.cwd || process.cwd();
-  }
-
-
   absolutePath(file: string): string {
     return path.join(this.cwd, file)
   }
 
 
-  get tempDir(): string {
-    return this.absolutePath(this.project.tempDir || '.md-check');
+  relativePath(file: string): string {
+    const relative = file.replace(this.matchCwd, '');
+    return stripLeadingAndTrailingSlashes(relative);
   }
 
 
-  get outputDir(): string {
-    return this.absolutePath(this.project.outputDir || 'dist');
+  outputRelativePath(file: string): string {
+    const relative = file.replace(this.matchOutputDir, '');
+    return stripLeadingAndTrailingSlashes(relative);
   }
 
 

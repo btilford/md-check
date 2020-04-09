@@ -19,6 +19,7 @@ export function fences(ctx: ParseResult): FenceContext[] {
   const result: FenceContext[] = [];
   const tokens = ctx.parsed.tokens;
   const len = tokens.length;
+
   for (let tdx = 0; tdx < len; tdx++) {
     const token = tokens[tdx];
     if (token.type === 'fence' && token.tag === 'code') {
@@ -35,6 +36,7 @@ export function fences(ctx: ParseResult): FenceContext[] {
       result.push(fence);
     }
   }
+  console.debug('Found %d fences in %s', result.length, ctx.file);
   return result;
 }
 
@@ -61,5 +63,6 @@ export function insertFences(ctx: InsertFences): Token[] {
     }
 
   });
+  console.debug('Inserted %d tokens for %s', copy.length - ctx.parsed.tokens.length, ctx.file);
   return copy;
 }

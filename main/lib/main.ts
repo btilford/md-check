@@ -54,6 +54,7 @@ async function processFence(ctx: FenceContext): Promise<FenceResult> {
 
       const rendered = renderer.render({
         ...execution,
+        file: ctx.file,
       });
       if (rendered) {
         insert = md.parse(rendered);
@@ -131,8 +132,13 @@ export function processNav(results: Result[]): Nav[] {
     const render = file.rendered;
     const parsed = file.parsed?.parsed;
 
-    const href = config.outputStyle === 'per-file' ? render?.file : `#${parsed?.id}`;
-    const baseLink = config.outputStyle === 'per-file' ? render?.file : '';
+    const href = config.outputStyle === 'per-file'
+                 ? project.outputRelativePath(render?.file || '')
+                 : `#${parsed?.id}`;
+    const baseLink = config.outputStyle === 'per-file'
+                     ? render?.file
+                     : '';
+
     const fences = file.fences?.sort((left, right) => left.fence.index - right.fence.index);
 
     return {
@@ -203,7 +209,7 @@ export async function processIndex(results: Results): Promise<Results> {
   const nav = renderNav(navTree);
   const index = 'index.html';
 
-  console.debug('Writing index at %s', index);
+  console.debug('Writing index at %s', project.outputPath(index));
   await writeOutput(
     project,
     index,
@@ -225,7 +231,7 @@ export async function processIndex(results: Results): Promise<Results> {
 export async function main(options: Options): Promise<Results> {
   config = new Configuration(options);
   compilers = config.compilers;
-  project = new ProjectDetails(config.project);
+  project = config.project;
   executors = config.executors;
   renderer = config.fileRenderer;
 

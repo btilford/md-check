@@ -14,11 +14,13 @@ export async function readOutput(project: ProjectDetails, file: string): Promise
 }
 
 
+
 export async function writeTemp(project: ProjectDetails, file: string, src: string): Promise<string> {
   const result = project.tempPath(file);
   await fs.mkdir(result.replace(path.basename(result), ''), { recursive: true });
   await fs.writeFile(result, src, { encoding: UTF8 });
-  return result;
+  console.debug('Wrote tempfile %s', result);
+  return project.relativePath(result);
 }
 
 
@@ -26,7 +28,8 @@ export async function writeOutput(project: ProjectDetails, file: string, src: st
   const result = project.outputPath(file);
   await fs.mkdir(result.replace(path.basename(result), ''), { recursive: true });
   await fs.writeFile(result, src, { encoding: UTF8 });
-  return result;
+  console.debug('Wrote output %s', result);
+  return project.relativePath(result);
 }
 
 
@@ -36,6 +39,7 @@ export async function apppendOutput(project: ProjectDetails, from: string, to: s
   const src = await fs.readFile(from, { encoding: UTF8 });
 
   await fs.appendFile(_to, src, { encoding: UTF8 });
+  console.debug('Appended %s to  %s', from, _to);
 
-  return _to;
+  return project.relativePath(_to);
 }

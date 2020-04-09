@@ -23,3 +23,8 @@ export function makeId(...parts: string[]): string {
               .replace(/__+/g, '_')
               .replace(/^_|_$/g, '');
 }
+
+
+export function stripLeadingAndTrailingSlashes(str: string): string {
+  return str.replace(/^\/|\/$/g, '');
+}

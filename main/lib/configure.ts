@@ -18,9 +18,6 @@ function projectAtCwd(): Project {
   return {
     name,
     version,
-    cwd,
-    tempDir: '.md-check',
-    outputDir: 'dist',
   };
 }
 
