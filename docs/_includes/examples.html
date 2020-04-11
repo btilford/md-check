@@ -2,18 +2,44 @@
 <nav class="md-check__nav">
  <ol class="nav__list">
 <li class="nav__item"><a class="nav__link"
-       href="#file_src-0-writing-markdown-md" 
+       href="#file_src-0-README-md" 
+       title="Verify your documentation">md-check</a>
+   <div class="nav__sub">
+     <ol class="nav__list">
+<li class="nav__item"><a class="md-check__nav-link"
+       href="#src-0-README-md_Installation" 
+       title="undefined">Installation</a> 
+</li>
+      
+
+<li class="nav__item"><a class="md-check__nav-link"
+       href="#src-0-README-md_Getting-Started" 
+       title="Configure and run md-check">Getting Started</a> 
+</li>
+      
+
+<li class="nav__item"><a class="md-check__nav-link"
+       href="#src-0-README-md_Development" 
+       title="Building md-check">Development</a> 
+</li>
+      </ol>
+   </div> 
+</li>
+      
+
+<li class="nav__item"><a class="nav__link"
+       href="#file_src-1-writing-markdown-md" 
        title="How to write the markdown for md-check to work.">Writing Markdown.</a>
    <div class="nav__sub">
      <ol class="nav__list">
 <li class="nav__item"><a class="md-check__nav-link"
-       href="#src-0-writing-markdown-md_Executing-Code-Blocks" 
+       href="#src-1-writing-markdown-md_Executing-Code-Blocks" 
        title="Trigger execution of fences">Executing Code Blocks</a> 
 </li>
       
 
 <li class="nav__item"><a class="md-check__nav-link"
-       href="#src-0-writing-markdown-md_Configuring-metadata" 
+       href="#src-1-writing-markdown-md_Configuring-metadata" 
        title="Set metadata for nicer output">Configuring metadata</a> 
 </li>
       </ol>
@@ -22,39 +48,19 @@
       
 
 <li class="nav__item"><a class="nav__link"
-       href="#file_src-1-node-mdx" 
+       href="#file_src-node-mdx" 
        title="Executing javascript code blocks.">Node Examples</a>
    <div class="nav__sub">
      <ol class="nav__list">
 <li class="nav__item"><a class="md-check__nav-link"
-       href="#src-1-node-mdx_Capture-stdout" 
+       href="#src-node-mdx_Capture-stdout" 
        title="Capture stdout/stderr from a node script.">Capture stdout</a> 
 </li>
       
 
 <li class="nav__item"><a class="md-check__nav-link"
-       href="#src-1-node-mdx_Configuration" 
+       href="#src-node-mdx_Configuration" 
        title="Setup the node executor">Configuration</a> 
-</li>
-      </ol>
-   </div> 
-</li>
-      
-
-<li class="nav__item"><a class="nav__link"
-       href="#file_src-2-typescript-mdx" 
-       title="Compile and execute typescript code blocks.">Typescript Examples</a>
-   <div class="nav__sub">
-     <ol class="nav__list">
-<li class="nav__item"><a class="md-check__nav-link"
-       href="#src-2-typescript-mdx_Basic" 
-       title="undefined">Basic</a> 
-</li>
-      
-
-<li class="nav__item"><a class="md-check__nav-link"
-       href="#src-2-typescript-mdx_Configuration" 
-       title="undefined">Configuration</a> 
 </li>
       </ol>
    </div> 
@@ -85,12 +91,104 @@
       </ol>
    </div> 
 </li>
+      
+
+<li class="nav__item"><a class="nav__link"
+       href="#file_src-typescript-mdx" 
+       title="Compile and execute typescript code blocks.">Typescript Examples</a>
+   <div class="nav__sub">
+     <ol class="nav__list">
+<li class="nav__item"><a class="md-check__nav-link"
+       href="#src-typescript-mdx_Basic" 
+       title="undefined">Basic</a> 
+</li>
+      
+
+<li class="nav__item"><a class="md-check__nav-link"
+       href="#src-typescript-mdx_Configuration" 
+       title="undefined">Configuration</a> 
+</li>
+      </ol>
+   </div> 
+</li>
       </ol>
 </nav>
     
-<section id="file_src-0-writing-markdown-md" class="md-check__file">
+<section id="file_src-0-README-md" class="md-check__file">
    
-<a href="#file_src-0-writing-markdown-md" 
+<a href="#file_src-0-README-md" 
+     class="file__permalink"
+     title="Verify your documentation"
+     rel="instructions">
+   <h2 class="file__heading">md-check</h2>
+</a>
+   <div class="file__content">
+     <p>Compile and execute your documentation.</p>
+<p><strong>Why?</strong></p>
+<ol>
+<li>Your docs have drifted out of sync with your codebase.</li>
+<li>Your docs are incomplete or wrong and won’t compile.</li>
+<li>Your users will thank you.</li>
+</ol>
+<p><strong>What?</strong></p>
+<p>Essentially this is like and borrows a lot from storybook and MDX. But isn’t
+focused on UI components.</p>
+<ol>
+<li>Extract fences from your markdown.</li>
+<li>Compile individual blocks if necessary.</li>
+<li>Execute each block and optionally capture output.</li>
+</ol>
+<p>This verifies that</p>
+<ol>
+<li>Your code at the very least is valid.</li>
+<li>Your code is complete including imports because each block compiles and executes by
+itself. <em>No more crawling the web for what was actually imported for that random snippet
+that was missing pieces.</em></li>
+<li>You code executes without an error. You could even execute tests in you code block. Part
+of the inspiration for this was Mocha’s <a href="https://mochajs.org/#doc">doc</a> and
+<a href="https://mochajs.org/#markdown">markdown</a> reporters.</li>
+</ol>
+<h2 id="install">Install <a class="header-anchor" href="#install">¶</a></h2>
+<pre><code id="src-0-README-md_Installation" class="md-check__code-block language-console"><span class="hljs-meta">#</span><span class="bash"> Run node and other commands</span>
+npm install --save-dev @btilford/md-check
+<span class="hljs-meta">
+#</span><span class="bash"> To compile typescript code blocks</span>
+npm install --save-dev @btilford/md-check-compile-typescript
+</code></pre>
+<h2 id="getting-started">Getting Started <a class="header-anchor" href="#getting-started">¶</a></h2>
+<p>The documentation <a href="https://btilford.github.io/md-check//examples.html">here</a> was generated
+from the markdown in <a href="examples/src">examples/src</a> by the <a href="examples/md-check.js">md-check.js</a> script .</p>
+<p><strong>Configure md-check</strong></p>
+<pre><code id="src-0-README-md_Getting-Started" class="md-check__code-block language-javascript"><span class="hljs-keyword">const</span> {mdCheck, NodeVmExecutor} = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@btilford/md-check'</span>);
+
+<span class="hljs-keyword">const</span> run = mdCheck({
+    <span class="hljs-attr">include</span>: {
+        <span class="hljs-attr">patterns</span>: [
+            <span class="hljs-string">'docs/**/*.{md,mdx}'</span>
+        ]
+    },
+    <span class="hljs-attr">executors</span>: [
+        [NodeVmExecutor.supply()]
+    ]
+});
+<span class="hljs-comment">// Calling run() will trigger execution.</span>
+</code></pre>
+<h2 id="development">Development <a class="header-anchor" href="#development">¶</a></h2>
+<p>If you don’t have <a href="https://rushjs.io/">rush</a> installed you’ll need to get that.</p>
+<pre><code id="src-0-README-md_Development" class="md-check__code-block language-console">npm install -g @microsoft/rush
+</code></pre>
+<p>Clone and initialize</p>
+<pre><code id="src-0-README-md_" class="md-check__code-block language-console">git clone git@github.com:btilford/md-check.git
+rush update
+</code></pre>
+<p>Building</p>
+<p><em>TODO</em></p>
+   </div>
+</section>
+    
+<section id="file_src-1-writing-markdown-md" class="md-check__file">
+   
+<a href="#file_src-1-writing-markdown-md" 
      class="file__permalink"
      title="How to write the markdown for md-check to work."
      rel="instructions">
@@ -101,7 +199,7 @@
 <p>Executors get passed the fence and can either accept it or skip it.
 The node vm executor will split the fence’s name and check if the last
 item in the array is <strong>node</strong> or <strong>node-vm</strong>.</p>
-<pre class="md-check__code-block language-markdown" id="src-0-writing-markdown-md_Executing-Code-Blocks">
+<pre class="md-check__code-block language-markdown" id="src-1-writing-markdown-md_Executing-Code-Blocks">
 <code>
 <span class="hljs-tag">```</span><span class="hljs-keyword">javascript node</span>
 console.log('This would be executed by the node vm executor');
@@ -121,7 +219,7 @@ console.warn('This would NOT be executed by the node vm executor');
 <h3 id="file-metadata">File metadata <a class="header-anchor" href="#file-metadata">¶</a></h3>
 <p>Metadata is YAML parsed out of the header block of the file. The currently support
 entries are.</p>
-<pre><code id="src-0-writing-markdown-md_Configuring-metadata" class="md-check__code-block language-yaml"><span class="hljs-attr">title:</span> <span class="hljs-string">Title</span> <span class="hljs-string">for</span> <span class="hljs-string">the</span> <span class="hljs-string">file</span> <span class="hljs-comment"># Used to generate header and link text</span>
+<pre><code id="src-1-writing-markdown-md_Configuring-metadata" class="md-check__code-block language-yaml"><span class="hljs-attr">title:</span> <span class="hljs-string">Title</span> <span class="hljs-string">for</span> <span class="hljs-string">the</span> <span class="hljs-string">file</span> <span class="hljs-comment"># Used to generate header and link text</span>
 <span class="hljs-attr">description:</span> <span class="hljs-string">Added</span> <span class="hljs-string">to</span> <span class="hljs-string">link.title</span> 
 <span class="hljs-attr">env:</span> <span class="hljs-comment"># Provide env parameters for the file</span>
     <span class="hljs-bullet">-</span> <span class="hljs-attr">NODE_ENV:</span> <span class="hljs-string">test</span>
@@ -134,9 +232,9 @@ entries are.</p>
    </div>
 </section>
     
-<section id="file_src-1-node-mdx" class="md-check__file">
+<section id="file_src-node-mdx" class="md-check__file">
    
-<a href="#file_src-1-node-mdx" 
+<a href="#file_src-node-mdx" 
      class="file__permalink"
      title="Executing javascript code blocks."
      rel="instructions">
@@ -144,44 +242,19 @@ entries are.</p>
 </a>
    <div class="file__content">
      <h3 id="capture-stdout-and-stderr">Capture stdout and stderr <a class="header-anchor" href="#capture-stdout-and-stderr">¶</a></h3>
-<pre><code id="src-1-node-mdx_Capture-stdout" class="md-check__code-block language-javascript"><span class="hljs-built_in">console</span>.log(<span class="hljs-string">'A log message'</span>);
+<pre><code id="src-node-mdx_Capture-stdout" class="md-check__code-block language-javascript"><span class="hljs-built_in">console</span>.log(<span class="hljs-string">'A log message'</span>);
 </code></pre>
-<div id="exec_src/1-node.mdx_3_out" class="execution__output">
+<div id="exec_src/node.mdx_3_out" class="execution__output">
 <p><em>stdout &gt;</em><br></p>
    <pre><code class="execution__code-block language-shell"><span class="hljs-meta">&gt;&nbsp;</span><span class="hljs-bash shell"><span class="hljs-string stdout">A log message</span></span></code></pre>
 </div>
 <h3 id="setting-up-the-nodevmexecutor">Setting up the NodeVMExecutor <a class="header-anchor" href="#setting-up-the-nodevmexecutor">¶</a></h3>
 <p>This uses <a href="https://github.com/patriksimek/vm2">VM2</a> to execute the scripts in a sandbox.
 All the standard vm2 options can be passed in.</p>
-<pre><code id="src-1-node-mdx_Configuration" class="md-check__code-block language-typescript"><span class="hljs-keyword">import</span> {NodeVmExecutor} <span class="hljs-keyword">from</span> <span class="hljs-string">'@btilford/md-check'</span>;
+<pre><code id="src-node-mdx_Configuration" class="md-check__code-block language-typescript"><span class="hljs-keyword">import</span> {NodeVmExecutor} <span class="hljs-keyword">from</span> <span class="hljs-string">'@btilford/md-check'</span>;
 
 NodeVmExecutor.supply(); <span class="hljs-comment">// Use defaults</span>
 NodeVmExecutor.supply({<span class="hljs-comment">/* vm2 options */</span>});
-</code></pre>
-   </div>
-</section>
-    
-<section id="file_src-2-typescript-mdx" class="md-check__file">
-   
-<a href="#file_src-2-typescript-mdx" 
-     class="file__permalink"
-     title="Compile and execute typescript code blocks."
-     rel="instructions">
-   <h2 class="file__heading">Typescript Examples</h2>
-</a>
-   <div class="file__content">
-     <h3 id="as-a-node.js-script">As a Node.js script <a class="header-anchor" href="#as-a-node.js-script">¶</a></h3>
-<pre><code id="src-2-typescript-mdx_Basic" class="md-check__code-block language-typescript"><span class="hljs-keyword">import</span> {ConsoleLog} <span class="hljs-keyword">from</span> <span class="hljs-string">'@btilford/ts-base'</span>;
-
-<span class="hljs-keyword">const</span> log: Log = ConsoleLog.create(<span class="hljs-string">'example'</span>);
-log.info(<span class="hljs-string">'Hello'</span>);
-</code></pre>
-<h3 id="setup-the-typescript-compiler">Setup the Typescript compiler <a class="header-anchor" href="#setup-the-typescript-compiler">¶</a></h3>
-<pre><code id="src-2-typescript-mdx_Configuration" class="md-check__code-block language-typescript"><span class="hljs-keyword">import</span> {TsCompiler} <span class="hljs-keyword">from</span> <span class="hljs-string">'@btilford/md-check-compile-typescript'</span>;
-
-TsCompiler.supply(); <span class="hljs-comment">// default configs, uses ${process.cwd()}/tsconfig.json</span>
-TsCompiler.supply(<span class="hljs-string">'tsconfig.json'</span>); <span class="hljs-comment">// Provide a path to you tsconfig</span>
-TsCompiler.supply({<span class="hljs-comment">/* compiler options */</span>}); <span class="hljs-comment">// Provide a configuration object</span>
 </code></pre>
    </div>
 </section>
@@ -272,6 +345,31 @@ ForkExecutor.supply(
     {},
     <span class="hljs-string">'run'</span>, <span class="hljs-string">'build'</span>
 );
+</code></pre>
+   </div>
+</section>
+    
+<section id="file_src-typescript-mdx" class="md-check__file">
+   
+<a href="#file_src-typescript-mdx" 
+     class="file__permalink"
+     title="Compile and execute typescript code blocks."
+     rel="instructions">
+   <h2 class="file__heading">Typescript Examples</h2>
+</a>
+   <div class="file__content">
+     <h3 id="as-a-node.js-script">As a Node.js script <a class="header-anchor" href="#as-a-node.js-script">¶</a></h3>
+<pre><code id="src-typescript-mdx_Basic" class="md-check__code-block language-typescript"><span class="hljs-keyword">import</span> {ConsoleLog} <span class="hljs-keyword">from</span> <span class="hljs-string">'@btilford/ts-base'</span>;
+
+<span class="hljs-keyword">const</span> log: Log = ConsoleLog.create(<span class="hljs-string">'example'</span>);
+log.info(<span class="hljs-string">'Hello'</span>);
+</code></pre>
+<h3 id="setup-the-typescript-compiler">Setup the Typescript compiler <a class="header-anchor" href="#setup-the-typescript-compiler">¶</a></h3>
+<pre><code id="src-typescript-mdx_Configuration" class="md-check__code-block language-typescript"><span class="hljs-keyword">import</span> {TsCompiler} <span class="hljs-keyword">from</span> <span class="hljs-string">'@btilford/md-check-compile-typescript'</span>;
+
+TsCompiler.supply(); <span class="hljs-comment">// default configs, uses ${process.cwd()}/tsconfig.json</span>
+TsCompiler.supply(<span class="hljs-string">'tsconfig.json'</span>); <span class="hljs-comment">// Provide a path to you tsconfig</span>
+TsCompiler.supply({<span class="hljs-comment">/* compiler options */</span>}); <span class="hljs-comment">// Provide a configuration object</span>
 </code></pre>
    </div>
 </section>
