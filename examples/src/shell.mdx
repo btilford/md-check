@@ -1,11 +1,20 @@
 ---
 title: Shell Examples
 description: Executing shell script blocks.
+fences:
+    - title: bash
+      description: 'Executing a bash script'
+    - title: sh
+      description: 'Executing the default shell'
+    - title: zsh
+      description: 'Executing  z shell'
+    - title: Fish
+      description: 'Executing fish shell'
 ---
 
 ### Capture stdout and stderr
 
-From bash
+**From bash**
 
 ```shell bash
 echo "Hello from bash"
@@ -13,21 +22,23 @@ echo "Hello from bash"
 ```
 
 
-From default shell
+**From default shell**
 
 ```shell sh
 echo "Hello from sh"
 
 ```
 
-From default zsh
+
+**From default zsh**
 
 ```shell sh
 #!/usr/bin/env zsh
 echo "Hello from zsh"
-
 ```
-From default fish
+
+
+**From default fish**
 
 ```shell sh
 #!/usr/bin/env fish

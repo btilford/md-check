@@ -108,7 +108,11 @@ export class TsCompiler extends Compiler {
 
 
   async compile(context: CompileContext): Promise<TsCompileResult> {
-    const tmpTs = await writeTemp(this.options.project, `${context.file}_${context.fence.index}.ts`, context.fence.code);
+    const tmpTs = await writeTemp(
+      this.options.project,
+      `${context.file}_${context.fence.index}.ts`,
+      context.fence.code,
+    );
     const fileName = path.basename(tmpTs);
     const compileDir = tmpTs.replace(fileName, '');
 
@@ -142,10 +146,12 @@ export class TsCompiler extends Compiler {
 
     const result: TsCompileResult = {
       ...context,
-      file: tmpTs.replace(/\.ts$/, '.js'),
+      compiled: {
+        file: tmpTs.replace(/\.ts$/, '.js'),
+      },
     };
     if (errors.length > 0) {
-      result.errors = errors;
+      result.compiled.errors = errors;
     }
     return result;
   }

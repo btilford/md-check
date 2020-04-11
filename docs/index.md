@@ -24,6 +24,7 @@ from the markdown in [examples/src](examples/src) by the [md-check.js](examples/
 ## Development
 
 If you don't have [rush](https://rushjs.io/) installed you'll need to get that.
+
 ```console
 npm install -g @microsoft/rush
 ```

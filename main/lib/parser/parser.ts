@@ -1,8 +1,10 @@
 import frontmatter from 'frontmatter';
 import Token from 'markdown-it/lib/token';
-import {FileContext} from './context';
-import {Md} from './md';
-import {makeId, stripMarkdownHeader} from './text';
+import {FileContext} from '../context';
+import {Md} from '../md';
+import {makeId, stripMarkdownHeader} from '../text';
+
+import {Log, Providers} from '@btilford/ts-base';
 
 
 export type ParseContext = FileContext & {
@@ -13,7 +15,7 @@ export type ParseContext = FileContext & {
 export type ParseResult = ParseContext & {
   readonly parsed: {
     readonly tokens: Token[];
-    readonly header: Record<string, string>;
+    readonly header: Record<string, any>;
     readonly id: string;
     [name: string]: any;
   };
@@ -21,18 +23,22 @@ export type ParseResult = ParseContext & {
 
 
 export class Parser {
-  constructor(readonly md: Md) {
+  protected readonly log: Log;
 
+
+  constructor(readonly md: Md) {
+    this.log = Providers.provide(Log).extend(this.constructor.name);
   }
 
 
   async parse(ctx: ParseContext): Promise<ParseResult> {
-    console.debug('Parsing file %s', ctx.file);
+    this.log.debug('Parsing file %s', ctx.file);
     const header = frontmatter(ctx.markdown);
-    const markdown = header ? stripMarkdownHeader(ctx.markdown) : ctx.markdown;
+    const markdown = stripMarkdownHeader(ctx.markdown);
+
     const tokens = this.md.parse(markdown, {});
 
-    console.debug('Parsed %d tokens from file %s', tokens.length, ctx.file);
+    this.log.debug('Parsed %d tokens from file %s', tokens.length, ctx.file);
     return {
       ...ctx,
       parsed: {

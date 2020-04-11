@@ -1,9 +1,9 @@
 import globby from 'globby';
 import Token from 'markdown-it/lib/token';
-import {Compiler, CompileResult} from './compile';
+import {Compiler, CompileResult} from './compiler';
 import {Configuration} from './configure';
 import {Context, FileContext, ProjectDetails} from './context';
-import {ExecutionResult, ExecutorConfig} from './exec';
+import {ExecutionContext, ExecutionResult, ExecutorConfig} from './exec';
 import {FenceContext, FenceResult, fences, insertFences} from './fence';
 import {apppendOutput, readSource, writeOutput} from './files';
 import {Md} from './md';
@@ -11,6 +11,18 @@ import {Options} from './options';
 import {Parser, ParseResult} from './parser';
 import {FileRenderer, RenderResult} from './renderer';
 import {stripMargin} from './text';
+import {Log, Providers} from '@btilford/ts-base';
+
+
+let _log: Log;
+
+
+function log(name?: string): Log {
+  if (!_log) {
+    _log = Providers.provide(Log).extend('main');
+  }
+  return name ? _log.extend(name) : _log;
+}
 
 
 export type Result = FileContext & {
@@ -36,32 +48,34 @@ let config: Configuration;
 
 
 async function processFence(ctx: FenceContext): Promise<FenceResult> {
+  const logger = log('processFence()');
 
   const compiler = compilers.find(c => c.accepts(ctx.fence.name));
   let insert: Token[] | undefined;
   const compiled: CompileResult[] = [];
 
+  let executionContext: ExecutionContext = { ...ctx };
   if (compiler) {
-    console.debug('Compiling %s', ctx.fence.id);
+    logger.debug('Compiling %s', ctx.fence.id);
     const compiledFile = await compiler.compile({ ...ctx });
     compiled.push(compiledFile);
-
-    const exec = executors.find(([exec]) => exec.accept(ctx.fence.name));
-    if (exec) {
-      const [executor, renderer] = exec;
-      console.debug('Executing %s', compiledFile.file);
-      const execution = await executor.execute({ ...ctx, file: compiledFile.file });
-
-      const rendered = renderer.render({
-        ...execution,
-        file: ctx.file,
-      });
-      if (rendered) {
-        insert = md.parse(rendered);
-      }
-    }
+    executionContext = { ...compiledFile };
   }
 
+  const exec = executors.find(([exec]) => exec.accept(executionContext));
+  if (exec) {
+    const [executor, renderer] = exec;
+    logger.debug('Executing %s', ctx.fence.id);
+    const execution = await executor.execute(executionContext);
+
+    const rendered = renderer.render({
+      ...execution,
+      file: ctx.file,
+    });
+    if (rendered) {
+      insert = md.parse(rendered);
+    }
+  }
 
   return {
     ...ctx,
@@ -73,15 +87,16 @@ async function processFence(ctx: FenceContext): Promise<FenceResult> {
 
 
 async function processFile(file: string, ctx: Context): Promise<Result> {
+  const logger = log('processFile()');
   const result: Result = {
     ...ctx,
     file,
   };
 
-  console.debug('Processing file %s', file);
+  logger.debug('Processing file %s', file);
   const markdown = await readSource(ctx.project, file);
 
-  console.debug('Parsing file %s', file);
+  logger.debug('Parsing file %s', file);
   const parsed = await parser.parse({
     ...ctx,
     file,
@@ -90,6 +105,7 @@ async function processFile(file: string, ctx: Context): Promise<Result> {
   result.parsed = parsed;
 
   const inserts = await Promise.all(fences(parsed).map(processFence));
+  result.fences = inserts;
   result.compiled = inserts.map(i => i.compiled).filter(c => c) as unknown as CompileResult[];
 
   const copy = insertFences({
@@ -98,7 +114,7 @@ async function processFile(file: string, ctx: Context): Promise<Result> {
   });
 
 
-  console.debug('Rendering %s', file);
+  logger.debug('Rendering %s', file);
   result.rendered = await renderer.render({
     ...parsed,
     file,
@@ -128,6 +144,7 @@ type Nav = {
 
 
 export function processNav(results: Result[]): Nav[] {
+  const logger = log('processNav()');
   return results.map(file => {
     const render = file.rendered;
     const parsed = file.parsed?.parsed;
@@ -139,7 +156,7 @@ export function processNav(results: Result[]): Nav[] {
     const baseLink = config.outputStyle === 'per-file'
                      ? render?.file
                      : '';
-    console.debug('Generating nav for %s, href:%s', filePath, href)
+    logger.info('Generating nav for %s, href:%s', filePath, href)
 
     const fences = file.fences?.sort((left, right) => left.fence.index - right.fence.index);
 
@@ -150,13 +167,21 @@ export function processNav(results: Result[]): Nav[] {
         text: parsed?.header.title || file.file,
         title: parsed?.header.description,
       },
-      children: fences?.map(fence => {
-        return {
-          file: `${fence.file}_${fence.fence.index}`,
-          href: `${baseLink}#${fence.fence.id}`,
-          text: `Example ${fence.fence.index}`,
-          title: fence.fence.name,
+      children: fences?.map(codeBlock => {
+        logger.debug('Generating sub nav entry for %s', codeBlock.fence.id);
+        const blockNav: Nav = {
+          file: `${codeBlock.file}_${codeBlock.fence.index}`,
+          link: {
+            href: `${baseLink}#${codeBlock.fence.id}`,
+            text: `${codeBlock.fence.name} ${codeBlock.fence.index}`,
+            title: undefined,
+          },
         };
+        if (codeBlock.fence.config) {
+          blockNav.link.text = codeBlock.fence.config.title;
+          blockNav.link.title = codeBlock.fence.config.description;
+        }
+        return blockNav;
       }),
     };
   }) as Nav[];
@@ -164,6 +189,8 @@ export function processNav(results: Result[]): Nav[] {
 
 
 function renderNav(nav: Nav[]): string {
+  const logger = log('renderNav()');
+  logger.debug('Rendering nav...');
   return nav.map((item: Nav) => {
     let result: string;
     if (item.children && item.children.length > 0) {
@@ -192,16 +219,18 @@ function renderNav(nav: Nav[]): string {
 
 
 async function singleFile(index: string, results: Result[]): Promise<RenderResult[]> {
+  const logger = log('singleFile()');
+  logger.info('Rendering to %d results single file %s', index, results.length);
   return await Promise.all(results.filter(r => r.rendered?.file).map(async result => {
     const file = result.rendered?.file as string;
     try {
-      console.debug('Appending %s to %s', file, index);
+      logger.debug('Appending %s to %s', file, index);
       const written = await apppendOutput(project, file, index);
-      console.log('Appended %s to %s', written, index);
+      logger.info('Appended %s to %s', written, index);
       return result;
     }
     catch (error) {
-      console.error('Error appending %s to %s!', file, index, error);
+      logger.error('Error appending %s to %s!', file, index, error);
       throw error;
     }
   }));
@@ -209,15 +238,16 @@ async function singleFile(index: string, results: Result[]): Promise<RenderResul
 
 
 export async function processIndex(results: Results): Promise<Results> {
+  const logger = log('processIndex()');
   const files: Result[] = results.files.filter(file => file.rendered);
 
   files.sort((left, right) => left.file.localeCompare(right.file));
   const navTree = processNav(files);
-  console.dir(navTree, { colors: true });
+  logger.debug('NavTree %j', navTree);
   const nav = renderNav(navTree);
   const index = 'index.html';
 
-  console.debug('Writing index at %s', project.outputPath(index));
+  logger.debug('Writing index at %s', project.outputPath(index));
   await writeOutput(
     project,
     index,
@@ -246,16 +276,17 @@ export async function main(options: Options): Promise<Results> {
   md = config.md;
   parser = new Parser(md);
 
-  const files = await globby(options.include.patterns, config.include.globby);
+  const files = await globby(config.include.patterns, config.include.globby);
   const results: Results = {
     files: [],
   };
   const ctx: Context = {
     project,
   };
-  console.log('Matched %d files', files.length);
+  log().info('Matched %d files', files.length);
+  log().debug('File list: %o', files);
   for await (const file of files) {
-    console.debug('Matched on file %s', file);
+    log().debug('Matched on file %s', file);
     try {
       // const result = await processFile(typeof file === 'string' ? file : file.toString(UTF8), ctx);
       const result = await processFile(file, ctx);
@@ -266,7 +297,7 @@ export async function main(options: Options): Promise<Results> {
         throw error;
       }
       else {
-        console.warn('Failed processing file %s', file);
+        log().warn('Failed processing file %s', file);
       }
     }
   }

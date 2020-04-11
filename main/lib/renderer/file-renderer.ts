@@ -6,6 +6,8 @@ import {ConfigurationSupplier} from '../options';
 import {ParseResult} from '../parser';
 import {stripMargin} from '../text';
 
+import {Providers, Log} from '@btilford/ts-base';
+
 
 export type RenderOptions = Configuration & {};
 
@@ -19,7 +21,11 @@ export type RenderResult = FileContext & {
 
 export class FileRenderer {
 
+  protected readonly log: Log;
+
+
   constructor(readonly options: RenderOptions) {
+    this.log = Providers.provide(Log).extend(this.constructor.name);
   }
 
 
@@ -47,6 +53,7 @@ export class FileRenderer {
 
 
   async render(ctx: RenderContext): Promise<RenderResult> {
+    this.log.debug('Rendering file %s', ctx.file);
     const content = ctx.md.render(ctx.tokens);
     const html = stripMargin(`
       |<section id="${ctx.parsed.id}" class="md-check__file">
@@ -58,6 +65,7 @@ export class FileRenderer {
     `);
 
     const file = await writeOutput(ctx.project, `${ctx.file}.html`, html);
+    this.log.info('Rendered file to %s', file);
     return {
       ...ctx,
       file,

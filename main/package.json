@@ -13,7 +13,11 @@
     "frontmatter": "~0.0.3",
     "globby": "~11.0.0",
     "fast-glob": "~3.2.2",
-    "escape-html": "~1.0.3"
+    "escape-html": "~1.0.3",
+    "vm2": "~3.9.1",
+    "@btilford/ts-base": "~0.0.7",
+    "@btilford/ts-base-node": "~0.0.7",
+    "rxjs": "~6.5.5"
   },
   "devDependencies": {
     "@types/node": "~13.11.1",
@@ -100,7 +104,7 @@
   },
   "scripts": {
     "compile": "tsc --project tsconfig.production.json",
-    "watch:compile": "tsc --watch",
+    "watch:compile": "tsc --project tsconfig.json --watch",
     "test": "nyc mocha --enable-source-maps --require ts-node/register --sort lib/**/*.spec.ts",
     "watch:test": "npm-watch test",
     "lint": "eslint . --ext js --ext ts --ext md",

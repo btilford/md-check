@@ -4,6 +4,8 @@ import {ConfigurationSupplier} from '../options';
 import {stripMargin} from '../text';
 import {ExecutionResult} from './executor';
 
+import {Providers, Log} from '@btilford/ts-base';
+
 
 export type OutputStream = 'stderr' | 'stdout';
 
@@ -13,7 +15,12 @@ export type ExecutionRenderContext = ExecutionResult & {}
 
 
 export abstract class ExecutionRenderer {
-  constructor(readonly options: ExecutionRendererOptions) {}
+  protected readonly log: Log;
+
+
+  constructor(readonly options: ExecutionRendererOptions) {
+    this.log = Providers.provide(Log).extend(this.constructor.name);
+  }
 
 
   abstract render(execution: ExecutionRenderContext): string | undefined;
@@ -50,6 +57,7 @@ export class StdOutRenderer extends ExecutionRenderer {
 
 
   render(ctx: ExecutionRenderContext): string | undefined {
+    this.log.debug('Rendering execution results for %s', ctx.fence.id);
     let html: string | undefined;
     const out = [
       (ctx.execution.stdout ? this.html(ctx.execution.stdout.trim(), 'stdout') : false),

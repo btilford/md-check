@@ -8,7 +8,7 @@ export function stripMargin(src: string): string {
 }
 
 
-export const MARKDOWN_HEADER = /^---\n(\w+:.+\n|\s*\n)+---\n.*/mg;
+export const MARKDOWN_HEADER = /^---\n([\s+-?\s]*\w+:?.+\n|\s*\n)+---\n.*/mg;
 
 
 export function stripMarkdownHeader(src: string): string {

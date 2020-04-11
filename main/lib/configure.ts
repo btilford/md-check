@@ -1,12 +1,15 @@
+import {bootstrap, ConsoleLog, Log, LogConfig, Providers, templateString} from '@btilford/ts-base';
+import {processEnvLoader} from '@btilford/ts-base-node';
 import fs from 'fs';
 import globby from 'globby';
 import path from 'path';
-import {Compiler} from './compile';
+import {Compiler} from './compiler';
 import {ProjectDetails} from './context';
 import {ExecutionRenderer, Executor, ExecutorConfig, StdOutRenderer} from './exec';
 import {Md} from './md';
 import {MarkdownItOptions, Options, OutputStyle, Project} from './options';
 import {FileRenderer} from './renderer';
+import {Restrictions} from './restrictions';
 import {UTF8} from './text';
 
 
@@ -35,6 +38,14 @@ export type ConfigurationOptions = {
     readonly   patterns: string | string[];
     readonly   globby?: globby.GlobbyOptions;
   };
+  readonly restrictions: Restrictions;
+}
+
+const defaultGlobbyOptions: globby.GlobbyOptions = {
+  gitignore: true,
+  ignore: [
+    'node_modules',
+  ],
 }
 
 
@@ -43,13 +54,37 @@ export class Configuration implements ConfigurationOptions {
 
   constructor(private readonly options: Options) {
     this.failOnerror = options.failOnerror || true;
-    this.include = options.include;
+    this.includePatterns = options.include.patterns;
+    this.globbyOptions = options.include.globby;
     this.outputStyle = options.outputStyle || 'single-file';
     this.project = new ProjectDetails(options.project || projectAtCwd());
 
     this.markdownIt = options.markdownIt;
     this.md = new Md(this.markdownIt);
+    this.restrictions = options.restrictions || {
+      allowSudo: false,
+    };
+    const name = `md-check:${this.project.name}`;
+    bootstrap({
+      appName: 'md-check',
+      envLoaders: [processEnvLoader],
+      log: {
+        root: ConsoleLog.create({
+          name,
+          config: LogConfig.create({
+            messageTemplate: templateString('[${ctx.data.level.name}] ${ctx.data.fqn} > ${ctx.message}'),
+          }),
+        }),
+      },
+    });
+    this.log = Providers.provide(Log).extend(Configuration.name);
+    this.log.debug('Configured');
   }
+
+
+  readonly log: Log;
+
+  readonly restrictions: Restrictions;
 
 
   readonly md: Md;
@@ -126,7 +161,19 @@ export class Configuration implements ConfigurationOptions {
 
 
   readonly failOnerror: boolean;
-  readonly include: { patterns: string | string[]; globby?: globby.GlobbyOptions };
+
+  private readonly includePatterns: string | string[];
+  private globbyOptions?: globby.GlobbyOptions;
+
+
+  get include(): { patterns: string | string[]; globby?: globby.GlobbyOptions } {
+    if (!this.globbyOptions) {
+      this.globbyOptions = defaultGlobbyOptions;
+    }
+    return { patterns: this.includePatterns, globby: this.globbyOptions };
+  }
+
+
   readonly markdownIt?: MarkdownItOptions;
   readonly outputStyle: 'single-file' | 'per-file';
   readonly project: ProjectDetails;

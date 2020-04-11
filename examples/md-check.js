@@ -1,14 +1,19 @@
 const { TsCompiler } = require('@btilford/md-check-compile-typescript');
 const path = require('path');
 const fs = require('fs').promises;
-const { mdCheck, ForkExecutor, WriteSourceCompiler } = require('@btilford/md-check');
+const {
+  mdCheck, NodeVmExecutor, ForkExecutor, WriteSourceCompiler,
+} = require('@btilford/md-check');
 
 const outputDir = 'docs/';
+process.env.LEVEL = 'debug';
 const run = mdCheck({
   outputStyle: 'single-file',
   failOnerror: true,
   project: {
+    name: 'examples',
     outputDir,
+
   },
   include: {
     patterns: [
@@ -16,7 +21,7 @@ const run = mdCheck({
     ],
   },
   executors: [
-    [ForkExecutor.supply(/node$/, 'node')],
+    [NodeVmExecutor.supply()],
     [ForkExecutor.supply(/bash$/, 'bash')],
     [ForkExecutor.supply(/sh|shell/, 'sh')],
   ],

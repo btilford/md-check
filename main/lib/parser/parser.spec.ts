@@ -1,8 +1,8 @@
-import {ProjectDetails} from './context';
-import {Md} from './md';
+import {ProjectDetails} from '../context';
+import {Md} from '../md';
 import {Parser, ParseResult} from './parser';
 import {expect} from 'chai';
-import {stripMargin} from './text';
+import {stripMargin} from '../text';
 
 
 describe('Parser Specs', function () {
@@ -22,6 +22,8 @@ describe('Parser Specs', function () {
     beforeEach(async () => {
       const markdown = stripMargin(`---
       |title: ${suite.title}
+      |env:
+      | - NODE_ENV: production
       |---
       |
       |# Heading 1

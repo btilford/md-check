@@ -53,11 +53,29 @@
     "typescript": "~3.8.3",
     "npm-watch": "~0.6.0"
   },
-
+  "watch": {
+    "docs:cp": {
+      "patterns": [
+        "examples/docs"
+      ],
+      "ignore": [
+        "reports/**/*",
+        "dist/**/*",
+        "dist/**/*",
+        ".nyc.output/**/*"
+      ],
+      "extensions": "ts,json,html,js,md",
+      "quiet": true,
+      "delay": 2000,
+      "clearBuffer": false
+    }
+  },
   "scripts": {
 
     "docs:cp": "cp examples/docs/index.html docs/_includes/examples.html && cp README.md docs/index.md",
+    "watch:docs:cp": "npm-watch docs:cp",
     "docs:gh-pages": "bundle exec jekyll serve --source docs/ --destination ./.gh-pages",
     "docs": "run-s docs:cp"
+
   }
 }
