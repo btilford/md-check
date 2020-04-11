@@ -4,6 +4,8 @@ description: Executing javascript code blocks.
 fences:
     - title: Capture stdout
       description: Capture stdout/stderr from a node script.
+    - title: Configuration
+      description: Setup the node executor
 ---
 
 ### Capture stdout and stderr
@@ -11,4 +13,17 @@ fences:
 ```javascript node
 console.log('A log message');
 console.error('An error!', new Error());
+```
+
+
+### Setting up the NodeVMExecutor
+
+This uses [VM2](https://github.com/patriksimek/vm2) to execute the scripts in a sandbox.
+All the standard vm2 options can be passed in.
+
+```typescript node
+import {NodeVmExecutor} from '@btilford/md-check';
+
+NodeVmExecutor.supply(); // Use defaults
+NodeVmExecutor.supply({/* vm2 options */});
 ```

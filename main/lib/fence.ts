@@ -39,21 +39,29 @@ export function fences(ctx: ParseResult): FenceContext[] {
   const len = tokens.length;
 
   const fenceConfig = ctx.parsed.header.fences;
-
+  log().info('Fence config for %s %s', ctx.file, fenceConfig ? 'found' : 'not found');
+  let fenceCount = 0;
 
   for (let tdx = 0; tdx < len; tdx++) {
     const token = tokens[tdx];
-    if (token.type === 'fence' && token.tag === 'code') {
-      let config = {
-        title: `${token.info} #${result.length + 1}`,
-        description: `Code block #${result.length}`,
-      };
-      if (fenceConfig && result.length <= fenceConfig.length) {
-        config = {
-          ...config,
-          ...fenceConfig[result.length],
+
+    if ((token.type === 'fence' && token.tag === 'code')
+        || (token.type === 'html_block' && token.content.match(      /fence=['|"]true['|"]/mg))) {
+      ++fenceCount;
+      const config = fenceConfig && fenceCount <= fenceConfig.length
+                     ? { ...fenceConfig[fenceCount - 1] }
+                     : {
+          title: `${token.info} #${result.length + 1}`,
+          description: `Code block #${result.length}`,
         };
+      const id = makeId(ctx.file, config.title);
+      config.id = id;
+
+      token.attrSet('id', id);
+      if(token.type === 'html_block') {
+        token.content = token.content.replace(/fence=['|"]true['|"]/m, `id="${id}"`);
       }
+
 
       const fence: FenceContext = {
         ...ctx,
@@ -62,7 +70,7 @@ export function fences(ctx: ParseResult): FenceContext[] {
           code: token.content,
           index: tdx,
           token,
-          id: makeId('code', ctx.file, tdx.toString(10)),
+          id,
           config,
         },
       };
@@ -95,8 +103,6 @@ export function insertFences(ctx: InsertFences): Token[] {
 
 
     const mark = copy.indexOf(fence.token);
-    const codeBlock = copy[mark];
-    codeBlock.attrSet('id', fence.id);
     const at = (mark + 1);
 
     if (item.insert && len > 0) {

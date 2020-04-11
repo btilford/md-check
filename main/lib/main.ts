@@ -12,7 +12,7 @@ import {Parser, ParseResult} from './parser';
 import {FileRenderer, RenderResult} from './renderer';
 import {stripMargin} from './text';
 import {Log, Providers} from '@btilford/ts-base';
-
+import path from 'path';
 
 let _log: Log;
 
@@ -158,7 +158,7 @@ export function processNav(results: Result[]): Nav[] {
                      : '';
     logger.info('Generating nav for %s, href:%s', filePath, href)
 
-    const fences = file.fences?.sort((left, right) => left.fence.index - right.fence.index);
+    const fences = file.fences;//?.sort((left, right) => left.fence.index - right.fence.index);
 
     return {
       file: file.file,
@@ -178,6 +178,7 @@ export function processNav(results: Result[]): Nav[] {
           },
         };
         if (codeBlock.fence.config) {
+          // blockNav.link.href = `${baseLink}#${codeBlock.fence.config.id}`
           blockNav.link.text = codeBlock.fence.config.title;
           blockNav.link.title = codeBlock.fence.config.description;
         }
@@ -241,7 +242,8 @@ export async function processIndex(results: Results): Promise<Results> {
   const logger = log('processIndex()');
   const files: Result[] = results.files.filter(file => file.rendered);
 
-  files.sort((left, right) => left.file.localeCompare(right.file));
+  files.sort((left, right) => path.basename(left.file)
+                                  .localeCompare(path.basename(right.file)));
   const navTree = processNav(files);
   logger.debug('NavTree %j', navTree);
   const nav = renderNav(navTree);

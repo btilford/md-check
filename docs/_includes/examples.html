@@ -2,13 +2,19 @@
 <nav class="md-check__nav">
  <ol class="nav__list">
 <li class="nav__item"><a class="nav__link"
-       href="#file_src_node_mdx" 
-       title="Executing javascript code blocks.">Node Examples</a>
+       href="#file_src-0-writing-markdown-md" 
+       title="How to write the markdown for md-check to work.">Writing Markdown.</a>
    <div class="nav__sub">
      <ol class="nav__list">
 <li class="nav__item"><a class="md-check__nav-link"
-       href="#code_src_node_mdx_3" 
-       title="Capture stdout/stderr from a node script.">Capture stdout</a> 
+       href="#src-0-writing-markdown-md_Executing-Code-Blocks" 
+       title="Trigger execution of fences">Executing Code Blocks</a> 
+</li>
+      
+
+<li class="nav__item"><a class="md-check__nav-link"
+       href="#src-0-writing-markdown-md_Configuring-metadata" 
+       title="Set metadata for nicer output">Configuring metadata</a> 
 </li>
       </ol>
    </div> 
@@ -16,30 +22,50 @@
       
 
 <li class="nav__item"><a class="nav__link"
-       href="#file_src_shell_mdx" 
+       href="#file_src-node-mdx" 
+       title="Executing javascript code blocks.">Node Examples</a>
+   <div class="nav__sub">
+     <ol class="nav__list">
+<li class="nav__item"><a class="md-check__nav-link"
+       href="#src-node-mdx_Capture-stdout" 
+       title="Capture stdout/stderr from a node script.">Capture stdout</a> 
+</li>
+      
+
+<li class="nav__item"><a class="md-check__nav-link"
+       href="#src-node-mdx_Configuration" 
+       title="Setup the node executor">Configuration</a> 
+</li>
+      </ol>
+   </div> 
+</li>
+      
+
+<li class="nav__item"><a class="nav__link"
+       href="#file_src-shell-mdx" 
        title="Executing shell script blocks.">Shell Examples</a>
    <div class="nav__sub">
      <ol class="nav__list">
 <li class="nav__item"><a class="md-check__nav-link"
-       href="#code_src_shell_mdx_6" 
+       href="#src-shell-mdx_bash" 
        title="Executing a bash script">bash</a> 
 </li>
       
 
 <li class="nav__item"><a class="md-check__nav-link"
-       href="#code_src_shell_mdx_10" 
+       href="#src-shell-mdx_sh" 
        title="Executing the default shell">sh</a> 
 </li>
       
 
 <li class="nav__item"><a class="md-check__nav-link"
-       href="#code_src_shell_mdx_14" 
+       href="#src-shell-mdx_zsh" 
        title="Executing  z shell">zsh</a> 
 </li>
       
 
 <li class="nav__item"><a class="md-check__nav-link"
-       href="#code_src_shell_mdx_18" 
+       href="#src-shell-mdx_Fish" 
        title="Executing fish shell">Fish</a> 
 </li>
       </ol>
@@ -48,13 +74,13 @@
       
 
 <li class="nav__item"><a class="nav__link"
-       href="#file_src_typescript_mdx" 
+       href="#file_src-typescript-mdx" 
        title="Compile and execute typescript code blocks.">Typescript Examples</a>
    <div class="nav__sub">
      <ol class="nav__list">
 <li class="nav__item"><a class="md-check__nav-link"
-       href="#code_src_typescript_mdx_3" 
-       title="Code block #0">Basic</a> 
+       href="#src-typescript-mdx_Basic" 
+       title="undefined">Basic</a> 
 </li>
       </ol>
    </div> 
@@ -62,9 +88,132 @@
       </ol>
 </nav>
     
-<section id="file_src_typescript_mdx" class="md-check__file">
+<section id="file_src-shell-mdx" class="md-check__file">
    
-<a href="#file_src_typescript_mdx" 
+<a href="#file_src-shell-mdx" 
+     class="file__permalink"
+     title="Executing shell script blocks."
+     rel="instructions">
+   <h2 class="file__heading">Shell Examples</h2>
+</a>
+   <div class="file__content">
+     <h3 id="capture-stdout-and-stderr">Capture stdout and stderr <a class="header-anchor" href="#capture-stdout-and-stderr">¶</a></h3>
+<p><strong>From bash</strong></p>
+<pre><code id="src-shell-mdx_bash" class="md-check__code-block language-shell">echo "Hello from bash"
+
+</code></pre>
+<div id="exec_src/shell.mdx_6_out" class="execution__output">
+<p><em>stdout &gt;</em><br></p>
+   <pre><code class="execution__code-block language-shell"><span class="hljs-meta">&gt;&nbsp;</span><span class="hljs-bash shell"><span class="hljs-string stdout">Hello from bash</span></span></code></pre>
+</div>
+<p><strong>From default shell</strong></p>
+<pre><code id="src-shell-mdx_sh" class="md-check__code-block language-shell">echo "Hello from sh"
+
+</code></pre>
+<div id="exec_src/shell.mdx_10_out" class="execution__output">
+<p><em>stdout &gt;</em><br></p>
+   <pre><code class="execution__code-block language-shell"><span class="hljs-meta">&gt;&nbsp;</span><span class="hljs-bash shell"><span class="hljs-string stdout">Hello from sh</span></span></code></pre>
+</div>
+<p><strong>From default zsh</strong></p>
+<pre><code id="src-shell-mdx_zsh" class="md-check__code-block language-shell"><span class="hljs-meta">#</span><span class="bash">!/usr/bin/env zsh</span>
+echo "Hello from zsh"
+</code></pre>
+<div id="exec_src/shell.mdx_14_out" class="execution__output">
+<p><em>stdout &gt;</em><br></p>
+   <pre><code class="execution__code-block language-shell"><span class="hljs-meta">&gt;&nbsp;</span><span class="hljs-bash shell"><span class="hljs-string stdout">Hello from zsh</span></span></code></pre>
+</div>
+<p><strong>From default fish</strong></p>
+<pre><code id="src-shell-mdx_Fish" class="md-check__code-block language-shell"><span class="hljs-meta">#</span><span class="bash">!/usr/bin/env fish</span>
+echo "Hello from fish"
+
+</code></pre>
+<div id="exec_src/shell.mdx_18_out" class="execution__output">
+<p><em>stdout &gt;</em><br></p>
+   <pre><code class="execution__code-block language-shell"><span class="hljs-meta">&gt;&nbsp;</span><span class="hljs-bash shell"><span class="hljs-string stdout">Hello from fish</span></span></code></pre>
+</div>
+   </div>
+</section>
+    
+<section id="file_src-0-writing-markdown-md" class="md-check__file">
+   
+<a href="#file_src-0-writing-markdown-md" 
+     class="file__permalink"
+     title="How to write the markdown for md-check to work."
+     rel="instructions">
+   <h2 class="file__heading">Writing Markdown.</h2>
+</a>
+   <div class="file__content">
+     <h3 id="making-code-blocks-executable">Making code blocks executable <a class="header-anchor" href="#making-code-blocks-executable">¶</a></h3>
+<p>Executors get passed the fence and can either accept it or skip it.
+The node vm executor will split the fence’s name and check if the last
+item in the array is <strong>node</strong> or <strong>node-vm</strong>.</p>
+<pre class="md-check__code-block language-markdown" id="src-0-writing-markdown-md_Executing-Code-Blocks">
+<code>
+<span class="hljs-tag">```</span><span class="hljs-keyword">javascript node</span>
+console.log('This would be executed by the node vm executor');
+<span class="hljs-tag">```</span>
+</code>
+<code>
+<span class="hljs-tag">```</span><span class="hljs-keyword">javascript node-vm</span>
+console.log('This would be executed by the node vm executor');
+<span class="hljs-tag">```</span>
+</code>
+<code>
+<span class="hljs-tag">```</span><span class="hljs-keyword">javascript js</span>
+console.warn('This would NOT be executed by the node vm executor');
+<span class="hljs-tag">```</span>
+</code>
+</pre>
+<h3 id="file-metadata">File metadata <a class="header-anchor" href="#file-metadata">¶</a></h3>
+<p>Metadata is YAML parsed out of the header block of the file. The currently support
+entries are.</p>
+<pre><code id="src-0-writing-markdown-md_Configuring-metadata" class="md-check__code-block language-yaml"><span class="hljs-attr">title:</span> <span class="hljs-string">Title</span> <span class="hljs-string">for</span> <span class="hljs-string">the</span> <span class="hljs-string">file</span> <span class="hljs-comment"># Used to generate header and link text</span>
+<span class="hljs-attr">description:</span> <span class="hljs-string">Added</span> <span class="hljs-string">to</span> <span class="hljs-string">link.title</span> 
+<span class="hljs-attr">fences:</span>
+    <span class="hljs-bullet">-</span> <span class="hljs-attr">title:</span> <span class="hljs-string">Title</span> <span class="hljs-string">for</span> <span class="hljs-string">code</span> <span class="hljs-string">block</span> <span class="hljs-number">0</span> <span class="hljs-comment"># Used on links to specific code blocks</span>
+      <span class="hljs-attr">description:</span> <span class="hljs-string">Added</span> <span class="hljs-string">to</span> <span class="hljs-string">link.title</span>
+</code></pre>
+   </div>
+</section>
+    
+<section id="file_src-node-mdx" class="md-check__file">
+   
+<a href="#file_src-node-mdx" 
+     class="file__permalink"
+     title="Executing javascript code blocks."
+     rel="instructions">
+   <h2 class="file__heading">Node Examples</h2>
+</a>
+   <div class="file__content">
+     <h3 id="capture-stdout-and-stderr">Capture stdout and stderr <a class="header-anchor" href="#capture-stdout-and-stderr">¶</a></h3>
+<pre><code id="src-node-mdx_Capture-stdout" class="md-check__code-block language-javascript"><span class="hljs-built_in">console</span>.log(<span class="hljs-string">'A log message'</span>);
+<span class="hljs-built_in">console</span>.error(<span class="hljs-string">'An error!'</span>, <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>());
+</code></pre>
+<div id="exec_src/node.mdx_3_out" class="execution__output">
+<p><em>stdout &gt;</em><br></p>
+   <pre><code class="execution__code-block language-shell"><span class="hljs-meta">&gt;&nbsp;</span><span class="hljs-bash shell"><span class="hljs-string stdout">A log message</span></span></code></pre>
+<p><em>stderr &gt;</em><br></p>
+   <pre><code class="execution__code-block language-shell"><span class="hljs-meta">&gt;&nbsp;</span><span class="hljs-bash shell"><span class="hljs-string stderr">An error! Error</span></span>
+<span class="hljs-meta">&gt;&nbsp;</span><span class="hljs-bash shell"><span class="hljs-string stderr">    at Object.&lt;anonymous&gt; (src/node.mdx_3.js:2:28)</span></span>
+<span class="hljs-meta">&gt;&nbsp;</span><span class="hljs-bash shell"><span class="hljs-string stderr">    at NodeVM.run (/home/btilford/work/btilford/md-fence-check/common/temp/node_modules/.registry.npmjs.org/vm2/3.9.1/node_modules/vm2/lib/main.js:1044:29)</span></span>
+<span class="hljs-meta">&gt;&nbsp;</span><span class="hljs-bash shell"><span class="hljs-string stderr">    at NodeVmExecutor.&lt;anonymous&gt; (/home/btilford/work/btilford/md-fence-check/main/dist/exec/node-vm-executor.js:124:43)</span></span>
+<span class="hljs-meta">&gt;&nbsp;</span><span class="hljs-bash shell"><span class="hljs-string stderr">    at Generator.next (&lt;anonymous&gt;)</span></span>
+<span class="hljs-meta">&gt;&nbsp;</span><span class="hljs-bash shell"><span class="hljs-string stderr">    at fulfilled (/home/btilford/work/btilford/md-fence-check/main/dist/exec/node-vm-executor.js:5:58)</span></span></code></pre>
+</div>
+<h3 id="setting-up-the-nodevmexecutor">Setting up the NodeVMExecutor <a class="header-anchor" href="#setting-up-the-nodevmexecutor">¶</a></h3>
+<p>This uses <a href="https://github.com/patriksimek/vm2">VM2</a> to execute the scripts in a sandbox.
+All the standard vm2 options can be passed in.</p>
+<pre><code id="src-node-mdx_Configuration" class="md-check__code-block language-typescript"><span class="hljs-keyword">import</span> {NodeVmExecutor} <span class="hljs-keyword">from</span> <span class="hljs-string">'@btilford/md-check'</span>;
+
+NodeVmExecutor.supply(); <span class="hljs-comment">// Use defaults</span>
+NodeVmExecutor.supply({<span class="hljs-comment">/* vm2 options */</span>});
+</code></pre>
+   </div>
+</section>
+    
+<section id="file_src-typescript-mdx" class="md-check__file">
+   
+<a href="#file_src-typescript-mdx" 
      class="file__permalink"
      title="Compile and execute typescript code blocks."
      rel="instructions">
@@ -72,7 +221,7 @@
 </a>
    <div class="file__content">
      <h3 id="as-a-node.js-script">As a Node.js script <a class="header-anchor" href="#as-a-node.js-script">¶</a></h3>
-<pre><code id="code_src_typescript_mdx_3" class="md-check__code-block language-typescript"><span class="hljs-keyword">import</span> {TypescriptError} <span class="hljs-keyword">from</span> <span class="hljs-string">'@btilford/md-check-compile-typescript'</span>;
+<pre><code id="src-typescript-mdx_Basic" class="md-check__code-block language-typescript"><span class="hljs-keyword">import</span> {TypescriptError} <span class="hljs-keyword">from</span> <span class="hljs-string">'@btilford/md-check-compile-typescript'</span>;
 
 <span class="hljs-keyword">const</span> err = <span class="hljs-keyword">new</span> TypescriptError(<span class="hljs-string">'testing'</span>);
 <span class="hljs-built_in">console</span>.error(<span class="hljs-string">'Error'</span>, err);
@@ -87,79 +236,6 @@
 <span class="hljs-meta">&gt;&nbsp;</span><span class="hljs-bash shell"><span class="hljs-string stderr">    at NodeVmExecutor.&lt;anonymous&gt; (/home/btilford/work/btilford/md-fence-check/main/dist/exec/node-vm-executor.js:124:43)</span></span>
 <span class="hljs-meta">&gt;&nbsp;</span><span class="hljs-bash shell"><span class="hljs-string stderr">    at Generator.next (&lt;anonymous&gt;)</span></span>
 <span class="hljs-meta">&gt;&nbsp;</span><span class="hljs-bash shell"><span class="hljs-string stderr">    at fulfilled (/home/btilford/work/btilford/md-fence-check/main/dist/exec/node-vm-executor.js:5:58)</span></span></code></pre>
-</div>
-   </div>
-</section>
-    
-<section id="file_src_node_mdx" class="md-check__file">
-   
-<a href="#file_src_node_mdx" 
-     class="file__permalink"
-     title="Executing javascript code blocks."
-     rel="instructions">
-   <h2 class="file__heading">Node Examples</h2>
-</a>
-   <div class="file__content">
-     <h3 id="capture-stdout-and-stderr">Capture stdout and stderr <a class="header-anchor" href="#capture-stdout-and-stderr">¶</a></h3>
-<pre><code id="code_src_node_mdx_3" class="md-check__code-block language-javascript"><span class="hljs-built_in">console</span>.log(<span class="hljs-string">'A log message'</span>);
-<span class="hljs-built_in">console</span>.error(<span class="hljs-string">'An error!'</span>, <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>());
-</code></pre>
-<div id="exec_src/node.mdx_3_out" class="execution__output">
-<p><em>stdout &gt;</em><br></p>
-   <pre><code class="execution__code-block language-shell"><span class="hljs-meta">&gt;&nbsp;</span><span class="hljs-bash shell"><span class="hljs-string stdout">A log message</span></span></code></pre>
-<p><em>stderr &gt;</em><br></p>
-   <pre><code class="execution__code-block language-shell"><span class="hljs-meta">&gt;&nbsp;</span><span class="hljs-bash shell"><span class="hljs-string stderr">An error! Error</span></span>
-<span class="hljs-meta">&gt;&nbsp;</span><span class="hljs-bash shell"><span class="hljs-string stderr">    at Object.&lt;anonymous&gt; (src/node.mdx_3.js:2:28)</span></span>
-<span class="hljs-meta">&gt;&nbsp;</span><span class="hljs-bash shell"><span class="hljs-string stderr">    at NodeVM.run (/home/btilford/work/btilford/md-fence-check/common/temp/node_modules/.registry.npmjs.org/vm2/3.9.1/node_modules/vm2/lib/main.js:1044:29)</span></span>
-<span class="hljs-meta">&gt;&nbsp;</span><span class="hljs-bash shell"><span class="hljs-string stderr">    at NodeVmExecutor.&lt;anonymous&gt; (/home/btilford/work/btilford/md-fence-check/main/dist/exec/node-vm-executor.js:124:43)</span></span>
-<span class="hljs-meta">&gt;&nbsp;</span><span class="hljs-bash shell"><span class="hljs-string stderr">    at Generator.next (&lt;anonymous&gt;)</span></span>
-<span class="hljs-meta">&gt;&nbsp;</span><span class="hljs-bash shell"><span class="hljs-string stderr">    at fulfilled (/home/btilford/work/btilford/md-fence-check/main/dist/exec/node-vm-executor.js:5:58)</span></span></code></pre>
-</div>
-   </div>
-</section>
-    
-<section id="file_src_shell_mdx" class="md-check__file">
-   
-<a href="#file_src_shell_mdx" 
-     class="file__permalink"
-     title="Executing shell script blocks."
-     rel="instructions">
-   <h2 class="file__heading">Shell Examples</h2>
-</a>
-   <div class="file__content">
-     <h3 id="capture-stdout-and-stderr">Capture stdout and stderr <a class="header-anchor" href="#capture-stdout-and-stderr">¶</a></h3>
-<p><strong>From bash</strong></p>
-<pre><code id="code_src_shell_mdx_6" class="md-check__code-block language-shell">echo "Hello from bash"
-
-</code></pre>
-<div id="exec_src/shell.mdx_6_out" class="execution__output">
-<p><em>stdout &gt;</em><br></p>
-   <pre><code class="execution__code-block language-shell"><span class="hljs-meta">&gt;&nbsp;</span><span class="hljs-bash shell"><span class="hljs-string stdout">Hello from bash</span></span></code></pre>
-</div>
-<p><strong>From default shell</strong></p>
-<pre><code id="code_src_shell_mdx_10" class="md-check__code-block language-shell">echo "Hello from sh"
-
-</code></pre>
-<div id="exec_src/shell.mdx_10_out" class="execution__output">
-<p><em>stdout &gt;</em><br></p>
-   <pre><code class="execution__code-block language-shell"><span class="hljs-meta">&gt;&nbsp;</span><span class="hljs-bash shell"><span class="hljs-string stdout">Hello from sh</span></span></code></pre>
-</div>
-<p><strong>From default zsh</strong></p>
-<pre><code id="code_src_shell_mdx_14" class="md-check__code-block language-shell"><span class="hljs-meta">#</span><span class="bash">!/usr/bin/env zsh</span>
-echo "Hello from zsh"
-</code></pre>
-<div id="exec_src/shell.mdx_14_out" class="execution__output">
-<p><em>stdout &gt;</em><br></p>
-   <pre><code class="execution__code-block language-shell"><span class="hljs-meta">&gt;&nbsp;</span><span class="hljs-bash shell"><span class="hljs-string stdout">Hello from zsh</span></span></code></pre>
-</div>
-<p><strong>From default fish</strong></p>
-<pre><code id="code_src_shell_mdx_18" class="md-check__code-block language-shell"><span class="hljs-meta">#</span><span class="bash">!/usr/bin/env fish</span>
-echo "Hello from fish"
-
-</code></pre>
-<div id="exec_src/shell.mdx_18_out" class="execution__output">
-<p><em>stdout &gt;</em><br></p>
-   <pre><code class="execution__code-block language-shell"><span class="hljs-meta">&gt;&nbsp;</span><span class="hljs-bash shell"><span class="hljs-string stdout">Hello from fish</span></span></code></pre>
 </div>
    </div>
 </section>

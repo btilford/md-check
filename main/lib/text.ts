@@ -19,9 +19,9 @@ export function stripMarkdownHeader(src: string): string {
 
 export function makeId(...parts: string[]): string {
   return parts.join('_')
-              .replace(/((?!:)\W)/g, '_')
-              .replace(/__+/g, '_')
-              .replace(/^_|_$/g, '');
+              .replace(/((?!:)\W)/g, '-')
+              .replace(/--+/g, '-')
+              .replace(/^-|-$/g, '');
 }
 
 

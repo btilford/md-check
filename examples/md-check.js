@@ -17,7 +17,7 @@ const run = mdCheck({
   },
   include: {
     patterns: [
-      '**/*.mdx',
+      '**/*.{mdx,md}',
     ],
   },
   executors: [
