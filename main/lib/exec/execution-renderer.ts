@@ -1,5 +1,5 @@
 import escapeHTML from 'escape-html';
-import {Configuration} from '../configure';
+import {Configuration, ConfigurationOptions} from '../configure';
 import {ConfigurationSupplier} from '../options';
 import {stripMargin} from '../text';
 import {ExecutionResult} from './executor';
@@ -9,7 +9,7 @@ import {Providers, Log} from '@btilford/ts-base';
 
 export type OutputStream = 'stderr' | 'stdout';
 
-export type ExecutionRendererOptions = Configuration & {}
+export type ExecutionRendererOptions = ConfigurationOptions & {}
 
 export type ExecutionRenderContext = ExecutionResult & {}
 
@@ -24,6 +24,22 @@ export abstract class ExecutionRenderer {
 
 
   abstract render(execution: ExecutionRenderContext): string | undefined;
+
+}
+
+
+export class NoOpExecutionRenderer extends ExecutionRenderer {
+  static supply(): ConfigurationSupplier<NoOpExecutionRenderer> {
+    return function (config: ConfigurationOptions) {
+      return new NoOpExecutionRenderer(config);
+    }
+  }
+
+
+  render(execution: ExecutionRenderContext): string | undefined {
+    this.log.debug('Skipping render of %s results', execution.file);
+    return undefined;
+  }
 
 }
 
