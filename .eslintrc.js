@@ -5,7 +5,7 @@ module.exports = {
     '.nyc_output',
     'coverage',
     'reports',
-    '.md-check'
+    '.md-check',
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -15,7 +15,7 @@ module.exports = {
       experimentalDecorators: true,
       experimentalObjectRestSpread: true,
 
-    }
+    },
   },
   env: {
     node: 12,
@@ -34,19 +34,33 @@ module.exports = {
     'no-secrets',
     'security',
     'editorconfig',
-    // 'json'
+    'json',
   ],
   extends: [
     'eslint:recommended',
-    // 'plugin:json/recommended',
+    'plugin:json/recommended',
     'plugin:md/recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:sonarjs/recommended',
     'plugin:security/recommended',
     'plugin:editorconfig/noconflict',
+    'plugin:mdx/recommended',
   ],
 
-
+  overrides: [
+    {
+      files: ['*.js', '*.md', '*.mdx'],
+      rules: {
+        '@typescript-eslint/no-var-requires': 'off',
+      },
+    },
+    {
+      files: ['*.spec.ts', '*.e2e.ts'],
+      rules: {
+        'mdx/no-unused-expressions': 'off',
+      },
+    },
+  ],
   rules: {
     quotes: ['warn', 'single'],
 
@@ -82,8 +96,8 @@ module.exports = {
             message: 'Use number instead',
             fixWith: 'number',
           },
-        }
-      }
-    ]
+        },
+      },
+    ],
   },
 };

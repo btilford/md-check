@@ -46,7 +46,7 @@ export function fences(ctx: ParseResult): FenceContext[] {
     const token = tokens[tdx];
 
     if ((token.type === 'fence' && token.tag === 'code')
-        || (token.type === 'html_block' && token.content.match(/fence=['|"]true['|"]/mg))) {
+        || (token.type === 'html_block' && token.content.match(/fence=["'|]true["'|]/gm))) {
       ++fenceCount;
       const config = fenceConfig && fenceCount <= fenceConfig.length
                      ? { ...fenceConfig[fenceCount - 1] }
@@ -59,7 +59,7 @@ export function fences(ctx: ParseResult): FenceContext[] {
 
       token.attrSet('id', id);
       if (token.type === 'html_block') {
-        token.content = token.content.replace(/fence=['|"]true['|"]/m, `id="${id}"`);
+        token.content = token.content.replace(/fence=["'|]true["'|]/m, `id="${id}"`);
       }
 
 

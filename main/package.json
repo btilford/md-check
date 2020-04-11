@@ -56,7 +56,8 @@
     "tsconfig-paths": "~3.9.0",
     "typescript": "~3.8.3",
     "npm-watch": "~0.6.0",
-    "@types/escape-html": "~0.0.20"
+    "@types/escape-html": "~0.0.20",
+    "eslint-plugin-mdx": "~1.6.8"
   },
   "repository": {
     "type": "git",
@@ -111,8 +112,6 @@
     "lint:fix": "eslint . --fix --ext js --ext ts --ext md",
     "watch:lint": "npm-watch lint",
     "watch": "run-p watch:lint watch:test watch:compile",
-
     "build": "run-s lint compile test"
-
   }
 }

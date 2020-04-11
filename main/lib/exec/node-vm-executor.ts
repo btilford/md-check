@@ -84,7 +84,7 @@ export class NodeVmExecutor extends Executor {
 
   accept(fence: FenceContext): boolean {
     const tokens = fence.fence.name.split(/\s/);
-    const accepted = /node[-vm]?$/.test(tokens[tokens.length - 1]);
+    const accepted = /node[-mv]?$/.test(tokens[tokens.length - 1]);
     this.log.debug('Accepted %s %s', accepted, fence.fence.id);
     return accepted;
   }

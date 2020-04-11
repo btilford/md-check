@@ -1,7 +1,7 @@
 {
   "name": "@btilford/md-check-exec-mocha",
   "version": "0.0.1",
-  "description": "Execute mocha markdown fences",
+  "description": "Execute markdown code block fences with Mocha",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "repository": {
@@ -12,7 +12,9 @@
     "markdown",
     "documentation",
     "docs",
-    "typescript"
+    "typescript",
+    "mocha",
+    "testing"
   ],
   "author": "btilford",
   "license": "MIT",
@@ -23,10 +25,10 @@
   "dependencies": {
     "typescript": "~3.8.3",
     "@types/node": "~13.11.1",
-    "mocha": "~7.1.1"
+    "mocha": "~7.1.1",
+    "@btilford/md-check": "~0.0.1"
   },
   "devDependencies": {
-    "mocha": "~7.1.1",
     "@types/mocha": "~7.0.2",
     "chai": "~4.2.0",
     "@types/chai": "~4.2.11",
@@ -56,7 +58,8 @@
     "source-map-support": "~0.5.16",
     "tsconfig-paths": "~3.9.0",
     "typescript": "~3.8.3",
-    "npm-watch": "~0.6.0"
+    "npm-watch": "~0.6.0",
+    "eslint-plugin-mdx": "~1.6.8"
   },
   "watch": {
     "test": {
@@ -88,15 +91,13 @@
   },
   "scripts": {
     "compile": "tsc --project tsconfig.production.json",
-    "watch:compile": "tsc --watch",
+    "watch:compile": "tsc --project tsconfig.json --watch",
     "test": "nyc mocha --enable-source-maps --require ts-node/register --sort lib/**/*.spec.ts",
     "watch:test": "npm-watch test",
-    "lint": "eslint . --ext js --ext ts --ext json --ext md",
-    "lint:fix": "eslint . --fix --ext js --ext ts --ext json --ext md",
+    "lint": "eslint . --ext js --ext ts --ext md",
+    "lint:fix": "eslint . --fix --ext js --ext ts --ext md",
     "watch:lint": "npm-watch lint",
     "watch": "run-p watch:lint watch:test watch:compile",
-
     "build": "run-s lint compile test"
-
   }
 }
