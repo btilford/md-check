@@ -68,19 +68,19 @@
      <ol class="nav__list">
 <li class="nav__item"><a class="md-check__nav-link"
        href="#src-shell-mdx_bash" 
-       title="Executing a bash script">bash</a> 
+       title="Executing as a bash script">bash</a> 
 </li>
       
 
 <li class="nav__item"><a class="md-check__nav-link"
-       href="#src-shell-mdx_Fork-Executor" 
-       title="Configuration to fork and execute a command">Fork Executor</a> 
+       href="#src-shell-mdx_eval" 
+       title="Eval a markdown fence">eval</a> 
 </li>
       
 
 <li class="nav__item"><a class="md-check__nav-link"
-       href="#src-shell-mdx_typescript-node-3" 
-       title="Code block #2">typescript node #3</a> 
+       href="#src-shell-mdx_ForkExecutor-Details" 
+       title="Configuration to fork and execute a command">ForkExecutor Details</a> 
 </li>
       </ol>
    </div> 
@@ -195,25 +195,49 @@ TsCompiler.supply({<span class="hljs-comment">/* compiler options */</span>}); <
    <h2 class="file__heading">Shell Examples</h2>
 </a>
    <div class="file__content">
-     <h3 id="capture-stdout-and-stderr">Capture stdout and stderr <a class="header-anchor" href="#capture-stdout-and-stderr">¶</a></h3>
-<p><strong>From bash</strong></p>
+     <h3 id="run-code-block-a-bash-script">Run code block a bash script <a class="header-anchor" href="#run-code-block-a-bash-script">¶</a></h3>
 <pre><code id="src-shell-mdx_bash" class="md-check__code-block language-shell">echo "Hello from bash"
 echo "Goodbye" 1&gt;&amp;2
 </code></pre>
-<div id="exec_src/shell.mdx_6_out" class="execution__output">
+<div id="exec_src/shell.mdx_3_out" class="execution__output">
 <p><em>stdout &gt;</em><br></p>
    <pre><code class="execution__code-block language-shell"><span class="hljs-meta">&gt;&nbsp;</span><span class="hljs-bash shell"><span class="hljs-string stdout">Hello from bash</span></span></code></pre>
 <p><em>stderr &gt;</em><br></p>
    <pre><code class="execution__code-block language-shell"><span class="hljs-meta">&gt;&nbsp;</span><span class="hljs-bash shell"><span class="hljs-string stderr">Goodbye</span></span></code></pre>
 </div>
-<p><strong>Eval from shell</strong></p>
-<pre><code id="src-shell-mdx_Fork-Executor" class="md-check__code-block language-shell">echo "OS Type: $(uname)"
+<p>This requires configuring a <strong>WriteSourceCompiler</strong> and a <strong>ForkExecutor</strong> that will
+create a command resembling <code>bash $COMPILED_FILE</code> which will expand to the path
+where the code block was written by the WriteSourceCompiler.</p>
+<pre><code id="src-shell-mdx_" class="md-check__code-block language-typescript"><span class="hljs-keyword">import</span> {WriteSourceCompiler, ForkExecutor} <span class="hljs-keyword">from</span> <span class="hljs-string">'@btilford/md-check'</span>;
+
+<span class="hljs-comment">// This will generate a temp file with the code block's contents</span>
+WriteSourceCompiler.supply(<span class="hljs-regexp">/bash$/</span>)
+
+ForkExecutor.supply(
+    <span class="hljs-regexp">/bash$/</span>,
+    <span class="hljs-string">'bash'</span>,
+    {},
+    <span class="hljs-string">'$COMPILED_FILE'</span>, <span class="hljs-comment">// Will insert the path provided by the WriteSourceCompiler</span>
+);
 </code></pre>
-<div id="exec_src/shell.mdx_10_out" class="execution__output">
+<h3 id="eval-a-code-block">Eval a code block <a class="header-anchor" href="#eval-a-code-block">¶</a></h3>
+<pre><code id="src-shell-mdx_eval" class="md-check__code-block language-shell">echo "OS Type: $(uname)"
+</code></pre>
+<div id="exec_src/shell.mdx_11_out" class="execution__output">
 <p><em>stdout &gt;</em><br></p>
    <pre><code class="execution__code-block language-shell"><span class="hljs-meta">&gt;&nbsp;</span><span class="hljs-bash shell"><span class="hljs-string stdout">OS Type: Linux</span></span></code></pre>
 </div>
-<h3 id="configuration">Configuration <a class="header-anchor" href="#configuration">¶</a></h3>
+<p>This can be setup with a <strong>ForkExecutor</strong></p>
+<pre><code id="src-shell-mdx_" class="md-check__code-block language-typescript"><span class="hljs-keyword">import</span> {ForkExecutor} <span class="hljs-keyword">from</span> <span class="hljs-string">'@btilford/md-check'</span>;
+
+ForkExecutor.supply(
+    <span class="hljs-regexp">/eval$/</span>,
+    <span class="hljs-string">'eval'</span>,
+    {},
+    <span class="hljs-string">'"$SOURCE"'</span>, <span class="hljs-comment">// Eval the code block's source.</span>
+);
+</code></pre>
+<h3 id="configuring-a-forkexecutor">Configuring a ForkExecutor <a class="header-anchor" href="#configuring-a-forkexecutor">¶</a></h3>
 <p>The fork executor takes the following arguments.</p>
 <ol>
 <li>A pattern to match on the fence name.</li>
@@ -228,7 +252,7 @@ at file or fence level.</li>
 <li><strong>SOURCE_FILE</strong> the uncompiled file containing the fence’s code <em>(not the original markdown file)</em>.</li>
 <li><strong>SOURCE</strong> the raw source of the file.</li>
 </ul>
-<pre><code id="src-shell-mdx_typescript-node-3" class="md-check__code-block language-typescript"><span class="hljs-keyword">import</span> {ForkExecutor} <span class="hljs-keyword">from</span> <span class="hljs-string">'@btilford/md-check'</span>;
+<pre><code id="src-shell-mdx_ForkExecutor-Details" class="md-check__code-block language-typescript"><span class="hljs-keyword">import</span> {ForkExecutor} <span class="hljs-keyword">from</span> <span class="hljs-string">'@btilford/md-check'</span>;
 
 ForkExecutor.supply(
     <span class="hljs-regexp">/bash|sh$/</span>, <span class="hljs-comment">// match fence names ending with bash or sh</span>

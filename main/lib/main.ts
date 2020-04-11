@@ -14,6 +14,7 @@ import {stripMargin} from './text';
 import {Log, Providers} from '@btilford/ts-base';
 import path from 'path';
 
+
 let _log: Log;
 
 
@@ -167,23 +168,24 @@ export function processNav(results: Result[]): Nav[] {
         text: parsed?.header.title || file.file,
         title: parsed?.header.description,
       },
-      children: fences?.map(codeBlock => {
-        logger.debug('Generating sub nav entry for %s', codeBlock.fence.id);
-        const blockNav: Nav = {
-          file: `${codeBlock.file}_${codeBlock.fence.index}`,
-          link: {
-            href: `${baseLink}#${codeBlock.fence.id}`,
-            text: `${codeBlock.fence.name} ${codeBlock.fence.index}`,
-            title: undefined,
-          },
-        };
-        if (codeBlock.fence.config) {
-          // blockNav.link.href = `${baseLink}#${codeBlock.fence.config.id}`
-          blockNav.link.text = codeBlock.fence.config.title;
-          blockNav.link.title = codeBlock.fence.config.description;
-        }
-        return blockNav;
-      }),
+      children: fences?.filter(codeBlock => codeBlock.fence.config.skip !== true)
+                      .map(codeBlock => {
+                        logger.debug('Generating sub nav entry for %s', codeBlock.fence.id);
+                        const blockNav: Nav = {
+                          file: `${codeBlock.file}_${codeBlock.fence.index}`,
+                          link: {
+                            href: `${baseLink}#${codeBlock.fence.id}`,
+                            text: `${codeBlock.fence.name} ${codeBlock.fence.index}`,
+                            title: undefined,
+                          },
+                        };
+                        if (codeBlock.fence.config) {
+                          // blockNav.link.href = `${baseLink}#${codeBlock.fence.config.id}`
+                          blockNav.link.text = codeBlock.fence.config.title;
+                          blockNav.link.title = codeBlock.fence.config.description;
+                        }
+                        return blockNav;
+                      }),
     };
   }) as Nav[];
 }
@@ -222,19 +224,20 @@ function renderNav(nav: Nav[]): string {
 async function singleFile(index: string, results: Result[]): Promise<RenderResult[]> {
   const logger = log('singleFile()');
   logger.info('Rendering to %d results single file %s', index, results.length);
-  return await Promise.all(results.filter(r => r.rendered?.file).map(async result => {
+
+  for (const result of results) {
     const file = result.rendered?.file as string;
     try {
       logger.debug('Appending %s to %s', file, index);
       const written = await apppendOutput(project, file, index);
       logger.info('Appended %s to %s', written, index);
-      return result;
     }
     catch (error) {
       logger.error('Error appending %s to %s!', file, index, error);
       throw error;
     }
-  }));
+  }
+  return results;
 }
 
 

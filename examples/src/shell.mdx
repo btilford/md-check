@@ -3,29 +3,64 @@ title: Shell Examples
 description: Executing shell script blocks.
 fences:
     - title: bash
-      description: Executing a bash script
-    - title: Fork Executor
+      description: Executing as a bash script
+    - skip: true
+    - title: eval
+      description: Eval a markdown fence
+    - skip: true
+    - title: ForkExecutor Details
       description: Configuration to fork and execute a command
 ---
 
-### Capture stdout and stderr
+### Run code block a bash script
 
-**From bash**
 
 ```shell bash
 echo "Hello from bash"
 echo "Goodbye" 1>&2
 ```
 
-**Eval from shell**
+This requires configuring a **WriteSourceCompiler** and a **ForkExecutor** that will
+create a command resembling `bash $COMPILED_FILE` which will expand to the path
+where the code block was written by the WriteSourceCompiler.
+
+```typescript
+import {WriteSourceCompiler, ForkExecutor} from '@btilford/md-check';
+
+// This will generate a temp file with the code block's contents
+WriteSourceCompiler.supply(/bash$/)
+
+ForkExecutor.supply(
+    /bash$/,
+    'bash',
+    {},
+    '$COMPILED_FILE', // Will insert the path provided by the WriteSourceCompiler
+);
+```
+
+### Eval a code block
 
 ```shell eval
 echo "OS Type: $(uname)"
 ```
 
+This can be setup with a **ForkExecutor**
 
 
-### Configuration
+```typescript
+import {ForkExecutor} from '@btilford/md-check';
+
+ForkExecutor.supply(
+    /eval$/,
+    'eval',
+    {},
+    '"$SOURCE"', // Eval the code block's source.
+);
+```
+
+
+
+### Configuring a ForkExecutor
 
 The fork executor takes the following arguments.
 
