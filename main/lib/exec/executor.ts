@@ -49,6 +49,7 @@ export type ForkOptions = ExecutorOptions & {
   readonly matchFence: RegExp;
   readonly args?: string[];
   readonly cmd: string;
+  readonly env: Record<string, string>;
 }
 
 

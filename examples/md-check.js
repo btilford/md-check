@@ -22,11 +22,25 @@ const run = mdCheck({
   },
   executors: [
     [NodeVmExecutor.supply()],
-    [ForkExecutor.supply(/bash$/, 'bash')],
-    [ForkExecutor.supply(/sh|shell/, 'sh')],
+    [
+      ForkExecutor.supply(
+        /eval$/,
+        'eval',
+        {},
+        '"$SOURCE"',
+      )
+    ],
+    [
+      ForkExecutor.supply(
+        /bash$/,
+        'bash',
+        {},
+        '$COMPILED_FILE',
+      )
+    ]
   ],
   compilers: [
-    WriteSourceCompiler.supply(/^javascript|bash|sh/),
+    WriteSourceCompiler.supply(/bash$/),
     TsCompiler.supply({ tsConfig: 'tsconfig.json' }),
   ],
 });

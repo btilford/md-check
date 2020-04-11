@@ -6,6 +6,8 @@ fences:
       description: Trigger execution of fences
     - title: Configuring metadata
       description: Set metadata for nicer output
+      env:
+        - NODE_ENV: docs
 ---
 
 
@@ -43,7 +45,11 @@ entries are.
 ```yaml
 title: Title for the file # Used to generate header and link text
 description: Added to link.title 
+env: # Provide env parameters for the file
+    - NODE_ENV: test
 fences:
     - title: Title for code block 0 # Used on links to specific code blocks
       description: Added to link.title
+      env: # Provide env parameters specific for this block
+        - NODE_ENV: production
 ```  

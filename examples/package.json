@@ -58,7 +58,8 @@
     "source-map-support": "~0.5.16",
     "tsconfig-paths": "~3.9.0",
     "typescript": "~3.8.3",
-    "npm-watch": "~0.6.0"
+    "npm-watch": "~0.6.0",
+    "@btilford/ts-base": "~0.0.7"
   },
   "watch": {
     "test": {

@@ -6,6 +6,7 @@ import {ConfigurationSupplier} from '../options';
 import {checkRestrictions} from '../restrictions';
 import {UTF8} from '../text';
 import {ExecutionContext, ExecutionResult, Executor, ForkOptions} from './executor';
+import fs from 'fs';
 
 
 export class ForkExecutor extends Executor {
@@ -19,15 +20,32 @@ export class ForkExecutor extends Executor {
     const options: ForkOptions = this.options as ForkOptions;
 
     return new Promise<ExecutionResult>((resolve, reject) => {
-      const args = options.args || [];
-      if (!ctx.compiled?.file) {
-        throw new Error(`File not written for ${ctx.fence.id}!`);
+      let args = options.args || [];
+      // if (!ctx.compiled?.file) {
+      //   throw new Error(`File not written for ${ctx.fence.id}!`);
+      // }
+      if (ctx.fence.config.args) {
+        args = [...args, ...ctx.fence.config.args];
       }
-      const cmd = [options.cmd, ctx.compiled?.file, ...args].join(' ');
+      if (args.find(arg => arg.match(/SOURCE_FILE/g))) {
+        this.log.info('Making file %s executable...', ctx.file);
+        fs.chmodSync(options.project.relativePath(ctx.file), '0777');
+      }
+      if (ctx.compiled && args.find(arg => arg.match(/COMPILED_FILE/g))) {
+        this.log.info('Making file %s executable...', ctx.compiled.file);
+        fs.chmodSync(options.project.relativePath(ctx.compiled?.file), '0777');
+      }
+      const cmd = [options.cmd, ...args].join(' ');
       const alias = `${ctx.file}_${ctx.fence.index}.${ctx.fence.name.split(/\s/)[0]}`;
       checkRestrictions(cmd, ctx, this.options);
       const execOpts = {
-        env: ctx.fence.config.env,
+        env: {
+          ...(options.env || {}),
+          ...(ctx.fence.config.env || {}),
+          COMPILED_FILE: ctx.compiled?.file,
+          SOURCE_FILE: ctx.file,
+          SOURCE: ctx.fence.code,
+        },
         ...(ctx.fence.config.cmd || {}),
       }
 
@@ -76,12 +94,18 @@ export class ForkExecutor extends Executor {
   }
 
 
-  static supply(matchFence: RegExp, cmd: string, ...args: string[]): ConfigurationSupplier<Executor> {
+  static supply(
+    matchFence: RegExp,
+    cmd: string,
+    env: Record<string, string> = {},
+    ...args: string[]
+  ): ConfigurationSupplier<Executor> {
     return function makeForkExecutor(config: ConfigurationOptions) {
       const opt: ForkOptions = {
         ...config,
         matchFence,
         cmd,
+        env,
         args,
       };
       return new ForkExecutor(opt);

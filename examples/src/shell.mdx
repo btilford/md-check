@@ -3,13 +3,9 @@ title: Shell Examples
 description: Executing shell script blocks.
 fences:
     - title: bash
-      description: 'Executing a bash script'
-    - title: sh
-      description: 'Executing the default shell'
-    - title: zsh
-      description: 'Executing  z shell'
-    - title: Fish
-      description: 'Executing fish shell'
+      description: Executing a bash script
+    - title: Fork Executor
+      description: Configuration to fork and execute a command
 ---
 
 ### Capture stdout and stderr
@@ -18,30 +14,54 @@ fences:
 
 ```shell bash
 echo "Hello from bash"
+echo "Goodbye" 1>&2
+```
 
+**Eval from shell**
+
+```shell eval
+echo "OS Type: $(uname)"
 ```
 
 
-**From default shell**
 
-```shell sh
-echo "Hello from sh"
+### Configuration
 
-```
+The fork executor takes the following arguments.
+
+1. A pattern to match on the fence name.
+2. The command to run.
+3. _(optional)_ Default env properties. These can be overridden in your markdown
+at file or fence level.
+4. _(optional)_ A var args to pass to the command.
+
+In addition the command will have access to the following env properties
+
+* **COMPILED_FILE** will be set if the file goes through compilation
+* **SOURCE_FILE** the uncompiled file containing the fence's code _(not the original markdown file)_.
+* **SOURCE** the raw source of the file.
 
 
-**From default zsh**
 
-```shell sh
-#!/usr/bin/env zsh
-echo "Hello from zsh"
-```
+```typescript node
+import {ForkExecutor} from '@btilford/md-check';
 
-
-**From default fish**
-
-```shell sh
-#!/usr/bin/env fish
-echo "Hello from fish"
-
+ForkExecutor.supply(
+    /bash|sh$/, // match fence names ending with bash or sh
+    'bash',  // execute bash
+    {}, // no env defaults
+    '-e', '$SOURCE' // args eval source
+);
+ForkExecutor.supply(
+    /babel$/,
+    'babel',
+    {NODE_ENV: process.env.NODE_ENV},
+    '$SOURCE_FILE', '--out-dir', 'dist/'
+);
+ForkExecutor.supply(
+    /npm$/,
+    'npm',
+    {},
+    'run', 'build'
+);
 ```
