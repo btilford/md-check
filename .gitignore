@@ -71,3 +71,7 @@ node_modules
 reports
 .md-check
 vendor
+.bundle
+.gh-pages
+Gemfile.lock
+examples/docs
