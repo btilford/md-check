@@ -247,7 +247,7 @@ export async function processIndex(results: Results): Promise<Results> {
 
   const index = 'index.html';
   // Clean out index.html
-  await writeOutput(project, index, '');
+  await writeOutput(project, index, '<div>');
 
   let script = '';
   for(const ldJson of project.ldJson) {
@@ -296,11 +296,12 @@ export async function processIndex(results: Results): Promise<Results> {
     project,
     stripMargin(
       `
-  |<footer class="md-check__footer">
+  |<section class="md-check__footer">
   |   <span class="footer__project-name">${project.name}</span>
   |   ${project.version ? `<span class="footer__project-version">v${project.version}</span>` : ''}
   |   <span class="footer__timestamp">${new Date().toISOString()}</span>
-  |</footer>
+  |</section>
+  |</div>
   `),
     index,
     false,

@@ -61,7 +61,7 @@
   "watch": {
     "docs:cp": {
       "patterns": [
-        "examples/docs"
+        "examples/docs/index.html"
       ],
       "ignore": [
         "reports/**/*",
