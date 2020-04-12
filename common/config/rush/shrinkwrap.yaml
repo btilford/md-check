@@ -12,7 +12,7 @@ dependencies:
   '@types/escape-html': 0.0.20
   '@types/globby': 9.1.0
   '@types/highlight.js': 9.12.3
-  '@types/markdown-it': 0.0.9
+  '@types/markdown-it': 10.0.0
   '@types/micromatch': 4.0.1
   '@types/mocha': 7.0.2
   '@types/node': 13.11.1
@@ -740,12 +740,17 @@ packages:
     dev: false
     resolution:
       integrity: sha512-Q7DYAOi9O/+cLLhdaSvKdaumWyHbm7HAk/bFwwyTuU0arR5yyCeW5GOoqt4tJTpDRxhpx9Q8kQL6vMpuw9hDSw==
-  /@types/markdown-it/0.0.9:
+  /@types/markdown-it/10.0.0:
     dependencies:
       '@types/linkify-it': 2.1.0
+      '@types/mdurl': 1.0.2
     dev: false
     resolution:
-      integrity: sha512-IFSepyZXbF4dgSvsk8EsgaQ/8Msv1I5eTL0BZ0X3iGO9jw6tCVtPG8HchIPm3wrkmGdqZOD42kE0zplVi1gYDA==
+      integrity: sha512-7UPBg1W0rfsqQ1JwNFfhxibKO0t7Q0scNt96XcFIFLGE/vhZamzZayaFS2LKha/26Pz7b/2GgiaxQZ1GUwW0dA==
+  /@types/mdurl/1.0.2:
+    dev: false
+    resolution:
+      integrity: sha512-eC4U9MlIcu2q0KQmXszyn5Akca/0jrQmwDRgpAMJai7qBWq4amIQhZyNau4VYGtCeALvW1/NtjzJJ567aZxfKA==
   /@types/micromatch/4.0.1:
     dependencies:
       '@types/braces': 3.0.0
@@ -7297,9 +7302,11 @@ packages:
     version: 0.0.0
   'file:projects/md-check-exec-mocha.tgz':
     dependencies:
+      '@btilford/ts-base': 0.0.7
       '@istanbuljs/nyc-config-typescript': /@istanbuljs/nyc-config-typescript/1.0.1/9a1f7e81172c3427602a4c688e2198b2
       '@mocha/eslint-config-mocha': /@mocha/eslint-config-mocha/0.0.0/5937831fa3e535c31e612e6865f1f1e6
       '@types/chai': 4.2.11
+      '@types/markdown-it': 10.0.0
       '@types/mocha': 7.0.2
       '@types/node': 13.11.1
       '@typescript-eslint/eslint-plugin': /@typescript-eslint/eslint-plugin/2.27.0/e4f96d28dab14e99675bed7d0dba806c
@@ -7322,6 +7329,7 @@ packages:
       eslint-plugin-sonarjs: /eslint-plugin-sonarjs/0.5.0/eslint@6.8.0
       eslint-plugin-standard: /eslint-plugin-standard/4.0.1/eslint@6.8.0
       eslint-watch: /eslint-watch/6.0.1/eslint@6.8.0
+      markdown-it: 10.0.0
       mocha: 7.1.1
       npm-run-all: 4.1.5
       npm-watch: 0.6.0
@@ -7333,7 +7341,7 @@ packages:
     dev: false
     name: '@rush-temp/md-check-exec-mocha'
     resolution:
-      integrity: sha512-fCZuXOVkvo8yKBS4cYfwaEG5aibXMajNurLc2zCHDDnjquRl6SwiX5hHOZzkSm5X8p301PosKy3m3RdQy1A+uQ==
+      integrity: sha512-woL30cD+r84ds0ss7xhTQasuaUa2XCzi58OY2bCbL0YT+GDE0RG+m55jd01m8Am6Vn5oD1H99rpl7uYXKtRN9g==
       tarball: 'file:projects/md-check-exec-mocha.tgz'
     version: 0.0.0
   'file:projects/md-check-root.tgz':
@@ -7387,7 +7395,7 @@ packages:
       '@types/escape-html': 0.0.20
       '@types/globby': 9.1.0
       '@types/highlight.js': 9.12.3
-      '@types/markdown-it': 0.0.9
+      '@types/markdown-it': 10.0.0
       '@types/micromatch': 4.0.1
       '@types/mocha': 7.0.2
       '@types/node': 13.11.1
@@ -7432,7 +7440,7 @@ packages:
     dev: false
     name: '@rush-temp/md-check'
     resolution:
-      integrity: sha512-WWg53LBTLjjIeZWIJOhRypuToFulvBrnwnPP0Pn5uOj9b7aKQzYH2rxH6VtVtZjeG7P2cqBxDPlE70Enq/0eTg==
+      integrity: sha512-/YPcu4HJg0bj7Exa04By29cEUX/u/4GwPd7nWddPEzI05Q2Ls5rucsG8TsPPtADv7qR1mhdaQIsNvMKElYnyfQ==
       tarball: 'file:projects/md-check.tgz'
     version: 0.0.0
 registry: 'https://registry.npmjs.org/'
@@ -7452,7 +7460,7 @@ specifiers:
   '@types/escape-html': ~0.0.20
   '@types/globby': ~9.1.0
   '@types/highlight.js': ~9.12.3
-  '@types/markdown-it': ~0.0.9
+  '@types/markdown-it': ~10.0.0
   '@types/micromatch': ~4.0.1
   '@types/mocha': ~7.0.2
   '@types/node': ~13.11.1

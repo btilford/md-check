@@ -9,6 +9,7 @@ export * from './text';
 export * from './files';
 export * from './configure';
 export * from './restrictions';
+export * from './fence';
 
 import {main} from './main';
 import {Options} from './options';

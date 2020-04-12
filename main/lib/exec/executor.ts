@@ -1,8 +1,15 @@
-import Token from 'markdown-it/lib/token';
+import {Log, Providers} from '@btilford/ts-base';
 import {Compiled} from '../compiler';
 import {ConfigurationOptions} from '../configure';
 import {FenceContext} from '../fence';
-import {Log, Providers} from '@btilford/ts-base';
+
+
+export class ExecutionError extends Error {
+
+  constructor(message: string, readonly cause?: Error) {
+    super(message);
+  }
+}
 
 
 export type Output = {
@@ -18,13 +25,16 @@ export type ExecutorOptions = ConfigurationOptions & {
 export type ExecutionContext = FenceContext & {
   compiled?: Compiled;
 };
+
+export type Execution = Output & {
+  readonly alias: string;
+  // readonly tokens?: Token[];
+  errors?: Error[];
+  returnValue?: any;
+  [k: string]: any;
+};
 export type ExecutionResult = ExecutionContext & {
-  readonly execution: Output & {
-    readonly alias: string;
-    readonly tokens?: Token[];
-    errors?: Error[];
-    returnValue?: any;
-  };
+  readonly execution: Execution;
 }
 
 

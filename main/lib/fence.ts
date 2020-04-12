@@ -15,20 +15,20 @@ function log(): Log {
   return _log;
 }
 
-
-export type FenceContext = ParseContext & {
-  readonly fence: {
-    readonly name: string;
-    readonly code: string;
-    readonly token: Token;
-    readonly index: number;
-    readonly id: string;
-    readonly config: {
-      title: string;
-      description?: string;
-      [k: string]: any;
-    };
+export type Fence = {
+  readonly name: string;
+  readonly code: string;
+  readonly token: Token;
+  readonly index: number;
+  readonly id: string;
+  readonly config: {
+    title: string;
+    description?: string;
+    [k: string]: any;
   };
+};
+export type FenceContext = ParseContext & {
+  readonly fence: Fence;
 }
 
 

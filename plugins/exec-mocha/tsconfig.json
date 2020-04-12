@@ -4,6 +4,11 @@
   "compilerOptions": {
     "declarationDir": "./dist",
     "outDir": "./dist",
-
+    "baseUrl": "",
+    "paths": {
+      "@btilford/md-check" : [
+        "node_modules/@btilford/md-check"
+      ]
+    }
   }
 }
