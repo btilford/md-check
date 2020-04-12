@@ -1,6 +1,6 @@
 ---
 title: md-check
-description: Verify your documentation
+description: Check your docs!
 fences:
     - title: Installation
       exec: false
@@ -15,8 +15,7 @@ fences:
       
 ---
 # doc-check
-
-Compile and execute your documentation.
+*Compile and execute your documentation.*
 
 **Why?** 
 

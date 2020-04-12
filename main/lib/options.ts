@@ -14,6 +14,7 @@ export type Project = {
   readonly cwd?: string;
   readonly tempDir?: string;
   readonly outputDir?: string;
+  readonly ldJson?: Record<string, any> | Record<string, any>[];
 }
 
 export type MarkdownItPlugin = {
@@ -30,6 +31,7 @@ export type MarkdownItOptions = {
 export interface ConfigurationSupplier<T> {
   (config: ConfigurationOptions): T;
 }
+
 
 export type Options = {
   project?: Project;

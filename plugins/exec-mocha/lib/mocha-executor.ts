@@ -67,7 +67,7 @@ export class MochaExecutor extends Executor {
 
   execute(ctx: ExecutionContext): Promise<import("@btilford/md-check").ExecutionResult> {
     return new Promise<ExecutionResult>((resolve, reject) => {
-      const alias = `${ctx.file}_${ctx.fence.index}.mocha`;
+      const alias = `${ctx.file}_${ctx.fence.index}.js`;
       this.log.debug('Preparing to execute %s', alias);
       const options = this.options as MochaExecutorOptions;
       const execution: Execution = {
@@ -124,25 +124,25 @@ export class MochaExecutor extends Executor {
           });
 
           runner.on('end', function end() {
-            if(suite) {
-              log.info('Completed suite %s for %s', suite.title, alias);
-              suite.stats = reporter.stats;
-              execution.suite = suite;
-            }
-            else {
-              log.warn('wtf');
-            }
+            log.info('Completed suite %s for %s', suite.title, alias);
+            suite.stats = reporter.stats;
+            execution.suite = suite;
           });
         }
       }
 
 
       try {
-        const mocha = new Mocha({
-          ...options.mocha,
-          reporter: MochaReporter,
-        });
-        mocha.addFile(ctx.file);
+        const mochaOpts = { ...options.mocha };
+        if (!mochaOpts.reporter) {
+          mochaOpts.reporter = MochaReporter;
+        }
+        const mocha = new Mocha(mochaOpts);
+        const file = ctx.compiled?.file;
+        if (!file) {
+          throw new Error(`Mocha runner requires that the file ${ctx.file} be compiled!`);
+        }
+        mocha.addFile(file);
         mocha.run(failures => {
           execution.failures = failures;
           execution.stdout = suite.tests.map(t => t.stdout).join('\n');

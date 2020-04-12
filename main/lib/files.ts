@@ -35,8 +35,6 @@ export async function writeTemp(project: ProjectDetails, file: string, src: stri
   const result = project.tempPath(file);
   await fs.mkdir(result.replace(path.basename(result), ''), { /*mode: '666',*/ recursive: true });
   await fs.writeFile(result, src, { encoding: UTF8, mode: '0644' });
-  const stat = await fs.stat(result);
-  console.assert(stat.mode.toString(8) === '100644', `Expected ${stat.mode.toString(8)} to equal 100644`);
   log().debug('Wrote tempfile %s', result);
   return project.relativePath(result);
 }
@@ -51,19 +49,30 @@ export async function writeOutput(project: ProjectDetails, file: string, src: st
 }
 
 
-export async function apppendOutput(project: ProjectDetails, from: string, to: string): Promise<string> {
+export async function apppendOutput(
+  project: ProjectDetails,
+  from: string,
+  to: string,
+  fromFile = true,
+): Promise<string> {
   const _to = path.resolve(project.outputPath(to));
   let _from = from;
   await fs.mkdir(_to.replace(path.basename(_to), ''), { recursive: true });
   let src: string;
-  try {
-    src = await fs.readFile(_from, { encoding: UTF8 });
+  if (fromFile) {
+    try {
+
+      src = await fs.readFile(_from, { encoding: UTF8 });
+    }
+    catch (err) {
+      const retry = `/${_from}`;
+      log().warn('Reading from %s failed trying %s', _from, retry);
+      src = await fs.readFile(retry, { encoding: UTF8 });
+      _from = retry;
+    }
   }
-  catch (err) {
-    const retry = `/${_from}`;
-    log().warn('Reading from %s failed trying %s', _from, retry);
-    src = await fs.readFile(retry, { encoding: UTF8 });
-    _from = retry;
+  else {
+    src = from;
   }
   await fs.appendFile(_to, src, { encoding: UTF8 });
   log().debug('Appended %s to  %s', _from, _to);

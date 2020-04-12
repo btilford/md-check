@@ -1,9 +1,9 @@
-
+<script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","name":"@btilford/md-check","url":"https://github.com/btilford/md-check#readme","author":"btilford","copyrightHolder":{"@type":"Person","name":"Ben Tilford"},"copyrightYear":2020,"dateModified":"2020-04-12T03:29:30.265Z","discussionUrl":"https://github.com/btilford/md-check/issues","description":"Compile and execute markdown code fences","keywords":["markdown","documentation","docs"]}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"Project","name":"@btilford/md-check","founder":"btilford","url":"https://github.com/btilford/md-check","description":"Compile and execute markdown code fences","sameAs":"git+ssh://git@github.com/btilford/md-check.git","contactPoint":{"url":"https://github.com/btilford/md-check/issues"}}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"SoftwareSourceCode","name":"@btilford/md-check","version":"0.0.1","codeRepository":"git+ssh://git@github.com/btilford/md-check.git","codeSampleType":"full","programmingLanguage":["Typescript","Javacript","Markdown"],"runtimePlatform":"NodeJS","copyrightHolder":"Ben Tilford","copyrightYear":2020,"dateModified":"2020-04-12T03:29:30.265Z","discussionUrl":"https://github.com/btilford/md-check/issues","description":"Compile and execute markdown code fences","license":"https://github.com/btilford/md-check/LICENSE","keywords":["markdown","documentation","docs"],"contributor":[{"@type":"Person"}],"maintainer":[],"url":"https://github.com/btilford/md-check","inLanguage":"en-US"}</script>
 <nav class="md-check__nav">
  <ol class="nav__list">
 <li class="nav__item"><a class="nav__link"
        href="#file_src-0-README-md" 
-       title="Verify your documentation">md-check</a>
+       title="Check your docs!">md-check</a>
    <div class="nav__sub">
      <ol class="nav__list">
 <li class="nav__item"><a class="md-check__nav-link"
@@ -41,6 +41,32 @@
 <li class="nav__item"><a class="md-check__nav-link"
        href="#src-1-writing-markdown-md_Configuring-metadata" 
        title="Set metadata for nicer output">Configuring metadata</a> 
+</li>
+      </ol>
+   </div> 
+</li>
+      
+
+<li class="nav__item"><a class="nav__link"
+       href="#file_src-mocha-mdx" 
+       title="Execute code blocks containing mocha tests">Run Mocha</a>
+   <div class="nav__sub">
+     <ol class="nav__list">
+<li class="nav__item"><a class="md-check__nav-link"
+       href="#src-mocha-mdx_Example-Test" 
+       title="undefined">Example Test</a> 
+</li>
+      
+
+<li class="nav__item"><a class="md-check__nav-link"
+       href="#src-mocha-mdx_Install" 
+       title="undefined">Install</a> 
+</li>
+      
+
+<li class="nav__item"><a class="md-check__nav-link"
+       href="#src-mocha-mdx_Configure" 
+       title="Configuring the mocha executor">Configure</a> 
 </li>
       </ol>
    </div> 
@@ -118,12 +144,12 @@
    
 <a href="#file_src-0-README-md" 
      class="file__permalink"
-     title="Verify your documentation"
+     title="Check your docs!"
      rel="instructions">
    <h2 class="file__heading">md-check</h2>
 </a>
    <div class="file__content">
-     <p>Compile and execute your documentation.</p>
+     <p><em>Compile and execute your documentation.</em></p>
 <p><strong>Why?</strong></p>
 <ol>
 <li>Your docs have drifted out of sync with your codebase.</li>
@@ -228,6 +254,47 @@ entries are.</p>
       <span class="hljs-attr">description:</span> <span class="hljs-string">Added</span> <span class="hljs-string">to</span> <span class="hljs-string">link.title</span>
       <span class="hljs-attr">env:</span> <span class="hljs-comment"># Provide env parameters specific for this block</span>
         <span class="hljs-bullet">-</span> <span class="hljs-attr">NODE_ENV:</span> <span class="hljs-string">production</span>
+</code></pre>
+   </div>
+</section>
+    
+<section id="file_src-mocha-mdx" class="md-check__file">
+   
+<a href="#file_src-mocha-mdx" 
+     class="file__permalink"
+     title="Execute code blocks containing mocha tests"
+     rel="instructions">
+   <h2 class="file__heading">Run Mocha</h2>
+</a>
+   <div class="file__content">
+     <h3 id="running-mocha-tests">Running Mocha Tests <a class="header-anchor" href="#running-mocha-tests">¶</a></h3>
+<pre><code id="src-mocha-mdx_Example-Test" class="md-check__code-block language-typescript"><span class="hljs-keyword">import</span> {expect} <span class="hljs-keyword">from</span> <span class="hljs-string">'chai'</span>;
+
+describe(<span class="hljs-string">'My test'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+    it(<span class="hljs-string">'Runs this test'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+        expect(<span class="hljs-literal">true</span>).to.eq(<span class="hljs-literal">true</span>);
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'In test'</span>);
+    });
+});
+</code></pre>
+<div id="exec_src/mocha.mdx_3_out" class="execution__output">
+<p><em>stdout &gt;</em><br></p>
+   <pre><code class="execution__code-block language-shell"><span class="hljs-meta">&gt;&nbsp;</span><span class="hljs-bash shell"><span class="hljs-string stdout">In test</span></span></code></pre>
+</div>
+<h3 id="configure-the-mochaexecutor">Configure the MochaExecutor <a class="header-anchor" href="#configure-the-mochaexecutor">¶</a></h3>
+<p><strong>Installation</strong></p>
+<pre><code id="src-mocha-mdx_Install" class="md-check__code-block language-console">npm install --save-dev @btilford/md-check
+npm install --save-dev @btilford/md-check-exec-mocha
+</code></pre>
+<p><strong>Configuration</strong></p>
+<pre><code id="src-mocha-mdx_Configure" class="md-check__code-block language-javascript"><span class="hljs-keyword">const</span> {MochaExecutor} = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@btilford/md-check-exec-mocha'</span>);
+
+MochaExecutor.supply(); <span class="hljs-comment">// use the defaults</span>
+MochaExecutor.supply(
+    {<span class="hljs-attr">ui</span>: <span class="hljs-string">'bdd'</span>}, <span class="hljs-comment">// Pass in Mocha.MochaOptions object (a custom reporter will be used unless you provide one)</span>
+    <span class="hljs-literal">false</span> <span class="hljs-comment">// Don't fail on test failure. (default is true)</span>
+);
+
 </code></pre>
    </div>
 </section>
@@ -374,3 +441,9 @@ TsCompiler.supply({<span class="hljs-comment">/* compiler options */</span>}); <
    </div>
 </section>
     
+<footer class="md-check__footer">
+   <span class="footer__project-name">@btilford/md-check</span>
+   <span class="footer__project-version">v0.0.1</span>
+   <span class="footer__timestamp">2020-04-12T03:29:39.240Z</span>
+</footer>
+  

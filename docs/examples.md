@@ -1,6 +1,6 @@
 ---
-
+title: md-check | Check you docs!
 ---
-# Usage
+# Check your docs
 
 {% include examples.html %}

@@ -245,27 +245,67 @@ export async function processIndex(results: Results): Promise<Results> {
   const logger = log('processIndex()');
   const files: Result[] = results.files.filter(file => file.rendered);
 
+  const index = 'index.html';
+  // Clean out index.html
+  await writeOutput(project, index, '');
+
+  let script = '';
+  for(const ldJson of project.ldJson) {
+    const ld = JSON.stringify(ldJson);
+    // eslint-disable-next-line no-secrets/no-secrets
+    script += `<script type="application/ld+json">${ld}</script>`;
+  }
+
+  if (project.ldJson) {
+    logger.info('Found ld+json writing to document');
+    await apppendOutput(
+      project,
+      script,
+      index,
+      false,
+    );
+  }
+
   files.sort((left, right) => path.basename(left.file)
                                   .localeCompare(path.basename(right.file)));
   const navTree = processNav(files);
-  logger.debug('NavTree %j', navTree);
+  // logger.debug('NavTree %j', navTree);
   const nav = renderNav(navTree);
-  const index = 'index.html';
+
 
   logger.debug('Writing index at %s', project.outputPath(index));
-  await writeOutput(
+
+
+  await apppendOutput(
     project,
-    index,
     stripMargin(`
-    |<nav class="md-check__nav">
-    | <ol class="nav__list">${nav}</ol>
-    |</nav>
+      |<nav class="md-check__nav">
+      | <ol class="nav__list">${nav}</ol>
+      |</nav>
     `),
+    index,
+    false,
   );
 
   if (config.outputStyle === 'single-file') {
     await singleFile(index, files);
   }
+
+  logger.debug('Writing footer...');
+  await apppendOutput(
+    project,
+    stripMargin(
+      `
+  |<footer class="md-check__footer">
+  |   <span class="footer__project-name">${project.name}</span>
+  |   ${project.version ? `<span class="footer__project-version">v${project.version}</span>` : ''}
+  |   <span class="footer__timestamp">${new Date().toISOString()}</span>
+  |</footer>
+  `),
+    index,
+    false,
+  );
+
 
   return results;
 }

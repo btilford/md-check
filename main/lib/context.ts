@@ -13,6 +13,7 @@ export class ProjectDetails implements Project {
   readonly tempDir: string;
   readonly outputDir: string;
   readonly cwd: string;
+  readonly ldJson: Record<string, any>[];
 
 
   constructor(private readonly project: Project) {
@@ -25,6 +26,9 @@ export class ProjectDetails implements Project {
     this.outputDir = this.absolutePath(this.output);
     this.matchCwd = RegExp(this.cwd, 'g');
     this.matchOutputDir = RegExp(this.output, 'g');
+    this.ldJson = project.ldJson instanceof Array
+                  ? project.ldJson
+                  : (project.ldJson ? [project.ldJson] : []);
   }
 
 

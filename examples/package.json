@@ -22,7 +22,8 @@
   },
   "homepage": "https://github.com/btilford/md-check#readme",
   "dependencies": {
-    "typescript": "~3.8.3"
+    "typescript": "~3.8.3",
+    "@btilford/md-check-exec-mocha": "~0.0.1"
   },
   "devDependencies": {
     "@btilford/md-check": "~0.0.1",
@@ -92,9 +93,11 @@
     "compile": {
       "patterns": [
         "./src",
-        "md-check.js"
+        "md-check.js",
+        "node_modules/@btilford/**/dist/",
+        "package.json"
       ],
-      "extensions": "md,mdx",
+      "extensions": "md,mdx,json,js,ts",
       "quiet": true,
       "delay": 2000,
       "clearBuffer": false
