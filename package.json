@@ -99,7 +99,8 @@
     "lint": "eslint . --ext js --ext ts --ext md",
     "lint:fix": "eslint . --fix --ext js --ext ts --ext md",
     "watch:lint": "npm-watch lint",
-    "watch": "run-p watch:docs:cp docs:gh-pages"
+    "watch": "run-p watch:docs:cp docs:gh-pages",
+    "test": "echo 'In root project...'"
 
 
   }

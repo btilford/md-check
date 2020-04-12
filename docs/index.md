@@ -14,6 +14,9 @@ fences:
       exec: false
       
 ---
+
+![Rush CI](https://github.com/btilford/md-check/workflows/Rush%20CI/badge.svg?branch=master)
+
 # doc-check
 *Compile and execute your documentation.*
 
