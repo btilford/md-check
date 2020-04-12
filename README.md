@@ -91,9 +91,11 @@ Clone and initialize
 
 ```console
 git clone git@github.com:btilford/md-check.git
-rush update
+rush install
 ```
 
 Building
 
-_TODO_
+```console
+rush build
+```

@@ -4,7 +4,7 @@ import Token from 'markdown-it/lib/token';
 import {DEFAULT_MOCHA_OPTIONS, MochaExecutor} from './mocha-executor';
 
 
-describe('E2E tests for mocha runner', function () {
+describe('MochaExecutor Specs', function () {
   const suite = this.title;
   let config: ConfigurationOptions;
   let exec: MochaExecutor;
@@ -45,7 +45,9 @@ describe('E2E tests for mocha runner', function () {
     before(async () => {
       ctx = {
         ...baseCtx,
-        file: 'test/fixtures/easy.js',
+        compiled: {
+          file: 'test/fixtures/easy.js',
+        }
       };
       result = await exec.execute(ctx);
       execution = result.execution;
