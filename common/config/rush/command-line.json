@@ -18,6 +18,7 @@
       "description": "",
       "enableParallelism": true,
       "incremental": true,
+      "allowWarningsInSuccessfulBuild": true
 
     },
     {
@@ -60,6 +61,26 @@
       "description": "",
       "enableParallelism": true
     },
+     {
+       /**
+        * (Required) Determines the type of custom command.
+        * Rush's "global" commands are invoked once for the entire repo.
+        */
+       "commandKind": "global",
+
+       "name": "release-help",
+       "summary": "help for release",
+       "description": "How to release",
+       "safeForSimultaneousRushProcesses": false,
+
+       /**
+        * A script that will be invoked using the OS shell. The working directory will be the folder
+        * that contains rush.json.  If custom parameters are associated with this command, their
+        * values will be appended to the end of this string.
+        */
+       "shellCommand": "cat common/release-help.md"
+     }
+
     // {
     //   /**
     //    * (Required) Determines the type of custom command.
