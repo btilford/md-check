@@ -77,7 +77,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "readme": "README.md",
+  "readlnme": "README.md",
   "contributors": [],
   "maintainers": [],
   "watch": {
