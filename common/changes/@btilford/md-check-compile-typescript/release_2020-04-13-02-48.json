@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@btilford/md-check-compile-typescript",
+      "comment": "readme",
+      "type": "major"
+    }
+  ],
+  "packageName": "@btilford/md-check-compile-typescript",
+  "email": "ben@tilford.info"
+}

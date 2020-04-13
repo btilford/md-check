@@ -1,6 +1,6 @@
 {
   "name": "@btilford/md-check-compile-typescript",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "description": "Compile typescript markdown fences",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -28,7 +28,7 @@
   "maintainers": [],
   "dependencies": {
     "typescript": "~3.8.3",
-    "@btilford/md-check": "~0.0.4",
+    "@btilford/md-check": "~1.0.0",
     "@btilford/ts-base": "~0.1.0"
   },
   "devDependencies": {

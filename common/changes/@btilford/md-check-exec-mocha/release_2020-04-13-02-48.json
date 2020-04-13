@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@btilford/md-check-exec-mocha",
+      "comment": "readme",
+      "type": "major"
+    }
+  ],
+  "packageName": "@btilford/md-check-exec-mocha",
+  "email": "ben@tilford.info"
+}

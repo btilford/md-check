@@ -1,7 +1,7 @@
 {
   "name": "@btilford/md-check-examples",
   "private": true,
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Compile typescript markdown fences",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -23,11 +23,11 @@
   "homepage": "https://btilford.github.io/md-check/",
   "dependencies": {
     "typescript": "~3.8.3",
-    "@btilford/md-check-exec-mocha": "~0.0.3"
+    "@btilford/md-check-exec-mocha": "~1.0.0"
   },
   "devDependencies": {
-    "@btilford/md-check": "~0.0.4",
-    "@btilford/md-check-compile-typescript": "~0.0.2",
+    "@btilford/md-check": "~1.0.0",
+    "@btilford/md-check-compile-typescript": "~1.0.0",
     "@types/node": "~13.11.1",
     "mocha": "~7.1.1",
     "@types/mocha": "~7.0.2",
