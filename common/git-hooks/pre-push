@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+rush change
+git add common/changes
+git commit -m "Adding changes"
