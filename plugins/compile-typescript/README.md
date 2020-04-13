@@ -1,11 +1,3 @@
----
-title: Typescript Examples
-description: Compile and execute typescript code blocks.
-fences:
-    - title: Basic
-    - title: Configuration
----
-
 ### Installation
 
 ```console
@@ -26,10 +18,10 @@ TsCompiler.supply({/* compiler options */}); // Provide a configuration object
 
 *Inside your markdown file add a code fence starting with **typescript**.*
 
-```typescript node
-import {ConsoleLog} from '@btilford/ts-base';
-
-const log: Log = ConsoleLog.create('example');
-log.info('Hello');
-```
+    ```typescript node
+    import {ConsoleLog} from '@btilford/ts-base';
+    
+    const log: Log = ConsoleLog.create('example');
+    log.info('Hello');
+    ```
 

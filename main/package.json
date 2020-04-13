@@ -1,6 +1,6 @@
 {
   "name": "@btilford/md-check",
-  "version": "0.0.1",
+  "version": "1.0.1",
   "description": "Compile and execute markdown code fences",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -77,7 +77,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "readme": "README.md",
+  "readlnme": "README.md",
   "contributors": [],
   "maintainers": [],
   "watch": {
@@ -118,7 +118,7 @@
     "lint:fix": "eslint . --fix --ext js --ext ts --ext md",
     "watch:lint": "npm-watch lint",
     "watch": "run-p watch:lint watch:test watch:compile",
-    "build": "run-s lint compile test"
+    "build": "run-s clean compile"
   },
   "contributors": [
     {}

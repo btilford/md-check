@@ -1,6 +1,7 @@
 import {ConsoleLog, CountInvocations, Log, Providers, TimedAsync} from '@btilford/ts-base';
 import frontmatter from 'frontmatter';
 import Token from 'markdown-it/lib/token';
+import {NOT_IN_CI} from '../apm-filter';
 import {FileContext} from '../context';
 import {Md} from '../md';
 import {makeId, stripMarkdownHeader} from '../text';
@@ -32,7 +33,7 @@ export class Parser {
 
 
   @CountInvocations()
-  @TimedAsync()
+  @TimedAsync({ filter: NOT_IN_CI })
   async parse(ctx: ParseContext): Promise<ParseResult> {
     this.log.debug('Parsing file %s', ctx.file);
     const header = frontmatter(ctx.markdown);

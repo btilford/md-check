@@ -1,4 +1,5 @@
 import {exec} from 'child_process';
+import {NOT_IN_CI} from '../apm-filter';
 
 import {ConfigurationOptions} from '../configure';
 import {FenceContext} from '../fence';
@@ -18,7 +19,7 @@ export class ForkExecutor extends Executor {
 
 
   @CountInvocations()
-  @TimedAsync()
+  @TimedAsync({ filter: NOT_IN_CI })
   execute(ctx: ExecutionContext): Promise<ExecutionResult> {
     const options: ForkOptions = this.options as ForkOptions;
 

@@ -8,6 +8,7 @@ import {
   Executor,
   ExecutorOptions,
   FenceContext,
+  NOT_IN_CI,
 } from '@btilford/md-check';
 import {StringWriter, TimedAsync, CountInvocations} from '@btilford/ts-base';
 import Mocha from 'mocha';
@@ -65,7 +66,7 @@ export class MochaExecutor extends Executor {
   }
 
   @CountInvocations()
-  @TimedAsync()
+  @TimedAsync({ filter: NOT_IN_CI })
   execute(ctx: ExecutionContext): Promise<import('@btilford/md-check').ExecutionResult> {
     return new Promise<ExecutionResult>((resolve, reject) => {
       const alias = `${ctx.file}_${ctx.fence.index}.js`;

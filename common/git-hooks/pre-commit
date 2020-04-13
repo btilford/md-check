@@ -2,4 +2,3 @@
 
 echo "Pre-commit"
 rush lint
-rush change --no-fetch --verify

@@ -400,27 +400,30 @@
     {
       "packageName": "@btilford/md-check-root",
       "projectFolder": "./",
-      "shouldPublish": false
+      "shouldPublish": false,
     },
     {
       "packageName": "@btilford/md-check",
       "projectFolder": "main",
-      "shouldPublish": true
+      "shouldPublish": true,
+      "versionPolicyName": "default-policy"
     },
     {
       "packageName": "@btilford/md-check-compile-typescript",
       "projectFolder": "plugins/compile-typescript",
-      "shouldPublish": true
+      "shouldPublish": true,
+      "versionPolicyName": "default-policy"
     },
     {
       "packageName": "@btilford/md-check-exec-mocha",
       "projectFolder": "plugins/exec-mocha",
-      "shouldPublish": true
+      "shouldPublish": true,
+      "versionPolicyName": "default-policy"
     },
     {
       "packageName": "@btilford/md-check-examples",
       "projectFolder": "examples",
-      "shouldPublish": false
+      "shouldPublish": false,
     },
 
 

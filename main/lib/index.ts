@@ -10,6 +10,7 @@ export * from './files';
 export * from './configure';
 export * from './restrictions';
 export * from './fence';
+export * from './apm-filter';
 
 import {Configuration} from './configure';
 import {Options} from './options';

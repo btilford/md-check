@@ -1,6 +1,6 @@
 {
   "name": "@btilford/md-check-exec-mocha",
-  "version": "0.0.1",
+  "version": "1.0.1",
   "description": "Execute markdown code block fences with Mocha",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -32,7 +32,7 @@
     "typescript": "~3.8.3",
     "@types/node": "~13.11.1",
     "mocha": "~7.1.1",
-    "@btilford/md-check": "~0.0.1",
+    "@btilford/md-check": "~1.0.1",
     "@btilford/ts-base": "~0.1.0"
   },
   "devDependencies": {
@@ -108,6 +108,6 @@
     "lint:fix": "eslint . --fix --ext js --ext ts --ext md",
     "watch:lint": "npm-watch lint",
     "watch": "run-p watch:lint watch:test watch:compile",
-    "build": "run-s lint compile test"
+    "build": "run-s clean compile"
   }
 }
