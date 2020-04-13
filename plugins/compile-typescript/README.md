@@ -1,11 +1,3 @@
----
-title: Typescript Examples
-description: Compile and execute typescript code blocks.
-fences:
-    - title: Basic
-    - title: Configuration
----
-
 ### Installation
 
 ```console
