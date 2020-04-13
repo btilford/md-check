@@ -401,7 +401,6 @@
       "packageName": "@btilford/md-check-root",
       "projectFolder": "./",
       "shouldPublish": false,
-      "versionPolicyName": "default-policy"
     },
     {
       "packageName": "@btilford/md-check",
@@ -425,7 +424,6 @@
       "packageName": "@btilford/md-check-examples",
       "projectFolder": "examples",
       "shouldPublish": false,
-      "versionPolicyName": "default-policy"
     },
 
 
