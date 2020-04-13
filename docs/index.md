@@ -1,20 +1,3 @@
----
-title: md-check
-description: Check your docs!
-fences:
-    - title: Installation
-      exec: false
-      compile: false
-    - title: Getting Started
-      description: Configure and run md-check
-    - title: Development
-      description: Building md-check
-      exec: false
-    - skip: true
-      exec: false
-      
----
-
 ![Rush CI](https://github.com/btilford/md-check/workflows/Rush%20CI/badge.svg?branch=master)
 
 # md-check
