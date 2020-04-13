@@ -77,7 +77,7 @@ const config = mdCheck({
   },
   include: {
     patterns: [
-      '**/*.{mdx,md}',
+      'src/**/*.{mdx,md}',
     ],
   },
   executors: [

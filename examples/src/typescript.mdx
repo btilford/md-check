@@ -22,9 +22,10 @@ TsCompiler.supply('tsconfig.json'); // Provide a path to you tsconfig
 TsCompiler.supply({/* compiler options */}); // Provide a configuration object
 ```
 
-### As a Node.js script
+### Compile and run
 
-*Inside your markdown file add a code fence starting with **typescript**.*
+*Inside your markdown file add a code fence starting with **typescript** **```typescript**.*
+
 
 ```typescript node
 import {ConsoleLog} from '@btilford/ts-base';
@@ -32,4 +33,5 @@ import {ConsoleLog} from '@btilford/ts-base';
 const log: Log = ConsoleLog.create('example');
 log.info('Hello');
 ```
+
 

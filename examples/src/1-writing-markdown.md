@@ -18,23 +18,19 @@ The node vm executor will split the fence's name and check if the last
 item in the array is **node** or **node-vm**.
 
 
-<pre class="md-check__code-block language-markdown" fence="true">
-<code>
-<span class="hljs-tag">```</span><span class="hljs-keyword">javascript node</span>
-console.log('This would be executed by the node vm executor');
-<span class="hljs-tag">```</span>
-</code>
-<code>
-<span class="hljs-tag">```</span><span class="hljs-keyword">javascript node-vm</span>
-console.log('This would be executed by the node vm executor');
-<span class="hljs-tag">```</span>
-</code>
-<code>
-<span class="hljs-tag">```</span><span class="hljs-keyword">javascript js</span>
-console.warn('This would NOT be executed by the node vm executor');
-<span class="hljs-tag">```</span>
-</code>
-</pre>
+    ```javascript node
+    console.log('This would be executed by the node vm executor');
+    ```
+    
+    
+    ```javascript node-vm
+    console.log('This would be executed by the node vm executor');
+    ```
+    
+    
+    ```javascript js
+    console.warn('This would NOT be executed by the node vm executor');
+    ```
 
 
 ### File metadata
