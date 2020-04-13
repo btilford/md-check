@@ -33,8 +33,8 @@
       "summary": "Lint all projects",
       "description": "",
       "enableParallelism": true,
-      "ignoreMissingScript": true,
-      "allowWarningsInSuccessfulBuild": true
+//      "ignoreMissingScript": true,
+//      "allowWarningsInSuccessfulBuild": true
     },
     {
       "commandKind": "bulk",
