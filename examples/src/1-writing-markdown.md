@@ -2,8 +2,6 @@
 title: Writing Markdown.
 description: How to write the markdown for md-check to work.
 fences:
-    - title: Executing Code Blocks
-      description: Trigger execution of fences
     - title: Configuring metadata
       description: Set metadata for nicer output
       env:
