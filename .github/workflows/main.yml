@@ -23,19 +23,20 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - name: rush install, build, and test
+    - name: rush install
       run: |
-        set -e
-
         echo 'Installing...'
         node common/scripts/install-run-rush.js install
-
+    - name: rush check
         echo 'Installing...'
         node common/scripts/install-run-rush.js check
-
+    - name: rush test
         echo 'Testing...'
         node common/scripts/install-run-rush.js test --verbose
-
+    - name: rush lint
+        echo 'Linting...'
+        node common/scripts/install-run-rush.js lint --verbose
+    - name: rush build
         echo 'Building...'
         node common/scripts/install-run-rush.js rebuild
       env:

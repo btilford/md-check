@@ -114,7 +114,7 @@
     "watch:lint": "npm-watch lint",
     "watch": "run-p watch:lint watch:test watch:compile",
 
-    "build": "run-s clean lint compile"
+    "build": "run-s clean compile"
 
 
   }

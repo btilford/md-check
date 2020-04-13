@@ -118,7 +118,7 @@
     "lint:fix": "eslint . --fix --ext js --ext ts --ext md",
     "watch:lint": "npm-watch lint",
     "watch": "run-p watch:lint watch:test watch:compile",
-    "build": "run-s lint compile test"
+    "build": "run-s clean compile"
   },
   "contributors": [
     {}
