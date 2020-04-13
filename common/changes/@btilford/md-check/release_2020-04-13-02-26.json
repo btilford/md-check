@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@btilford/md-check",
+      "comment": "NPM doesn't follow symlinks to README files.",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@btilford/md-check",
+  "email": "ben@tilford.info"
+}
