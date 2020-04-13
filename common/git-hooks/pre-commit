@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+echo "Pre-commit"
+rush lint
