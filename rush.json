@@ -250,7 +250,7 @@
      * your PR branch, and in this situation "rush change" will also automatically invoke "git fetch"
      * to retrieve the latest activity for the remote master branch.
      */
-     "url": "https://github.com/btilford/md-check",
+     "url": "git@github.com:btilford/md-fence-check.git",
 
     /**
      * The default branch name. This tells "rush change" which remote branch to compare against.
