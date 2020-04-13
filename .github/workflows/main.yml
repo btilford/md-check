@@ -28,15 +28,19 @@ jobs:
         echo 'Installing...'
         node common/scripts/install-run-rush.js install
     - name: rush check
+      run: |
         echo 'Installing...'
         node common/scripts/install-run-rush.js check
     - name: rush test
+      run: |
         echo 'Testing...'
         node common/scripts/install-run-rush.js test --verbose
     - name: rush lint
+      run: |
         echo 'Linting...'
         node common/scripts/install-run-rush.js lint --verbose
     - name: rush build
+      run: |
         echo 'Building...'
         node common/scripts/install-run-rush.js rebuild
       env:
