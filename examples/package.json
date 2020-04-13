@@ -23,11 +23,11 @@
   "homepage": "https://btilford.github.io/md-check/",
   "dependencies": {
     "typescript": "~3.8.3",
-    "@btilford/md-check-exec-mocha": "~0.0.2"
+    "@btilford/md-check-exec-mocha": "~0.0.3"
   },
   "devDependencies": {
-    "@btilford/md-check": "~0.0.2",
-    "@btilford/md-check-compile-typescript": "~0.0.1",
+    "@btilford/md-check": "~0.0.4",
+    "@btilford/md-check-compile-typescript": "~0.0.2",
     "@types/node": "~13.11.1",
     "mocha": "~7.1.1",
     "@types/mocha": "~7.0.2",

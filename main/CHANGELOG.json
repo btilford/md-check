@@ -2,6 +2,30 @@
   "name": "@btilford/md-check",
   "entries": [
     {
+      "version": "0.0.4",
+      "tag": "@btilford/md-check_v0.0.4",
+      "date": "Mon, 13 Apr 2020 02:41:36 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "republish"
+          }
+        ]
+      }
+    },
+    {
+      "version": "0.0.3",
+      "tag": "@btilford/md-check_v0.0.3",
+      "date": "Mon, 13 Apr 2020 02:39:10 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "working on npm publish with rush\""
+          }
+        ]
+      }
+    },
+    {
       "version": "0.0.2",
       "tag": "@btilford/md-check_v0.0.2",
       "date": "Mon, 13 Apr 2020 02:29:56 GMT",
