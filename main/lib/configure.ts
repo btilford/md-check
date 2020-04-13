@@ -1,4 +1,13 @@
-import {bootstrap, ConsoleLog, Log, LogConfig, Providers, templateString} from '@btilford/ts-base';
+import {
+  CONSOLE_APM,
+  TimedAsync,
+  bootstrap,
+  ConsoleLog,
+  Log,
+  LogConfig,
+  Providers,
+  templateString,
+} from '@btilford/ts-base';
 import {processEnvLoader} from '@btilford/ts-base-node';
 import fs from 'fs';
 import globby from 'globby';
@@ -6,6 +15,7 @@ import path from 'path';
 import {Compiler} from './compiler';
 import {ProjectDetails} from './context';
 import {ExecutionRenderer, Executor, ExecutorConfig, StdOutRenderer} from './exec';
+import {main} from './main';
 import {Md} from './md';
 import {MarkdownItOptions, Options, OutputStyle, Project} from './options';
 import {FileRenderer} from './renderer';
@@ -68,6 +78,7 @@ export class Configuration implements ConfigurationOptions {
     bootstrap({
       appName: 'md-check',
       envLoaders: [processEnvLoader],
+      apm:  CONSOLE_APM,
       log: {
         root: ConsoleLog.create({
           name,
@@ -79,6 +90,12 @@ export class Configuration implements ConfigurationOptions {
     });
     this.log = Providers.provide(Log).extend(Configuration.name);
     this.log.debug('Configured');
+  }
+
+
+  @TimedAsync()
+  async run() {
+    return await main(this);
   }
 
 

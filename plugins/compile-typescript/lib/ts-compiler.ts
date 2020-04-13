@@ -17,7 +17,7 @@ import {
   Diagnostic,
 } from 'typescript';
 import ts from 'typescript';
-
+import {CountInvocations, TimedAsync} from '@btilford/ts-base';
 
 export type TsCompilerOptions = CompilerOptions & {
   tsConfig: string | TypescriptCompilerOptions;
@@ -106,7 +106,8 @@ export class TsCompiler extends Compiler {
     return /^typescript/.test(fence);
   }
 
-
+  @CountInvocations()
+  @TimedAsync()
   async compile(context: CompileContext): Promise<TsCompileResult> {
     const tmpTs = await writeTemp(
       this.options.project,

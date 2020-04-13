@@ -7,7 +7,7 @@ import {ConfigurationSupplier} from '../options';
 import {ExecutionContext, ExecutionResult, Executor, ExecutorOptions} from './executor';
 import path from 'path';
 import fs from 'fs';
-
+import {CountInvocations, TimedAsync} from '@btilford/ts-base';
 
 export class NodeVmError extends Error {
 
@@ -89,7 +89,8 @@ export class NodeVmExecutor extends Executor {
     return accepted;
   }
 
-
+  @CountInvocations()
+  @TimedAsync()
   async execute(ctx: ExecutionContext): Promise<ExecutionResult> {
     const alias = `${ctx.file}_${ctx.fence.index}.js`;
     this.log.debug('Preparing to execute %s', alias);

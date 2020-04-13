@@ -3,16 +3,24 @@ import {Md} from '../md';
 import {Parser, ParseResult} from './parser';
 import {expect} from 'chai';
 import {stripMargin} from '../text';
+import {bootstrap, CONSOLE_APM} from '@btilford/ts-base';
 
 
 describe('Parser Specs', function () {
   const suite = this;
   let project: ProjectDetails;
-
+  let parser: Parser;
+  before(() => {
+    bootstrap({
+      appName: suite.title,
+      apm: CONSOLE_APM,
+    });
+  });
   beforeEach(() => {
     project = new ProjectDetails({
       name: suite.title || 'suite',
     });
+    parser = new Parser(new Md());
   });
 
   describe('With defaults', () => {
@@ -35,7 +43,7 @@ describe('Parser Specs', function () {
       \`\`\`
       `);
 
-      actual = await new Parser(new Md()).parse({
+      actual = await parser.parse({
         file: section.title,
         markdown,
         project,

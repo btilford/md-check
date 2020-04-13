@@ -29,7 +29,6 @@ export abstract class Compiler {
 
   abstract accepts(fence?: string): boolean;
 
-
   abstract compile(context: CompileContext): Promise<CompileResult>;
 
 }

@@ -22,7 +22,8 @@
   "homepage": "https://github.com/btilford/md-check#readme",
   "dependencies": {
     "typescript": "~3.8.3",
-    "@btilford/md-check": "~0.0.1"
+    "@btilford/md-check": "~0.0.1",
+    "@btilford/ts-base": "~0.1.0"
   },
   "devDependencies": {
     "@types/node": "~13.11.1",
@@ -90,6 +91,7 @@
     }
   },
   "scripts": {
+    "clean": "rm -rf dist/* .md-check/*",
     "compile": "tsc --project tsconfig.production.json",
     "watch:compile": "tsc --watch",
     "test": "nyc mocha --enable-source-maps --require ts-node/register --sort lib/**/*.spec.ts",

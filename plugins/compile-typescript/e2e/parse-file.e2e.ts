@@ -1,5 +1,5 @@
+import {Configuration, ForkExecutor, Results} from '@btilford/md-check';
 import {expect} from 'chai';
-import {ForkExecutor, main, Results} from '@btilford/md-check';
 import {TsCompiler} from '../lib';
 
 
@@ -7,7 +7,7 @@ describe('Compiling and executing Typescript blocks', () => {
   describe('Parsing ts-example-1', () => {
     let result: Results;
     beforeEach(async () => {
-      result = await main({
+      result = await new Configuration({
         include: {
           patterns: 'e2e/fixtures/ts-example-1.md',
         },
@@ -17,7 +17,7 @@ describe('Compiling and executing Typescript blocks', () => {
         executors: [
           [ForkExecutor.supply(/node$/, 'node')],
         ],
-      });
+      }).run();
     });
 
     it('returned results', () => {

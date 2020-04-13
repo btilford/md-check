@@ -7,6 +7,7 @@ import {checkRestrictions} from '../restrictions';
 import {UTF8} from '../text';
 import {ExecutionContext, ExecutionResult, Executor, ForkOptions} from './executor';
 import fs from 'fs';
+import {TimedAsync, CountInvocations} from '@btilford/ts-base';
 
 
 export class ForkExecutor extends Executor {
@@ -16,6 +17,8 @@ export class ForkExecutor extends Executor {
   }
 
 
+  @CountInvocations()
+  @TimedAsync()
   execute(ctx: ExecutionContext): Promise<ExecutionResult> {
     const options: ForkOptions = this.options as ForkOptions;
 

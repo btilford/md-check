@@ -60,7 +60,7 @@
     "tsconfig-paths": "~3.9.0",
     "typescript": "~3.8.3",
     "npm-watch": "~0.6.0",
-    "@btilford/ts-base": "~0.0.7",
+    "@btilford/ts-base": "~0.1.0",
     "eslint-plugin-mdx": "~1.6.8"
   },
   "watch": {

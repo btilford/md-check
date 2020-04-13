@@ -1,3 +1,4 @@
+import {Log, Providers, TimedAsync, CountInvocations} from '@btilford/ts-base';
 import {Configuration} from '../configure';
 import {FileContext} from '../context';
 import {writeOutput} from '../files';
@@ -5,8 +6,6 @@ import {Md} from '../md';
 import {ConfigurationSupplier} from '../options';
 import {ParseResult} from '../parser';
 import {stripMargin} from '../text';
-
-import {Providers, Log} from '@btilford/ts-base';
 
 
 export type RenderOptions = Configuration & {};
@@ -52,6 +51,8 @@ export class FileRenderer {
   }
 
 
+  @CountInvocations()
+  @TimedAsync()
   async render(ctx: RenderContext): Promise<RenderResult> {
     this.log.debug('Rendering file %s', ctx.file);
     const content = ctx.md.render(ctx.tokens);

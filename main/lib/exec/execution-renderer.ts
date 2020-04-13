@@ -4,7 +4,7 @@ import {ConfigurationSupplier} from '../options';
 import {stripMargin} from '../text';
 import {ExecutionResult} from './executor';
 
-import {Providers, Log} from '@btilford/ts-base';
+import {Timed, CountInvocations, Providers, Log} from '@btilford/ts-base';
 
 
 export type OutputStream = 'stderr' | 'stdout';
@@ -36,6 +36,8 @@ export class NoOpExecutionRenderer extends ExecutionRenderer {
   }
 
 
+  @Timed()
+  @CountInvocations()
   render(execution: ExecutionRenderContext): string | undefined {
     this.log.debug('Skipping render of %s results', execution.file);
     return undefined;

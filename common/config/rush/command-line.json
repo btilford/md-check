@@ -13,6 +13,20 @@
   "commands": [
     {
       "commandKind": "bulk",
+      "name": "compile",
+      "summary": "Compile all projects",
+      "description": "",
+      "enableParallelism": true
+    },
+    {
+      "commandKind": "bulk",
+      "name": "clean",
+      "summary": "Clean all projects",
+      "description": "",
+      "enableParallelism": true
+    },
+    {
+      "commandKind": "bulk",
       "name": "lint",
       "summary": "Lint all projects",
       "description": "",

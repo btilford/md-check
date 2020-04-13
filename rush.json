@@ -132,7 +132,7 @@
    * version. In those cases, you will need to add an entry to the "allowedAlternativeVersions"
    * section of the common-versions.json.
    */
-  // "ensureConsistentVersions": true,
+   "ensureConsistentVersions": true,
 
   /**
    * Large monorepos can become intimidating for newcomers if project folder paths don't follow
@@ -231,7 +231,7 @@
      * you might configure your system's trigger to look for a special string such as "[skip-ci]"
      * in the commit message, and then customize Rush's message to contain that string.
      */
-    // "versionBumpCommitMessage": "Applying package updates. [skip-ci]"
+     "versionBumpCommitMessage": "Applying package updates. [skip-ci]"
   },
 
   "repository": {
@@ -250,7 +250,7 @@
      * your PR branch, and in this situation "rush change" will also automatically invoke "git fetch"
      * to retrieve the latest activity for the remote master branch.
      */
-    // "url": "https://github.com/microsoft/rush-example",
+     "url": "https://github.com/btilford/md-check",
 
     /**
      * The default branch name. This tells "rush change" which remote branch to compare against.
@@ -400,29 +400,29 @@
     {
       "packageName": "@btilford/md-check-root",
       "projectFolder": "./",
+      "shouldPublish": false
     },
     {
       "packageName": "@btilford/md-check",
       "projectFolder": "main",
+      "shouldPublish": true
     },
     {
       "packageName": "@btilford/md-check-compile-typescript",
       "projectFolder": "plugins/compile-typescript",
+      "shouldPublish": true
     },
     {
       "packageName": "@btilford/md-check-exec-mocha",
       "projectFolder": "plugins/exec-mocha",
+      "shouldPublish": true
     },
     {
       "packageName": "@btilford/md-check-examples",
       "projectFolder": "examples",
+      "shouldPublish": false
     },
 
-    //
-    // {
-    //   "packageName": "my-toolchain",
-    //   "projectFolder": "tools/my-toolchain",
-    //   "reviewCategory": "tools"
-    // }
+
   ]
 }

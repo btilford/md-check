@@ -9,7 +9,7 @@ import {
   ExecutorOptions,
   FenceContext,
 } from '@btilford/md-check';
-import {StringWriter} from '@btilford/ts-base';
+import {StringWriter, TimedAsync, CountInvocations} from '@btilford/ts-base';
 import Mocha from 'mocha';
 
 
@@ -64,8 +64,9 @@ export class MochaExecutor extends Executor {
     return /mocha$/.test(parts[parts.length - 1]);
   }
 
-
-  execute(ctx: ExecutionContext): Promise<import("@btilford/md-check").ExecutionResult> {
+  @CountInvocations()
+  @TimedAsync()
+  execute(ctx: ExecutionContext): Promise<import('@btilford/md-check').ExecutionResult> {
     return new Promise<ExecutionResult>((resolve, reject) => {
       const alias = `${ctx.file}_${ctx.fence.index}.js`;
       this.log.debug('Preparing to execute %s', alias);

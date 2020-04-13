@@ -11,11 +11,11 @@ export * from './configure';
 export * from './restrictions';
 export * from './fence';
 
-import {main} from './main';
+import {Configuration} from './configure';
 import {Options} from './options';
 
 
 export function mdCheck(options: Options) {
-  return () => main(options);
+  return new Configuration(options);
 }
 export default mdCheck;

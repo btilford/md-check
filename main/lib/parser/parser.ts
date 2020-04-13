@@ -1,10 +1,9 @@
+import {ConsoleLog, CountInvocations, Log, Providers, TimedAsync} from '@btilford/ts-base';
 import frontmatter from 'frontmatter';
 import Token from 'markdown-it/lib/token';
 import {FileContext} from '../context';
 import {Md} from '../md';
 import {makeId, stripMarkdownHeader} from '../text';
-
-import {Log, Providers} from '@btilford/ts-base';
 
 
 export type ParseContext = FileContext & {
@@ -27,10 +26,13 @@ export class Parser {
 
 
   constructor(readonly md: Md) {
-    this.log = Providers.provide(Log).extend(this.constructor.name);
+    this.log = Providers.provide(Log, () => ConsoleLog.create({ name: this.constructor.name }))
+                        .extend(this.constructor.name);
   }
 
 
+  @CountInvocations()
+  @TimedAsync()
   async parse(ctx: ParseContext): Promise<ParseResult> {
     this.log.debug('Parsing file %s', ctx.file);
     const header = frontmatter(ctx.markdown);

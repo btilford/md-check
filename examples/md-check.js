@@ -66,7 +66,7 @@ function ldJson() {
 }
 
 
-const run = mdCheck({
+const config = mdCheck({
   outputStyle: 'single-file',
   failOnerror: true,
   project: {
@@ -108,7 +108,7 @@ const run = mdCheck({
   ],
 });
 
-run().then(async results => {
+config.run().then(async results => {
   console.log('Finished generating partials');
 
   const basePath = path.resolve(path.join(__dirname, outputDir));

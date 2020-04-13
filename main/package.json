@@ -15,8 +15,8 @@
     "fast-glob": "~3.2.2",
     "escape-html": "~1.0.3",
     "vm2": "~3.9.1",
-    "@btilford/ts-base": "~0.0.7",
-    "@btilford/ts-base-node": "~0.0.7",
+    "@btilford/ts-base": "~0.1.0",
+    "@btilford/ts-base-node": "0.1.0",
     "rxjs": "~6.5.5"
   },
   "devDependencies": {
@@ -104,6 +104,7 @@
     }
   },
   "scripts": {
+    "clean": "rm -rf dist/* .md-check/*",
     "compile": "tsc --project tsconfig.production.json",
     "watch:compile": "tsc --project tsconfig.json --watch",
     "test": "nyc mocha --enable-source-maps --require ts-node/register --sort lib/**/*.spec.ts",

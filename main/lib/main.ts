@@ -1,5 +1,7 @@
+import {Log, Providers} from '@btilford/ts-base';
 import globby from 'globby';
 import Token from 'markdown-it/lib/token';
+import path from 'path';
 import {Compiler, CompileResult} from './compiler';
 import {Configuration} from './configure';
 import {Context, FileContext, ProjectDetails} from './context';
@@ -7,12 +9,9 @@ import {ExecutionContext, ExecutionResult, ExecutorConfig} from './exec';
 import {FenceContext, FenceResult, fences, insertFences} from './fence';
 import {apppendOutput, readSource, writeOutput} from './files';
 import {Md} from './md';
-import {Options} from './options';
 import {Parser, ParseResult} from './parser';
 import {FileRenderer, RenderResult} from './renderer';
 import {stripMargin} from './text';
-import {Log, Providers} from '@btilford/ts-base';
-import path from 'path';
 
 
 let _log: Log;
@@ -250,7 +249,7 @@ export async function processIndex(results: Results): Promise<Results> {
   await writeOutput(project, index, '<div>');
 
   let script = '';
-  for(const ldJson of project.ldJson) {
+  for (const ldJson of project.ldJson) {
     const ld = JSON.stringify(ldJson);
     // eslint-disable-next-line no-secrets/no-secrets
     script += `<script type="application/ld+json">${ld}</script>`;
@@ -312,8 +311,8 @@ export async function processIndex(results: Results): Promise<Results> {
 }
 
 
-export async function main(options: Options): Promise<Results> {
-  config = new Configuration(options);
+export async function main(configuration: Configuration): Promise<Results> {
+  config = configuration;
   compilers = config.compilers;
   project = config.project;
   executors = config.executors;

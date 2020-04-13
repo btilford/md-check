@@ -1,3 +1,4 @@
+import {CountInvocations, TimedAsync} from '@btilford/ts-base';
 import {ConfigurationOptions} from '../configure';
 import {writeTemp} from '../files';
 import {ConfigurationSupplier} from '../options';
@@ -27,6 +28,8 @@ export class WriteSourceCompiler extends Compiler {
   }
 
 
+  @CountInvocations()
+  @TimedAsync()
   async compile(context: CompileContext): Promise<CompileResult> {
     const fileName = `${context.file.replace(/(\.\w+)$/, `_${context.fence.index}$1`)}`;
     this.log.debug('Preparing to write file %s', fileName);
