@@ -1,6 +1,6 @@
 {
   "name": "@btilford/md-check-exec-mocha",
-  "version": "1.0.0",
+  "version": "1.0.1-0",
   "description": "Execute markdown code block fences with Mocha",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -32,7 +32,7 @@
     "typescript": "~3.8.3",
     "@types/node": "~13.11.1",
     "mocha": "~7.1.1",
-    "@btilford/md-check": "~1.0.0",
+    "@btilford/md-check": "~1.0.1-0",
     "@btilford/ts-base": "~0.1.0"
   },
   "devDependencies": {
