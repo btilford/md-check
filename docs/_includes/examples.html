@@ -1,4 +1,4 @@
-<div><script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","name":"@btilford/md-check","url":"https://github.com/btilford/md-check#readme","author":"btilford","copyrightHolder":{"@type":"Person","name":"Ben Tilford"},"copyrightYear":2020,"dateModified":"2020-04-12T23:47:35.458Z","discussionUrl":"https://github.com/btilford/md-check/issues","description":"Compile and execute markdown code fences","keywords":["markdown","documentation","docs"]}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"Project","name":"@btilford/md-check","founder":"btilford","url":"https://github.com/btilford/md-check","description":"Compile and execute markdown code fences","sameAs":"git+ssh://git@github.com/btilford/md-check.git","contactPoint":{"url":"https://github.com/btilford/md-check/issues"}}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"SoftwareSourceCode","name":"@btilford/md-check","version":"0.0.1","codeRepository":"git+ssh://git@github.com/btilford/md-check.git","codeSampleType":"full","programmingLanguage":["Typescript","Javacript","Markdown"],"runtimePlatform":"NodeJS","copyrightHolder":"Ben Tilford","copyrightYear":2020,"dateModified":"2020-04-12T23:47:35.458Z","discussionUrl":"https://github.com/btilford/md-check/issues","description":"Compile and execute markdown code fences","license":"https://github.com/btilford/md-check/LICENSE","keywords":["markdown","documentation","docs"],"contributor":[{"@type":"Person"}],"maintainer":[],"url":"https://github.com/btilford/md-check","inLanguage":"en-US"}</script>
+<div><script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","name":"@btilford/md-check","url":"https://btilford.github.io/md-check/","author":"btilford","copyrightHolder":{"@type":"Person","name":"Ben Tilford"},"copyrightYear":2020,"dateModified":"2020-04-13T02:36:14.261Z","discussionUrl":"https://github.com/btilford/md-check/issues","description":"Compile and execute markdown code fences","keywords":["markdown","documentation","docs"]}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"Project","name":"@btilford/md-check","founder":"btilford","url":"https://github.com/btilford/md-check","description":"Compile and execute markdown code fences","sameAs":"git+ssh://git@github.com/btilford/md-check.git","contactPoint":{"url":"https://github.com/btilford/md-check/issues"}}</script><script type="application/ld+json">{"@context":"http://schema.org","@type":"SoftwareSourceCode","name":"@btilford/md-check","version":"0.0.2","codeRepository":"git+ssh://git@github.com/btilford/md-check.git","codeSampleType":"full","programmingLanguage":["Typescript","Javacript","Markdown"],"runtimePlatform":"NodeJS","copyrightHolder":"Ben Tilford","copyrightYear":2020,"dateModified":"2020-04-13T02:36:14.261Z","discussionUrl":"https://github.com/btilford/md-check/issues","description":"Compile and execute markdown code fences","license":"https://github.com/btilford/md-check/LICENSE","keywords":["markdown","documentation","docs"],"contributor":[{"@type":"Person"}],"maintainer":[],"url":"https://github.com/btilford/md-check","inLanguage":"en-US"}</script>
 <nav class="md-check__nav">
  <ol class="nav__list">
 <li class="nav__item"><a class="nav__link"
@@ -68,12 +68,6 @@
        href="#src-mocha-mdx_Install" 
        title="undefined">Install</a> 
 </li>
-      
-
-<li class="nav__item"><a class="md-check__nav-link"
-       href="#src-mocha-mdx_Configure" 
-       title="Configuring the mocha executor">Configure</a> 
-</li>
       </ol>
    </div> 
 </li>
@@ -126,18 +120,18 @@
       
 
 <li class="nav__item"><a class="nav__link"
-       href="#file_src-typescript-mdx" 
+       href="#file_src-typescript-md" 
        title="Compile and execute typescript code blocks.">Typescript Examples</a>
    <div class="nav__sub">
      <ol class="nav__list">
 <li class="nav__item"><a class="md-check__nav-link"
-       href="#src-typescript-mdx_Basic" 
+       href="#src-typescript-md_Basic" 
        title="undefined">Basic</a> 
 </li>
       
 
 <li class="nav__item"><a class="md-check__nav-link"
-       href="#src-typescript-mdx_Configuration" 
+       href="#src-typescript-md_Configuration" 
        title="undefined">Configuration</a> 
 </li>
       </ol>
@@ -156,8 +150,8 @@
 </a>
    <div class="file__content">
      <p><img src="https://github.com/btilford/md-check/workflows/Rush%20CI/badge.svg?branch=master" alt="Rush CI"></p>
-<h1 id="doc-check">doc-check <a class="header-anchor" href="#doc-check">¶</a></h1>
-<p><em>Compile and execute your documentation.</em></p>
+<h1 id="md-check">md-check <a class="header-anchor" href="#md-check">¶</a></h1>
+<p><em>Compile and execute your markdown documentation.</em></p>
 <p><strong>Why?</strong></p>
 <ol>
 <li>Your docs have drifted out of sync with your codebase.</li>
@@ -276,27 +270,13 @@ entries are.</p>
    <h2 class="file__heading">Run Mocha</h2>
 </a>
    <div class="file__content">
-     <h3 id="running-mocha-tests">Running Mocha Tests <a class="header-anchor" href="#running-mocha-tests">¶</a></h3>
-<pre><code id="src-mocha-mdx_Example-Test" class="md-check__code-block language-typescript"><span class="hljs-keyword">import</span> {expect} <span class="hljs-keyword">from</span> <span class="hljs-string">'chai'</span>;
-
-describe(<span class="hljs-string">'My test'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
-    it(<span class="hljs-string">'Runs this test'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
-        expect(<span class="hljs-literal">true</span>).to.eq(<span class="hljs-literal">true</span>);
-        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'In test'</span>);
-    });
-});
-</code></pre>
-<div id="exec_src/mocha.mdx_3_out" class="execution__output">
-<p><em>stdout &gt;</em><br></p>
-   <pre><code class="execution__code-block language-shell"><span class="hljs-meta">&gt;&nbsp;</span><span class="hljs-bash shell"><span class="hljs-string stdout">In test</span></span></code></pre>
-</div>
-<h3 id="configure-the-mochaexecutor">Configure the MochaExecutor <a class="header-anchor" href="#configure-the-mochaexecutor">¶</a></h3>
+     <h3 id="configure-the-mochaexecutor">Configure the MochaExecutor <a class="header-anchor" href="#configure-the-mochaexecutor">¶</a></h3>
 <p><strong>Installation</strong></p>
-<pre><code id="src-mocha-mdx_Install" class="md-check__code-block language-console">npm install --save-dev @btilford/md-check
+<pre><code id="src-mocha-mdx_Example-Test" class="md-check__code-block language-console">npm install --save-dev @btilford/md-check
 npm install --save-dev @btilford/md-check-exec-mocha
 </code></pre>
 <p><strong>Configuration</strong></p>
-<pre><code id="src-mocha-mdx_Configure" class="md-check__code-block language-javascript"><span class="hljs-keyword">const</span> {MochaExecutor} = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@btilford/md-check-exec-mocha'</span>);
+<pre><code id="src-mocha-mdx_Install" class="md-check__code-block language-javascript"><span class="hljs-keyword">const</span> {MochaExecutor} = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@btilford/md-check-exec-mocha'</span>);
 
 MochaExecutor.supply(); <span class="hljs-comment">// use the defaults</span>
 MochaExecutor.supply(
@@ -304,6 +284,19 @@ MochaExecutor.supply(
     <span class="hljs-literal">false</span> <span class="hljs-comment">// Don't fail on test failure. (default is true)</span>
 );
 
+</code></pre>
+<h3 id="running-mocha-tests">Running Mocha Tests <a class="header-anchor" href="#running-mocha-tests">¶</a></h3>
+<p><em>Inside your markdown file add a code fence ending with <strong>mocha</strong>.</em></p>
+<pre><code>```typescript mocha
+import {expect} from 'chai';
+
+describe('My test', function() {
+    it('Runs this test', function() {
+        expect(true).to.eq(true);
+        console.log('In test');
+    });
+});
+```
 </code></pre>
    </div>
 </section>
@@ -425,35 +418,41 @@ ForkExecutor.supply(
    </div>
 </section>
     
-<section id="file_src-typescript-mdx" class="md-check__file">
+<section id="file_src-typescript-md" class="md-check__file">
    
-<a href="#file_src-typescript-mdx" 
+<a href="#file_src-typescript-md" 
      class="file__permalink"
      title="Compile and execute typescript code blocks."
      rel="instructions">
    <h2 class="file__heading">Typescript Examples</h2>
 </a>
    <div class="file__content">
-     <h3 id="as-a-node.js-script">As a Node.js script <a class="header-anchor" href="#as-a-node.js-script">¶</a></h3>
-<pre><code id="src-typescript-mdx_Basic" class="md-check__code-block language-typescript"><span class="hljs-keyword">import</span> {ConsoleLog} <span class="hljs-keyword">from</span> <span class="hljs-string">'@btilford/ts-base'</span>;
-
-<span class="hljs-keyword">const</span> log: Log = ConsoleLog.create(<span class="hljs-string">'example'</span>);
-log.info(<span class="hljs-string">'Hello'</span>);
+     <h3 id="installation">Installation <a class="header-anchor" href="#installation">¶</a></h3>
+<pre><code id="src-typescript-md_Basic" class="md-check__code-block language-console">npm install --save-dev @btilford/md-check-compile-typescript
 </code></pre>
 <h3 id="setup-the-typescript-compiler">Setup the Typescript compiler <a class="header-anchor" href="#setup-the-typescript-compiler">¶</a></h3>
-<pre><code id="src-typescript-mdx_Configuration" class="md-check__code-block language-typescript"><span class="hljs-keyword">import</span> {TsCompiler} <span class="hljs-keyword">from</span> <span class="hljs-string">'@btilford/md-check-compile-typescript'</span>;
+<pre><code id="src-typescript-md_Configuration" class="md-check__code-block language-typescript"><span class="hljs-keyword">import</span> {TsCompiler} <span class="hljs-keyword">from</span> <span class="hljs-string">'@btilford/md-check-compile-typescript'</span>;
 
 TsCompiler.supply(); <span class="hljs-comment">// default configs, uses ${process.cwd()}/tsconfig.json</span>
 TsCompiler.supply(<span class="hljs-string">'tsconfig.json'</span>); <span class="hljs-comment">// Provide a path to you tsconfig</span>
 TsCompiler.supply({<span class="hljs-comment">/* compiler options */</span>}); <span class="hljs-comment">// Provide a configuration object</span>
+</code></pre>
+<h3 id="as-a-node.js-script">As a Node.js script <a class="header-anchor" href="#as-a-node.js-script">¶</a></h3>
+<p><em>Inside your markdown file add a code fence starting with <strong>typescript</strong>.</em></p>
+<pre><code>```typescript node
+import {ConsoleLog} from '@btilford/ts-base';
+
+const log: Log = ConsoleLog.create('example');
+log.info('Hello');
+```
 </code></pre>
    </div>
 </section>
     
 <section class="md-check__footer">
    <span class="footer__project-name">@btilford/md-check</span>
-   <span class="footer__project-version">v0.0.1</span>
-   <span class="footer__timestamp">2020-04-12T23:47:45.183Z</span>
+   <span class="footer__project-version">v0.0.2</span>
+   <span class="footer__timestamp">2020-04-13T02:36:21.923Z</span>
 </section>
 </div>
   
