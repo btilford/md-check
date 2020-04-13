@@ -20,7 +20,7 @@
   "bugs": {
     "url": "https://github.com/btilford/md-check/issues"
   },
-  "homepage": "https://github.com/btilford/md-check#readme",
+  "homepage": "https://btilford.github.io/md-check/",
   "dependencies": {
     "typescript": "~3.8.3",
     "@btilford/md-check-exec-mocha": "~0.0.1"

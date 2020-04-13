@@ -19,7 +19,13 @@
   "bugs": {
     "url": "https://github.com/btilford/md-check/issues"
   },
-  "homepage": "https://github.com/btilford/md-check#readme",
+  "homepage": "https://btilford.github.io/md-check/",
+  "publishConfig": {
+    "access": "public"
+  },
+  "readme": "README.md",
+  "contributors": [],
+  "maintainers": [],
   "dependencies": {
     "typescript": "~3.8.3",
     "@btilford/md-check": "~0.0.1",

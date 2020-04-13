@@ -73,8 +73,13 @@
   "bugs": {
     "url": "https://github.com/btilford/md-check/issues"
   },
-  "homepage": "https://github.com/btilford/md-check#readme",
-
+  "homepage": "https://btilford.github.io/md-check/",
+  "publishConfig": {
+    "access": "public"
+  },
+  "readme": "README.md",
+  "contributors": [],
+  "maintainers": [],
   "watch": {
     "test": {
       "patterns": [
