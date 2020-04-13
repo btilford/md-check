@@ -6,11 +6,14 @@
 .file__content {
     position: relative;
 }
+
 .file__content {
     padding: 10px;
 }
 
+
 .file__content pre,
+.file__content pre code,
 .highlighter-rouge .md-check__code-block,
 .highlighter-rouge .md-check__code-block pre,
 .highlighter-rouge .md-check__code-block code,
@@ -85,6 +88,7 @@
     right: 0;
     //bottom: -25px ;
 }
+
 .file__content code,
 code.highlighter-rouge {
     background-color: #ddd;
@@ -92,4 +96,23 @@ code.highlighter-rouge {
     padding: 1px;
     margin: 0;
     display: inline-block;
+}
+
+.md-check__main {
+    display: grid;
+    grid-template-areas: "header header header" "sidebar content content" ". . footer";
+    grid-template-columns: 300px 1fr;
+}
+
+.md-check__nav {
+    grid-area: sidebar;
+}
+
+.md-check__footer {
+    grid-area: footer;
+    font-size: small;
+}
+
+.md-check__content {
+    grid-area: content;
 }

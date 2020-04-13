@@ -246,16 +246,17 @@ export async function processIndex(results: Results): Promise<Results> {
 
   const index = 'index.html';
   // Clean out index.html
-  await writeOutput(project, index, '<div>');
+  await writeOutput(project, index, '<main class="md-check__main">');
 
-  let script = '';
-  for (const ldJson of project.ldJson) {
-    const ld = JSON.stringify(ldJson);
-    // eslint-disable-next-line no-secrets/no-secrets
-    script += `<script type="application/ld+json">${ld}</script>`;
-  }
+  // for (const ldJson of project.ldJson) {
+  //   const ld = JSON.stringify(ldJson);
+  //   // eslint-disable-next-line no-secrets/no-secrets
+  //   script += `<script type="application/ld+json">${ld}</script>`;
+  // }
 
   if (project.ldJson) {
+    // eslint-disable-next-line no-secrets/no-secrets
+    const script = `<script type="application/ld+json">${JSON.stringify(project.ldJson)}</script>`;
     logger.info('Found ld+json writing to document');
     await apppendOutput(
       project,
@@ -287,7 +288,9 @@ export async function processIndex(results: Results): Promise<Results> {
   );
 
   if (config.outputStyle === 'single-file') {
+    await apppendOutput(project, '<div class="md-check__content">', index, false);
     await singleFile(index, files);
+    await apppendOutput(project, '</div>', index, false);
   }
 
   logger.debug('Writing footer...');
@@ -300,7 +303,7 @@ export async function processIndex(results: Results): Promise<Results> {
   |   ${project.version ? `<span class="footer__project-version">v${project.version}</span>` : ''}
   |   <span class="footer__timestamp">${new Date().toISOString()}</span>
   |</section>
-  |</div>
+  |</main>
   `),
     index,
     false,

@@ -75,7 +75,7 @@ export async function apppendOutput(
     src = from;
   }
   await fs.appendFile(_to, src, { encoding: UTF8 });
-  log().debug('Appended %s to  %s', _from, _to);
+  log().debug('Appended %s to  %s', fromFile ? _from : '<source>', _to);
 
   return project.relativePath(_to);
 }
