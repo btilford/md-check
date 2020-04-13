@@ -1,5 +1,6 @@
 import {StringWriter} from '@btilford/ts-base';
 import {NodeVM, NodeVMOptions as VM2Options, VMScript} from 'vm2';
+import {NOT_IN_CI} from '../apm-filter';
 import {ConfigurationOptions} from '../configure';
 import {FenceContext} from '../fence';
 import {readTemp} from '../files';
@@ -90,7 +91,7 @@ export class NodeVmExecutor extends Executor {
   }
 
   @CountInvocations()
-  @TimedAsync()
+  @TimedAsync({ filter: NOT_IN_CI })
   async execute(ctx: ExecutionContext): Promise<ExecutionResult> {
     const alias = `${ctx.file}_${ctx.fence.index}.js`;
     this.log.debug('Preparing to execute %s', alias);

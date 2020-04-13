@@ -1,4 +1,5 @@
 import {CountInvocations, TimedAsync} from '@btilford/ts-base';
+import {NOT_IN_CI} from '../apm-filter';
 import {ConfigurationOptions} from '../configure';
 import {writeTemp} from '../files';
 import {ConfigurationSupplier} from '../options';
@@ -29,7 +30,7 @@ export class WriteSourceCompiler extends Compiler {
 
 
   @CountInvocations()
-  @TimedAsync()
+  @TimedAsync({ filter: NOT_IN_CI })
   async compile(context: CompileContext): Promise<CompileResult> {
     const fileName = `${context.file.replace(/(\.\w+)$/, `_${context.fence.index}$1`)}`;
     this.log.debug('Preparing to write file %s', fileName);

@@ -1,4 +1,5 @@
 import escapeHTML from 'escape-html';
+import {NOT_IN_CI} from '../apm-filter';
 import {Configuration, ConfigurationOptions} from '../configure';
 import {ConfigurationSupplier} from '../options';
 import {stripMargin} from '../text';
@@ -36,7 +37,7 @@ export class NoOpExecutionRenderer extends ExecutionRenderer {
   }
 
 
-  @Timed()
+  @Timed({ filter: NOT_IN_CI })
   @CountInvocations()
   render(execution: ExecutionRenderContext): string | undefined {
     this.log.debug('Skipping render of %s results', execution.file);

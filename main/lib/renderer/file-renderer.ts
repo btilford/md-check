@@ -1,4 +1,5 @@
 import {Log, Providers, TimedAsync, CountInvocations} from '@btilford/ts-base';
+import {NOT_IN_CI} from '../apm-filter';
 import {Configuration} from '../configure';
 import {FileContext} from '../context';
 import {writeOutput} from '../files';
@@ -52,7 +53,7 @@ export class FileRenderer {
 
 
   @CountInvocations()
-  @TimedAsync()
+  @TimedAsync({ filter: NOT_IN_CI })
   async render(ctx: RenderContext): Promise<RenderResult> {
     this.log.debug('Rendering file %s', ctx.file);
     const content = ctx.md.render(ctx.tokens);

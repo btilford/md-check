@@ -12,6 +12,7 @@ import {processEnvLoader} from '@btilford/ts-base-node';
 import fs from 'fs';
 import globby from 'globby';
 import path from 'path';
+import {NOT_IN_CI} from './apm-filter';
 import {Compiler} from './compiler';
 import {ProjectDetails} from './context';
 import {ExecutionRenderer, Executor, ExecutorConfig, StdOutRenderer} from './exec';
@@ -92,8 +93,7 @@ export class Configuration implements ConfigurationOptions {
     this.log.debug('Configured');
   }
 
-
-  @TimedAsync()
+  @TimedAsync({ filter: NOT_IN_CI })
   async run() {
     return await main(this);
   }

@@ -7,6 +7,7 @@ import {
   writeTemp,
   ConfigurationSupplier,
   ConfigurationOptions,
+  NOT_IN_CI
 } from '@btilford/md-check';
 import fs from 'fs';
 import path from 'path';
@@ -107,7 +108,7 @@ export class TsCompiler extends Compiler {
   }
 
   @CountInvocations()
-  @TimedAsync()
+  @TimedAsync({ filter: NOT_IN_CI })
   async compile(context: CompileContext): Promise<TsCompileResult> {
     const tmpTs = await writeTemp(
       this.options.project,
