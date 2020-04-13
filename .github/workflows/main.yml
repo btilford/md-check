@@ -23,13 +23,21 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
+    - name: rush changes
+      run: |
+        echo 'Changes...'
+        node common/scripts/install-run-rush.js change --verify
     - name: rush install
       run: |
         echo 'Installing...'
-        node common/scripts/install-run-rush.js install
+        node common/scripts/install-run-rush.js install --no-link
+    - name: rush link
+      run: |
+        echo 'Linking...'
+        node common/scripts/install-run-rush.js link
     - name: rush check
       run: |
-        echo 'Installing...'
+        echo 'Checking...'
         node common/scripts/install-run-rush.js check
     - name: rush test
       run: |
@@ -42,7 +50,7 @@ jobs:
     - name: rush build
       run: |
         echo 'Building...'
-        node common/scripts/install-run-rush.js rebuild
+        node common/scripts/install-run-rush.js rebuild --ship --verbose
       env:
         CI: true
         NODE_ENV: production
