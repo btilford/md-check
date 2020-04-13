@@ -52,8 +52,8 @@
     "tsconfig-paths": "~3.9.0",
     "typescript": "~3.8.3",
     "npm-watch": "~0.6.0",
-    "@btilford/md-check": "~0.0.1",
-    "@btilford/md-check-exec-mocha": "~0.0.1",
+    "@btilford/md-check": "~0.0.2",
+    "@btilford/md-check-exec-mocha": "~0.0.2",
     "@btilford/md-check-compile-typescript": "~0.0.1",
     "eslint-plugin-mdx": "~1.6.8",
     "@btilford/md-check-examples": "~0.0.1"

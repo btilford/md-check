@@ -1,6 +1,6 @@
 {
   "name": "@btilford/md-check",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Compile and execute markdown code fences",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

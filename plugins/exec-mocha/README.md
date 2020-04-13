@@ -34,13 +34,16 @@ MochaExecutor.supply(
 
 ### Running Mocha Tests
 
-```typescript mocha
-import {expect} from 'chai';
 
-describe('My test', function() {
-    it('Runs this test', function() {
-        expect(true).to.eq(true);
-        console.log('In test');
+*Inside your markdown file add a code fence ending with **mocha**.*
+    
+    ```typescript mocha
+    import {expect} from 'chai';
+    
+    describe('My test', function() {
+        it('Runs this test', function() {
+            expect(true).to.eq(true);
+            console.log('In test');
+        });
     });
-});
-```
+    ```

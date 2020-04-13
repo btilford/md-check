@@ -24,10 +24,12 @@ TsCompiler.supply({/* compiler options */}); // Provide a configuration object
 
 ### As a Node.js script
 
-```typescript node
-import {ConsoleLog} from '@btilford/ts-base';
+*Inside your markdown file add a code fence starting with **typescript**.*
 
-const log: Log = ConsoleLog.create('example');
-log.info('Hello');
-```
+    ```typescript node
+    import {ConsoleLog} from '@btilford/ts-base';
+    
+    const log: Log = ConsoleLog.create('example');
+    log.info('Hello');
+    ```
 
