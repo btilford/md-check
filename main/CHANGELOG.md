@@ -1,6 +1,11 @@
 # Change Log - @btilford/md-check
 
-This log was last generated on Mon, 13 Apr 2020 02:52:59 GMT and should not be manually modified.
+This log was last generated on Mon, 13 Apr 2020 03:03:20 GMT and should not be manually modified.
+
+## 1.0.1
+Mon, 13 Apr 2020 03:03:20 GMT
+
+*Version update only*
 
 ## 2.0.0
 Mon, 13 Apr 2020 02:52:59 GMT

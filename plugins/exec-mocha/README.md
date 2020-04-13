@@ -1,14 +1,3 @@
----
-title: Run Mocha
-description: Execute code blocks containing mocha tests
-fences:
-    - title: Example Test
-    - title: Install
-    - title: Configure
-      description: Configuring the mocha executor
----
-
-
 ### Configure the MochaExecutor
 
 **Installation**
