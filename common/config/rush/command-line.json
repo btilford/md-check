@@ -33,23 +33,24 @@
       "summary": "Lint all projects",
       "description": "",
       "enableParallelism": true,
-//      "ignoreMissingScript": true,
-//      "allowWarningsInSuccessfulBuild": true
+      "incremental": true,
+      "allowWarningsInSuccessfulBuild": false
     },
     {
       "commandKind": "bulk",
       "name": "lint:fix",
       "summary": "Lint fix all projects",
       "description": "",
+      "incremental": true,
       "enableParallelism": true,
-      "ignoreMissingScript": true
     },
     {
       "commandKind": "bulk",
       "name": "test",
       "summary": "Run test on all projects",
       "description": "",
-      "enableParallelism": false,
+      "incremental": true,
+      "enableParallelism": true,
       "ignoreMissingScript": true
     },
     {
@@ -57,7 +58,7 @@
       "name": "watch",
       "summary": "Run watch on all projects",
       "description": "",
-      "enableParallelism": false
+      "enableParallelism": true
     },
     // {
     //   /**

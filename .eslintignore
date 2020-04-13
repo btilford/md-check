@@ -13,4 +13,4 @@ vendor
 .gh-pages
 .rush
 common/config/rush/pnpmfile.js
-common/scripts/install-run-rush.js
+common/scripts
